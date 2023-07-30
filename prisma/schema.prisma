@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lang {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+// Categories
+model NewsCategory {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  news News[]
+}
+
+model BaseCategory {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model VideoCategory {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+// Dependency Models
+model News {
+  id             Int      @id @default(autoincrement())
+  name           String
+  location       String
+  text           String
+  newsCategoryId Int
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  NewsCategory NewsCategory @relation(fields: [newsCategoryId], references: [id])
+}
+
+model Videos {
+  id   Int    @id @default(autoincrement())
+  name String
+  path String
+}
