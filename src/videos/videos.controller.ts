@@ -1,9 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { CreateVideoDto } from './dto/create-video.dto';
+import { CreateManyVideosDto, CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { FindAllVideosDto } from './dto/videos.dto';
 
 @Controller('videos')
+@ApiTags('Videos')
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 
@@ -12,23 +23,28 @@ export class VideosController {
     return this.videosService.create(createVideoDto);
   }
 
+  @Post('many')
+  createMany(@Body() data: CreateManyVideosDto[]) {
+    return this.videosService.createMany(data);
+  }
+
   @Get()
-  findAll() {
-    return this.videosService.findAll();
+  findAll(@Param() param: FindAllVideosDto) {
+    return this.videosService.findAll(param);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.videosService.findOne(+id);
+    return this.videosService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVideoDto: UpdateVideoDto) {
-    return this.videosService.update(+id, updateVideoDto);
+  update(@Param('id') id: string, @Body() data: UpdateVideoDto) {
+    return this.videosService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.videosService.remove(+id);
+    return this.videosService.remove(id);
   }
 }

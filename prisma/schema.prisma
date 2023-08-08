@@ -11,43 +11,76 @@ datasource db {
 }
 
 model Lang {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-}
-
-// Categories
-model NewsCategory {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
-  news News[]
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model BaseCategory {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+  id        String   @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([nameTm, nameRu])
 }
 
-model VideoCategory {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+enum Sections {
+  Local
+  World
+  Video
 }
 
-// Dependency Models
+model SportCategories {
+  id        String   @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  section   Sections
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  news   News[]
+  videos Videos[]
+
+  @@unique([nameTm, nameRu, section])
+}
+
 model News {
-  id             Int      @id @default(autoincrement())
-  name           String
-  location       String
-  text           String
-  newsCategoryId Int
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id         String          @id @default(uuid())
+  text       String
+  views      Int             @default(0)
+  nameTm     String
+  nameRu     String
+  location   String
+  imagePath  String
+  category   SportCategories @relation(fields: [categoryId], references: [id])
+  categoryId String
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
 
-  NewsCategory NewsCategory @relation(fields: [newsCategoryId], references: [id])
+  @@unique([nameTm, nameRu])
 }
 
 model Videos {
-  id   Int    @id @default(autoincrement())
-  name String
-  path String
+  id         String          @id @default(uuid())
+  views      Int             @default(0)
+  nameTm     String
+  nameRu     String
+  videoPath  String
+  imagePath  String
+  category   SportCategories @relation(fields: [categoryId], references: [id])
+  categoryId String
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  @@unique([nameTm, nameRu])
+}
+
+model Ads {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

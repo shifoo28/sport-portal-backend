@@ -19,15 +19,15 @@ export class BaseCategoryService {
     return this.prismaService.baseCategory.findMany({ skip, take });
   }
 
-  async findOne(id: number): Promise<BaseCategory> {
+  async findOne(id: string): Promise<BaseCategory> {
     return this.prismaService.baseCategory.findUnique({ where: { id } });
   }
 
-  async update(id: number, data: UpdateBaseCategoryDto) {
+  async update(id: string, data: UpdateBaseCategoryDto) {
     return this.prismaService.baseCategory.update({ where: { id }, data });
   }
 
-  async remove(id: number): Promise<BaseCategory> {
+  async remove(id: string): Promise<BaseCategory> {
     return this.prismaService.baseCategory.delete({ where: { id } });
   }
 }

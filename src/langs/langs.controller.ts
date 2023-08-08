@@ -19,7 +19,7 @@ export class LangsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.langService.lang(+id);
+    return this.langService.lang(id);
   }
 
   @Get()
@@ -37,11 +37,11 @@ export class LangsController {
     @Param('id') id: string,
     @Body() body: Prisma.LangUpdateInput,
   ): Promise<Lang> {
-    return this.langService.updateLang(+id, body);
+    return this.langService.updateLang(id, body);
   }
 
   @Delete(':id')
   removeLang(@Param('id') id: string): Promise<Lang> {
-    return this.langService.deleteLang(+id);
+    return this.langService.deleteLang(id);
   }
 }

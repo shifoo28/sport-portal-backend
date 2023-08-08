@@ -3,5 +3,7 @@ import { Prisma } from '@prisma/client';
 
 export class CreateBaseCategoryDto implements Prisma.BaseCategoryCreateInput {
   @ApiProperty()
-  name: string;
+  nameTm: string;
+  @ApiProperty()
+  nameRu: string;
 }

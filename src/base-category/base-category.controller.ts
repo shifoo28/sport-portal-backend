@@ -30,19 +30,16 @@ export class BaseCategoryController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.baseCategoryService.findOne(+id);
+    return this.baseCategoryService.findOne(id);
   }
 
   @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() data: UpdateBaseCategoryDto,
-  ) {
-    return this.baseCategoryService.update(+id, data);
+  update(@Param('id') id: string, @Body() data: UpdateBaseCategoryDto) {
+    return this.baseCategoryService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.baseCategoryService.remove(+id);
+    return this.baseCategoryService.remove(id);
   }
 }

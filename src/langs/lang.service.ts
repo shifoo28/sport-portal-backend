@@ -7,7 +7,7 @@ import { GetLangsDto } from './dto/lang.dto';
 export class LangService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async lang(id: number): Promise<Lang | null> {
+  async lang(id: string): Promise<Lang | null> {
     return this.prisma.lang.findUnique({ where: { id } });
   }
 
@@ -27,11 +27,11 @@ export class LangService {
     return this.prisma.lang.create({ data });
   }
 
-  async updateLang(id: number, data: Prisma.LangUpdateInput): Promise<Lang> {
+  async updateLang(id: string, data: Prisma.LangUpdateInput): Promise<Lang> {
     return this.prisma.lang.update({ where: { id }, data });
   }
 
-  async deleteLang(id: number): Promise<Lang> {
+  async deleteLang(id: string): Promise<Lang> {
     return this.prisma.lang.delete({ where: { id } });
   }
 }

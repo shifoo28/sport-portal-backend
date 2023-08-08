@@ -1,6 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { NewsService } from './news.service';
-import { CreateNewsDto } from './dto/create-news.dto';
+import { CreateManyNewsDto, CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { FindAllNewsDto } from './dto/news.dto';
@@ -15,6 +23,11 @@ export class NewsController {
     return this.newsService.create(data);
   }
 
+  @Post('many')
+  careteMany(@Body() data: CreateManyNewsDto) {
+    return this.newsService.createMany(data);
+  }
+
   @Get()
   findAll(@Param() param: FindAllNewsDto) {
     return this.newsService.findAll(param);
@@ -22,16 +35,16 @@ export class NewsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.newsService.findOne(+id);
+    return this.newsService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateNewsDto) {
-    return this.newsService.update(+id, data);
+    return this.newsService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.newsService.remove(+id);
+    return this.newsService.remove(id);
   }
 }

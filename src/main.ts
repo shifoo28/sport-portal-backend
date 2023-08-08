@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { logger: ['error'] });
+  const app = await NestFactory.create(AppModule,{cors:true});
 
   const config = new DocumentBuilder()
     .setTitle('SportPortal API')
@@ -15,7 +15,7 @@ async function bootstrap() {
 
   app
     .listen(process.env.APP_PORT)
-    .then(() => console.log(`App Listening on port::: ${process.env.APP_PORT}`))
+    .then(() => console.log(`App Listening on port ${process.env.APP_PORT}`))
     .catch((error) => console.log(error));
 }
 bootstrap();
