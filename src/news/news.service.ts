@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+} from '@nestjs/common';
 import { News } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateManyNewsDto, CreateNewsDto } from './dto/create-news.dto';
@@ -10,16 +12,17 @@ export class NewsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateNewsDto): Promise<News> {
-    const { categoryId, imagePath, location, nameRu, nameTm, text, views } =
+    const { categoryId, imagePath, location, nameRu, nameTm, textTm, textRu } =
       data;
+
     return this.prismaService.news.create({
       data: {
         imagePath,
         location,
         nameRu,
         nameTm,
-        text,
-        views,
+        textTm,
+        textRu,
         category: { connect: { id: categoryId } },
       },
     });
@@ -40,8 +43,9 @@ export class NewsService {
   }
 
   async update(id: string, data: UpdateNewsDto): Promise<News> {
-    const { categoryId, imagePath, location, nameRu, nameTm, text, views } =
+    const { categoryId, imagePath, location, nameRu, nameTm, textTm, textRu } =
       data;
+
     return this.prismaService.news.update({
       where: { id },
       data: {
@@ -49,8 +53,8 @@ export class NewsService {
         location,
         nameRu,
         nameTm,
-        text,
-        views,
+        textTm,
+        textRu,
         category: { connect: { id: categoryId } },
       },
     });

@@ -18,7 +18,6 @@ export class VideosService {
         nameRu,
         nameTm,
         videoPath,
-        views: 0,
         category: { connect: { id: categoryId } },
       },
     });
@@ -46,7 +45,6 @@ export class VideosService {
         nameRu,
         nameTm,
         videoPath,
-        views: 0,
         category: { connect: { id: categoryId } },
       },
       where: { id },

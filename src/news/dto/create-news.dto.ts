@@ -2,37 +2,29 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 
 export class CreateNewsDto implements Prisma.NewsCreateInput {
+  @ApiProperty() textTm: string;
+  @ApiProperty() textRu: string;
+  @ApiProperty() nameTm: string;
+  @ApiProperty() nameRu: string;
+  @ApiProperty() location: string;
+  @ApiProperty() imagePath: string;
+  @ApiProperty() categoryId: string;
   @ApiProperty()
-  nameTm: string;
-  @ApiProperty()
-  nameRu: string;
-  @ApiProperty()
-  text: string;
-  @ApiProperty()
-  views: number;
-  @ApiProperty()
-  location: string;
-  @ApiProperty()
-  imagePath: string;
-  @ApiProperty()
-  categoryId: string;
-  @ApiProperty({ required: false })
   category: Prisma.SportCategoriesCreateNestedOneWithoutNewsInput;
+  @ApiProperty({
+    type: 'string',
+    format: 'binary',
+    description: 'Max file size: 25MB. Expected file types: PNG, JPG, JPEG',
+  })
+  photo: Express.Multer.File;
 }
 
 export class CreateManyNewsDto implements Prisma.NewsCreateManyInput {
-  @ApiProperty({})
-  text: string;
-  @ApiProperty()
-  views: number;
-  @ApiProperty()
-  nameTm: string;
-  @ApiProperty()
-  nameRu: string;
-  @ApiProperty()
-  location: string;
-  @ApiProperty()
-  imagePath: string;
-  @ApiProperty()
-  categoryId: string;
+  @ApiProperty() nameTm: string;
+  @ApiProperty() nameRu: string;
+  @ApiProperty() textTm: string;
+  @ApiProperty() textRu: string;
+  @ApiProperty() location: string;
+  @ApiProperty() imagePath: string;
+  @ApiProperty() categoryId: string;
 }

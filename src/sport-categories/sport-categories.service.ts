@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSportCategoryDto } from './dto/create-sport-category.dto';
 import { UpdateSportCategoryDto } from './dto/update-sport-category.dto';
+import { PrismaService } from 'src/prisma.service';
+import { SportCategory } from './entities/sport-category.entity';
+import { FindAllSportCategoriesDto } from './dto/sport-category.dto';
 
 @Injectable()
 export class SportCategoriesService {
-  create(createSportCategoryDto: CreateSportCategoryDto) {
-    return 'This action adds a new sportCategory';
+  constructor(private readonly prismaService: PrismaService) {}
+
+  async create(data: CreateSportCategoryDto): Promise<SportCategory> {
+    return this.prismaService.sportCategories.create({ data });
   }
 
-  findAll() {
-    return `This action returns all sportCategories`;
+  async findAll(param: FindAllSportCategoriesDto): Promise<SportCategory[]> {
+    const { skip, take = 10 } = param;
+
+    return this.prismaService.sportCategories.findMany({ skip, take });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} sportCategory`;
+  async findOne(id: string): Promise<SportCategory> {
+    return this.prismaService.sportCategories.findUnique({ where: { id } });
   }
 
-  update(id: number, updateSportCategoryDto: UpdateSportCategoryDto) {
-    return `This action updates a #${id} sportCategory`;
+  async update(
+    id: string,
+    data: UpdateSportCategoryDto,
+  ): Promise<SportCategory> {
+    return this.prismaService.sportCategories.update({ where: { id }, data });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sportCategory`;
+  async remove(id: string): Promise<SportCategory> {
+    return this.prismaService.sportCategories.delete({ where: { id } });
   }
 }
