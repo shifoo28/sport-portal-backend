@@ -17,6 +17,13 @@ model Lang {
   updatedAt DateTime @updatedAt
 }
 
+model Ads {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model BaseCategory {
   id        String   @id @default(uuid())
   nameTm    String
@@ -79,9 +86,37 @@ model Videos {
   @@unique([nameTm, nameRu])
 }
 
-model Ads {
+model Federations {
+  id        String            @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  fsports   FederationSports?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@unique([nameTm, nameRu])
+}
+
+model FederationSports {
+  id           String      @id @default(uuid())
+  president    String
+  leader       String
+  founded      DateTime
+  location     String
+  tel          String
+  fax          String
+  email        String
+  web          String
+  federationId String      @unique
+  federation   Federations @relation(fields: [federationId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@unique([tel, email])
+}
+
+model FederationTrainers {
   id        String   @id @default(uuid())
-  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
