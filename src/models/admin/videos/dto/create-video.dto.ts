@@ -4,17 +4,16 @@ import { Prisma } from '@prisma/client';
 export class CreateVideoDto implements Prisma.VideosCreateInput {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
-  @ApiProperty() videoPath: string;
-  @ApiProperty() imagePath: string;
+  videoPath: string;
+  imagePath: string;
   @ApiProperty() categoryId: string;
-  @ApiProperty()
   category: Prisma.SportCategoriesCreateNestedOneWithoutVideosInput;
-  @ApiProperty({
-    type: 'string',
-    format: 'binary',
-    description: 'Max file size: 25MB. Expected file types: PNG, JPG, JPEG',
-  })
-  photo: Express.Multer.File;
+  // @ApiProperty({
+  //   type: 'string',
+  //   format: 'binary',
+  //   description: 'Max file size: 25MB. Expected file types: PNG, JPG, JPEG',
+  // })
+  // photo: Express.Multer.File;
   @ApiProperty({
     type: 'string',
     format: 'binary',
@@ -26,7 +25,7 @@ export class CreateVideoDto implements Prisma.VideosCreateInput {
 export class CreateManyVideosDto implements Prisma.VideosCreateManyInput {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
-  @ApiProperty() videoPath: string;
-  @ApiProperty() imagePath: string;
+  videoPath: string;
+  imagePath: string;
   @ApiProperty() categoryId: string;
 }

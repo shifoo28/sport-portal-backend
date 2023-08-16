@@ -30,7 +30,7 @@ import { PrismaService } from './prisma.service';
     LangService,
     BaseCategoryService,
     SportCategoriesService,
-    PrismaService
+    PrismaService,
   ],
 })
 export class AppModule {}

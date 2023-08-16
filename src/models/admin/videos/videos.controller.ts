@@ -27,20 +27,20 @@ export class VideosController {
 
   @Post()
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('photo', { dest: './upload/images' }))
-  @UseInterceptors(FileInterceptor('video', { dest: './upload/videos' }))
+  // @UseInterceptors(FileInterceptor('photo', { dest: './upload/images' }))
+  @UseInterceptors(FileInterceptor('video'))
   create(
     @Body() data: CreateVideoDto,
-    @UploadedFile(
-      'photo',
-      new ParseFilePipe({
-        validators: [
-          new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }),
-          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
-        ],
-      }),
-    )
-    photo: Express.Multer.File,
+    // @UploadedFile(
+    //   'photo',
+    //   new ParseFilePipe({
+    //     validators: [
+    //       new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }),
+    //       new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+    //     ],
+    //   }),
+    // )
+    // photo: Express.Multer.File,
     @UploadedFile(
       'video',
       new ParseFilePipe({
@@ -52,7 +52,9 @@ export class VideosController {
     )
     video: Express.Multer.File,
   ) {
-    console.log(photo, video);
+    console.log(video);
+    console.log(data);
+    data.videoPath = '';
 
     return this.videosService.create(data);
   }
