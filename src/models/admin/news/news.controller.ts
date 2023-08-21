@@ -19,6 +19,7 @@ import { UpdateNewsDto } from './dto/update-news.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FindAllNewsDto } from './dto/news.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('news')
 @ApiTags('News')
@@ -27,7 +28,16 @@ export class NewsController {
 
   @Post()
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('photo', { dest: './upload/images' }))
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/images',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
   create(
     @Body() data: CreateNewsDto,
     @UploadedFile(
@@ -40,7 +50,7 @@ export class NewsController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file.path;
+    data.imagePath = file.path.slice(7);
 
     return this.newsService.create(data);
   }

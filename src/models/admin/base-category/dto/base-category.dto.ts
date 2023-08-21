@@ -5,4 +5,7 @@ export class FindAllBaseCategoryDto implements Prisma.BaseCategoryFindManyArgs {
   @ApiProperty({ default: 0, required: false }) skip?: number;
   @ApiProperty({ default: 10, required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.BaseCategoryWhereInput;
+  @ApiProperty({ required: false }) orderBy?:
+    | Prisma.BaseCategoryOrderByWithRelationInput
+    | Prisma.BaseCategoryOrderByWithRelationInput[];
 }

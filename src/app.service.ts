@@ -19,7 +19,9 @@ export class AppService {
 
   async getApp(): Promise<IApp> {
     const lang = await this.lang.langs({});
-    const bc = await this.baseCategories.findAll({});
+    const bc = await this.baseCategories.findAll({
+      orderBy: { createdAt: 'asc' },
+    });
     const sc = await this.sportCategory.findAll({
       where: { section: 'Local' },
     });

@@ -3,22 +3,20 @@ import {
   Get,
   Post,
   Body,
+  Query,
   Patch,
   Param,
   Delete,
   UseInterceptors,
-  UploadedFile,
-  ParseFilePipe,
-  FileTypeValidator,
-  MaxFileSizeValidator,
-  Query,
+  UploadedFiles,
 } from '@nestjs/common';
 import { VideosService } from './videos.service';
 import { CreateManyVideosDto, CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import FindAllVideosDto from './dto/videos.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('videos')
 @ApiTags('Videos')
@@ -27,34 +25,29 @@ export class VideosController {
 
   @Post()
   @ApiConsumes('multipart/form-data')
-  // @UseInterceptors(FileInterceptor('photo', { dest: './upload/images' }))
-  @UseInterceptors(FileInterceptor('video'))
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'photo', maxCount: 1 },
+        { name: 'video', maxCount: 1 },
+      ],
+      {
+        storage: diskStorage({
+          destination: './upload/videos',
+          filename(req, file, callback) {
+            callback(null, `${Date.now()}_${file.originalname}`);
+          },
+        }),
+      },
+    ),
+  )
   create(
     @Body() data: CreateVideoDto,
-    // @UploadedFile(
-    //   'photo',
-    //   new ParseFilePipe({
-    //     validators: [
-    //       new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }),
-    //       new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
-    //     ],
-    //   }),
-    // )
-    // photo: Express.Multer.File,
-    @UploadedFile(
-      'video',
-      new ParseFilePipe({
-        validators: [
-          new FileTypeValidator({ fileType: '.(mp4)' }),
-          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 250 }),
-        ],
-      }),
-    )
-    video: Express.Multer.File,
+    @UploadedFiles()
+    files: { photo?: Express.Multer.File[]; video?: Express.Multer.File[] },
   ) {
-    console.log(video);
-    console.log(data);
-    data.videoPath = '';
+    data.imagePath = files.photo[0].path.slice(7);
+    data.videoPath = files.video[0].path.slice(7);
 
     return this.videosService.create(data);
   }

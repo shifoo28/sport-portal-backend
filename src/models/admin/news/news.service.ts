@@ -30,8 +30,21 @@ export class NewsService {
     return this.prismaService.news.createMany({ data, skipDuplicates: true });
   }
 
-  async findAll({ skip, take, where }: FindAllNewsDto): Promise<News[]> {
-    return this.prismaService.news.findMany({ skip, take, where });
+  async findAll({
+    skip,
+    take,
+    where,
+    orderBy,
+  }: FindAllNewsDto): Promise<News[]> {
+    return this.prismaService.news.findMany({
+      skip,
+      take,
+      where,
+      orderBy,
+      include: {
+        category: { select: { nameTm: true, nameRu: true } },
+      },
+    });
   }
 
   async findOne(id: string): Promise<News> {

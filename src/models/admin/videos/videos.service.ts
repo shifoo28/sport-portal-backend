@@ -27,8 +27,21 @@ export class VideosService {
     return this.prismaService.videos.createMany({ data, skipDuplicates: true });
   }
 
-  async findAll({ skip, take, where }: FindAllVideosDto): Promise<Video[]> {
-    return this.prismaService.videos.findMany({ skip, take, where });
+  async findAll({
+    skip,
+    take,
+    where,
+    orderBy,
+  }: FindAllVideosDto): Promise<Video[]> {
+    return this.prismaService.videos.findMany({
+      skip,
+      take,
+      where,
+      orderBy,
+      include: {
+        category: { select: { nameTm: true, nameRu: true } },
+      },
+    });
   }
 
   async findOne(id: string): Promise<Video> {

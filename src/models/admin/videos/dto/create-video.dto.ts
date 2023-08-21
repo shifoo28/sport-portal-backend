@@ -8,12 +8,12 @@ export class CreateVideoDto implements Prisma.VideosCreateInput {
   imagePath: string;
   @ApiProperty() categoryId: string;
   category: Prisma.SportCategoriesCreateNestedOneWithoutVideosInput;
-  // @ApiProperty({
-  //   type: 'string',
-  //   format: 'binary',
-  //   description: 'Max file size: 25MB. Expected file types: PNG, JPG, JPEG',
-  // })
-  // photo: Express.Multer.File;
+  @ApiProperty({
+    type: 'string',
+    format: 'binary',
+    description: 'Max file size: 25MB. Expected file types: PNG, JPG, JPEG',
+  })
+  photo: Express.Multer.File;
   @ApiProperty({
     type: 'string',
     format: 'binary',

@@ -87,26 +87,28 @@ model Videos {
 }
 
 model Federations {
-  id        String            @id @default(uuid())
+  id        String              @id @default(uuid())
   nameTm    String
   nameRu    String
   fsports   FederationSports?
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
+  fathlete  FederationAthlete?
+  ftrainers FederationTrainers?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
 
   @@unique([nameTm, nameRu])
 }
 
 model FederationSports {
   id           String      @id @default(uuid())
-  president    String
-  leader       String
-  founded      DateTime
-  location     String
   tel          String
   fax          String
-  email        String
   web          String
+  email        String
+  leader       String
+  founded      String
+  location     String
+  president    String
   federationId String      @unique
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
@@ -116,7 +118,32 @@ model FederationSports {
 }
 
 model FederationTrainers {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String      @id @default(uuid())
+  age          Int
+  job          String
+  name         String      @unique
+  made         String
+  rating       Float
+  imagePath    String
+  experience   Int
+  birthPlace   String
+  sportLevel   String
+  federationId String      @unique
+  federation   Federations @relation(fields: [federationId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model FederationAthlete {
+  id           String      @id @default(uuid())
+  name         String      @unique
+  club         String
+  made         String
+  rating       Float
+  position     String
+  imagePath    String
+  federationId String      @unique
+  federation   Federations @relation(fields: [federationId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }

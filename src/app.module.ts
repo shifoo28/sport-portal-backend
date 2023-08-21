@@ -1,28 +1,42 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { Module } from '@nestjs/common';
 import { AdsModule } from './models/admin/ads/ads.module';
-import { BaseCategoryModule } from './models/admin/base-category/base-category.module';
-import { LangsModule } from './models/admin/langs/langs.module';
+import { AppService } from './app.service';
 import { NewsModule } from './models/admin/news/news.module';
-import { SportCategoriesModule } from './models/admin/sport-categories/sport-categories.module';
-import { VideosModule } from './models/admin/videos/videos.module';
+import { LangsModule } from './models/admin/langs/langs.module';
 import { LangService } from './models/admin/langs/lang.service';
-import { BaseCategoryService } from './models/admin/base-category/base-category.service';
-import { SportCategoriesService } from './models/admin/sport-categories/sport-categories.service';
+import { VideosModule } from './models/admin/videos/videos.module';
+import { AppController } from './app.controller';
 import { PrismaService } from './prisma.service';
+import { MainPageModule } from './models/client/home/main-page.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { BaseCategoryModule } from './models/admin/base-category/base-category.module';
+import { BaseCategoryService } from './models/admin/base-category/base-category.service';
+import { SportCategoriesModule } from './models/admin/sport-categories/sport-categories.module';
+import { SportCategoriesService } from './models/admin/sport-categories/sport-categories.service';
+import { FederationSportsModule } from './models/admin/federation-sports/federation-sports.module';
+import { FederationAthleteModule } from './models/admin/federation-athlete/federation-athlete.module';
+import { FederationTrainersModule } from './models/admin/federation-trainers/federation-trainers.module';
+import { FederationsModule } from './models/admin/federations/federations.module';
+import { FederationPageModule } from './models/client/federation-page/federation-page.module';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'upload') }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'upload'),
+    }),
+    FederationPageModule,
+    MainPageModule,
     LangsModule,
-    BaseCategoryModule,
     NewsModule,
     VideosModule,
     AdsModule,
+    BaseCategoryModule,
     SportCategoriesModule,
+    FederationsModule,
+    FederationSportsModule,
+    FederationTrainersModule,
+    FederationAthleteModule,
   ],
   controllers: [AppController],
   providers: [
