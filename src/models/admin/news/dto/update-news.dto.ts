@@ -4,4 +4,7 @@ import { CreateNewsDto } from './create-news.dto';
 
 export class UpdateNewsDto
   extends PartialType(CreateNewsDto)
-  implements Prisma.NewsUpdateInput {}
+  implements Prisma.NewsUpdateInput
+{
+  views?: number | Prisma.IntFieldUpdateOperationsInput;
+}

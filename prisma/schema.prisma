@@ -17,6 +17,14 @@ model Lang {
   updatedAt DateTime @updatedAt
 }
 
+model Users {
+  id       String @id @default(uuid())
+  name     String
+  surname  String
+  email    String @unique
+  password String
+}
+
 model Ads {
   id        String   @id @default(uuid())
   name      String
@@ -123,11 +131,15 @@ model FederationTrainers {
   job          String
   name         String      @unique
   made         String
-  rating       Float
+  rating       Float       @default(4.5)
   imagePath    String
-  experience   Int
+  experience   Int         @default(0)
+  views        Int         @default(0)
   birthPlace   String
   sportLevel   String
+  workedAt     String[]
+  badges       String[]
+  links        Json?       @db.Json
   federationId String      @unique
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
@@ -137,13 +149,78 @@ model FederationTrainers {
 model FederationAthlete {
   id           String      @id @default(uuid())
   name         String      @unique
-  club         String
+  club         String?
   made         String
-  rating       Float
-  position     String
+  rating       Float       @default(4.5)
+  position     String?
   imagePath    String
+  age          Int
+  birthPlace   String
+  views        Int         @default(0)
+  experience   Int         @default(0)
+  sportLevel   String
+  workedAt     String[]
+  badges       String[]
+  links        Json        @default("{}") @db.Json
   federationId String      @unique
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
+}
+
+model FederationGymsAndClubs {
+  id         String   @id @default(uuid())
+  nameTm     String
+  nameRu     String
+  locationTm String
+  locationRu String?
+  email      String?
+  link       String?
+  views      Int      @default(0)
+  latitude   Float
+  longitude  Float
+  tel        String[]
+  sportsTm   String[]
+  sportsRu   String[]
+  openAtTm   String[]
+  openAtRu   String[]
+  imagePath1 String
+  imagePath2 String   @default("")
+  imagePath3 String   @default("")
+  imagePath4 String   @default("")
+  imagePath5 String   @default("")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([nameTm, nameRu])
+}
+
+model HealthCareDepartments {
+  id        String                          @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  employees FederationHealthCareEmployees[]
+  createdAt DateTime                        @default(now())
+  updatedAt DateTime                        @updatedAt
+
+  @@unique([nameTm, nameRu])
+}
+
+model FederationHealthCareEmployees {
+  id           String                @id @default(uuid())
+  name         String
+  job          String
+  age          Int
+  workAt       String
+  departmentId String
+  department   HealthCareDepartments @relation(fields: [departmentId], references: [id])
+  experience   Int                   @default(0)
+  views        Int                   @default(0)
+  rating       Float                 @default(4.5)
+  imagePath    String
+  links        Json                  @default("{}") @db.Json
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  @@unique([name, job])
 }

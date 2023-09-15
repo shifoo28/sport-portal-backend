@@ -10,12 +10,38 @@ export class FederationPageController {
   @Get()
   async findFederations() {
     const federations = await this.federationPageService.findFederations();
+
     return { federations };
   }
 
   @Get('sports')
   async findAllFederationSports() {
     const fsports = await this.federationPageService.findAllFederationSports();
+
     return { fsports };
+  }
+
+  @Get('trainers')
+  async findAllFederationTrainers() {
+    const ftrainers =
+      await this.federationPageService.findAllFederationTrainers();
+
+    return { ftrainers };
+  }
+
+  @Get('athletes')
+  async findAllFederationAthletes() {
+    const fathletes =
+      await this.federationPageService.findAllFederationAthletes();
+
+    return { fathletes };
+  }
+
+  @Get('health_care')
+  async findAllDepartmentsAndEmployees() {
+    const departments_employees =
+      await this.federationPageService.findAllDepartmentsAndEmployees();
+
+    return { departments_employees };
   }
 }

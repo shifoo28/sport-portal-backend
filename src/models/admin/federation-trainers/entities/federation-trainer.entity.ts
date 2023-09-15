@@ -1,6 +1,10 @@
-import { FederationTrainers } from '@prisma/client';
+import { FederationTrainers, Prisma } from '@prisma/client';
 
 export class FederationTrainerEntity implements FederationTrainers {
+  views: number;
+  workedAt: string[];
+  badges: string[];
+  links: Prisma.JsonValue;
   id: string;
   age: number;
   job: string;

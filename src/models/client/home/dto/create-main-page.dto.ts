@@ -1,7 +1,5 @@
 import { News, Videos } from '@prisma/client';
 
-export class CreateMainPageDto {}
-
 export class FindAllLWNewsDto implements News {
   id: string;
   textTm: string;

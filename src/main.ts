@@ -7,7 +7,7 @@ async function bootstrap() {
     cors: true,
     logger: ['error'],
   });
-
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('SportPortal API')
     .setDescription('API Documentation of SportPortal Backend!')

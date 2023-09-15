@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { FederationAthleteService } from './federation-athlete.service';
 import {
@@ -14,7 +16,9 @@ import {
   FindAllFederationAthleteDto,
 } from './dto/create-federation-athlete.dto';
 import { UpdateFederationAthleteDto } from './dto/update-federation-athlete.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('federation-athlete')
 @ApiTags('Federation Athlete')
@@ -24,7 +28,23 @@ export class FederationAthleteController {
   ) {}
 
   @Post()
-  create(@Body() data: CreateFederationAthleteDto) {
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/images/athletes',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
+  create(
+    @Body() data: CreateFederationAthleteDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    data.imagePath = file.path.slice(7);
+
     return this.federationAthleteService.create(data);
   }
 

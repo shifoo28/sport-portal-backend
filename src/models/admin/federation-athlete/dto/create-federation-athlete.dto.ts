@@ -5,13 +5,29 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateFederationAthleteDto
   implements Prisma.FederationAthleteCreateInput
 {
+  @ApiProperty() age: number;
+  @ApiProperty() birthPlace: string;
+  @ApiProperty({ default: 0 }) experience?: number;
+  @ApiProperty() sportLevel: string;
+  @ApiProperty() workedAt?:
+    | string[]
+    | Prisma.FederationAthleteCreateworkedAtInput;
+  @ApiProperty() badges?: string[] | Prisma.FederationAthleteCreatebadgesInput;
+  @ApiProperty() links?: Prisma.NullTypes.JsonNull | Prisma.InputJsonValue;
   @ApiProperty() name: string;
   @ApiProperty() club: string;
   @ApiProperty() made: string;
   @ApiProperty() rating: number;
   @ApiProperty() position: string;
-  @ApiProperty() imagePath: string;
   @ApiProperty() federationId: string;
+  @ApiProperty({
+    format: 'binary',
+    type: 'string',
+    description:
+      'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
+  })
+  photo: Express.Multer.File;
+  imagePath: string;
   federation: Prisma.FederationsCreateNestedOneWithoutFathleteInput;
 }
 

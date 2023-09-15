@@ -14,16 +14,34 @@ export class FederationAthleteService {
   async create(
     data: CreateFederationAthleteDto,
   ): Promise<FederationAthleteEntity> {
-    const { club, made, name, rating, position, imagePath, federationId } =
-      data;
+    const {
+      age,
+      club,
+      made,
+      name,
+      links,
+      badges,
+      rating,
+      position,
+      imagePath,
+      federationId,
+      birthPlace,
+      sportLevel,
+      experience,
+      workedAt,
+    } = data;
     return this.prismaService.federationAthlete.create({
       data: {
+        age: +age,
+        rating: +rating,
+        experience: +experience,
         club,
         made,
         name,
-        rating,
         position,
         imagePath,
+        birthPlace,
+        sportLevel,
         federation: { connect: { id: federationId } },
       },
     });
@@ -43,18 +61,35 @@ export class FederationAthleteService {
     id: string,
     data: UpdateFederationAthleteDto,
   ): Promise<FederationAthleteEntity> {
-    const { club, made, name, rating, position, imagePath, federationId } =
-      data;
+    const {
+      age,
+      club,
+      made,
+      name,
+      rating,
+      position,
+      imagePath,
+      federationId,
+      birthPlace,
+      sportLevel,
+      experience,
+      workedAt,
+    } = data;
 
     return this.prismaService.federationAthlete.update({
       where: { id },
       data: {
+        age: +age,
+        rating: +rating,
+        experience: +experience,
         club,
         made,
         name,
-        rating,
+        workedAt,
         position,
         imagePath,
+        birthPlace,
+        sportLevel,
         federation: { connect: { id: federationId } },
       },
     });

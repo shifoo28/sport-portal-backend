@@ -19,6 +19,12 @@ import { FederationAthleteModule } from './models/admin/federation-athlete/feder
 import { FederationTrainersModule } from './models/admin/federation-trainers/federation-trainers.module';
 import { FederationsModule } from './models/admin/federations/federations.module';
 import { FederationPageModule } from './models/client/federation-page/federation-page.module';
+import { NewsDetailsModule } from './models/client/news-details/news-details.module';
+import { FederationGymsAndClubsModule } from './models/admin/federation-gyms-and-clubs/federation-gyms-and-clubs.module';
+import { FederationHealthCareEmployeesModule } from './models/admin/federation-health-care-employees/federation-health-care-employees.module';
+import { HealthCareDepartmentsModule } from './models/admin/health-care-departments/health-care-departments.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './models/client/users/users.module';
 
 @Module({
   imports: [
@@ -27,6 +33,7 @@ import { FederationPageModule } from './models/client/federation-page/federation
     }),
     FederationPageModule,
     MainPageModule,
+    NewsDetailsModule,
     LangsModule,
     NewsModule,
     VideosModule,
@@ -37,6 +44,11 @@ import { FederationPageModule } from './models/client/federation-page/federation
     FederationSportsModule,
     FederationTrainersModule,
     FederationAthleteModule,
+    FederationGymsAndClubsModule,
+    HealthCareDepartmentsModule,
+    FederationHealthCareEmployeesModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [

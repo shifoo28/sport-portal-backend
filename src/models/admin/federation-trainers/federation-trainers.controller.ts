@@ -32,7 +32,7 @@ export class FederationTrainersController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images',
+        destination: './upload/images/trainers',
         filename(req, file, callback) {
           callback(null, `${Date.now()}_${file.originalname}`);
         },
@@ -67,7 +67,25 @@ export class FederationTrainersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: UpdateFederationTrainerDto) {
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/images/trainers',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
+  update(
+    @Param('id') id: string,
+    @Body() data: UpdateFederationTrainerDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    console.log(data);
+    file && (data.imagePath = file.path.slice(7));
+
     return this.federationTrainersService.update(id, data);
   }
 

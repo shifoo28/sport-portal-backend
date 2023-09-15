@@ -52,8 +52,16 @@ export class NewsService {
   }
 
   async update(id: string, data: UpdateNewsDto): Promise<News> {
-    const { categoryId, imagePath, location, nameRu, nameTm, textTm, textRu } =
-      data;
+    const {
+      categoryId,
+      imagePath,
+      location,
+      nameRu,
+      nameTm,
+      textTm,
+      textRu,
+      views,
+    } = data;
 
     return this.prismaService.news.update({
       where: { id },
@@ -64,6 +72,7 @@ export class NewsService {
         nameTm,
         textTm,
         textRu,
+        views,
         category: { connect: { id: categoryId } },
       },
     });
