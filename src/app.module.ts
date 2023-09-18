@@ -25,12 +25,19 @@ import { FederationHealthCareEmployeesModule } from './models/admin/federation-h
 import { HealthCareDepartmentsModule } from './models/admin/health-care-departments/health-care-departments.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './models/client/users/users.module';
+import { ShopCategoriesModule } from './models/admin/shop-categories/shop-categories.module';
+import { CompetitionTypesModule } from './models/admin/competition-types/competition-types.module';
+import { CompetitionsModule } from './models/admin/competitions/competitions.module';
+import { CompetitionPageModule } from './models/client/competition-page/competition-page.module';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'upload'),
     }),
+    AuthModule,
+    UsersModule,
+    CompetitionPageModule,
     FederationPageModule,
     MainPageModule,
     NewsDetailsModule,
@@ -47,8 +54,9 @@ import { UsersModule } from './models/client/users/users.module';
     FederationGymsAndClubsModule,
     HealthCareDepartmentsModule,
     FederationHealthCareEmployeesModule,
-    AuthModule,
-    UsersModule,
+    ShopCategoriesModule,
+    CompetitionTypesModule,
+    CompetitionsModule,
   ],
   controllers: [AppController],
   providers: [

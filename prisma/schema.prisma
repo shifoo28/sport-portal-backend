@@ -224,3 +224,44 @@ model FederationHealthCareEmployees {
 
   @@unique([name, job])
 }
+
+model CompetitionTypes {
+  id          Int            @id @default(autoincrement())
+  nameTm      String
+  nameRu      String
+  competition Competitions[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@unique([nameRu, nameTm])
+}
+
+model Competitions {
+  id              String           @id @default(uuid())
+  nameTm          String
+  nameRu          String
+  textTm          String
+  textRu          String
+  location        String
+  views           Int              @default(0)
+  imagePath       String
+  competitionType CompetitionTypes @relation(fields: [typeId], references: [id])
+  typeId          Int
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@unique([nameTm, nameRu])
+}
+
+model ShopCategories {
+  id             String           @id @default(uuid())
+  nameTm         String
+  nameRu         String
+  parentId       String           @default("0")
+  parentCategory ShopCategories   @relation("InfinteShopCategory", fields: [parentId], references: [id])
+  shopCategory   ShopCategories[] @relation("InfinteShopCategory")
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@unique([nameTm, nameRu])
+}

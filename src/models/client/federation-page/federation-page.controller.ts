@@ -39,9 +39,9 @@ export class FederationPageController {
 
   @Get('health_care')
   async findAllDepartmentsAndEmployees() {
-    const departments_employees =
+    const hcdepartments =
       await this.federationPageService.findAllDepartmentsAndEmployees();
 
-    return { departments_employees };
+    return { hcdepartments };
   }
 }
