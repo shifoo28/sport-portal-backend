@@ -16,7 +16,7 @@ async function bootstrap() {
       crossOriginOpenerPolicy: false,
       crossOriginEmbedderPolicy: false,
       contentSecurityPolicy: false,
-      crossOriginResourcePolicy: false,
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
     }),
   );
   // app.use(csurf());
