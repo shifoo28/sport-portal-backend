@@ -11,7 +11,8 @@ async function bootstrap() {
 
   // MiddleWares
   app.enableCors();
-  app.use(helmet({ crossOriginOpenerPolicy: true }));
+  app.use(helmet({ crossOriginOpenerPolicy: false, crossOriginEmbedderPolicy: false,
+  }));
   // app.use(csurf());
 
   // OpenAPI
