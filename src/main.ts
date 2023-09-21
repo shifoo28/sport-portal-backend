@@ -14,7 +14,7 @@ async function bootstrap() {
   app.use(
     helmet({
       crossOriginOpenerPolicy: false,
-      crossOriginEmbedderPolicy: true,
+      crossOriginEmbedderPolicy: { policy: 'credentialless' },
       contentSecurityPolicy: false,
       crossOriginResourcePolicy: { policy: 'cross-origin' },
     }),
