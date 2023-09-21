@@ -11,8 +11,8 @@ async function bootstrap() {
 
   // MiddleWares
   app.enableCors();
-  // app.use(helmet());
-  // app.use(csurf());
+  app.use(helmet());
+  app.use(csurf());
 
   // OpenAPI
   const config = new DocumentBuilder()
