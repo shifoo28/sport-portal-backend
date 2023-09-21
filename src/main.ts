@@ -11,25 +11,14 @@ async function bootstrap() {
 
   // MiddleWares
   app.enableCors();
-  // app.use(
-  //   helmet({
-  //     crossOriginOpenerPolicy: { policy: 'unsafe-none' },
-  //     crossOriginEmbedderPolicy: { policy: 'credentialless' },
-  //     crossOriginResourcePolicy: { policy: 'cross-origin' },
-  //     contentSecurityPolicy: {
-  //       directives: {
-  //         imgSrc: [`'self'`, 'data:'],
-  //         scriptSrc: [
-  //           `'self'`,
-  //           `https: 'unsafe-inline'`,
-  //           `http: 'unsafe-inline'`,
-  //         ],
-  //         manifestSrc: [`'self'`],
-  //         frameSrc: [`'self'`],
-  //       },
-  //     },
-  //   }),
-  // );
+  app.use(
+    helmet({
+      crossOriginOpenerPolicy: { policy: 'unsafe-none' },
+      crossOriginEmbedderPolicy: { policy: 'credentialless' },
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+      contentSecurityPolicy: false,
+    }),
+  );
   // app.use(csurf());
 
   // OpenAPI
