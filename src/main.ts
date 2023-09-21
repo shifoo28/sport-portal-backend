@@ -13,10 +13,21 @@ async function bootstrap() {
   app.enableCors();
   app.use(
     helmet({
-      crossOriginOpenerPolicy: false,
+      crossOriginOpenerPolicy: { policy: 'unsafe-none' },
       crossOriginEmbedderPolicy: { policy: 'credentialless' },
-      contentSecurityPolicy: false,
       crossOriginResourcePolicy: { policy: 'cross-origin' },
+      contentSecurityPolicy: {
+        directives: {
+          imgSrc: [`'self'`, 'data:'],
+          scriptSrc: [
+            `'self'`,
+            `https: 'unsafe-inline'`,
+            `http: 'unsafe-inline'`,
+          ],
+          manifestSrc: [`'self'`],
+          frameSrc: [`'self'`],
+        },
+      },
     }),
   );
   // app.use(csurf());
