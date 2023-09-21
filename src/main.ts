@@ -10,7 +10,7 @@ async function bootstrap() {
   });
 
   // MiddleWares
-  app.enableCors();
+  app.enableCors({ origin: '*' });
   app.use(
     helmet({
       crossOriginOpenerPolicy: { policy: 'unsafe-none' },
