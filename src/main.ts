@@ -15,7 +15,7 @@ async function bootstrap() {
     helmet({
       crossOriginOpenerPolicy: { policy: 'unsafe-none' },
       crossOriginEmbedderPolicy: false,
-      crossOriginResourcePolicy: { policy: 'same-origin' },
+      crossOriginResourcePolicy: false,
       contentSecurityPolicy: false,
     }),
   );
