@@ -10,7 +10,7 @@ async function bootstrap() {
   });
 
   // MiddleWares
-  app.enableCors();
+  app.enableCors({ allowedHeaders: 'same-origin' });
   app.use(helmet());
   // app.use(csurf());
 
