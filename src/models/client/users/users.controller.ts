@@ -37,7 +37,7 @@ export class UsersController {
       skip: skip ? +skip : 0,
       take: take ? +take : 10,
       where,
-      select,
+      select: { id: true, name: true, surname: true, email: true },
       orderBy,
     });
   }

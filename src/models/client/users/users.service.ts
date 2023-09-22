@@ -27,7 +27,10 @@ export class UsersService {
   async findOne(query: FindOneUserDto): Promise<UserEntity> {
     const { id, email } = query;
 
-    return this.prismaService.users.findUnique({ where: { id, email } });
+    return this.prismaService.users.findUnique({
+      where: { id, email },
+      select: { id: true, name: true, surname: true, email: true },
+    });
   }
 
   async update(id: string, data: UpdateUserDto): Promise<UserEntity> {
