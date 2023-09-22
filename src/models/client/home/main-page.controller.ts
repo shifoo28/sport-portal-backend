@@ -11,17 +11,15 @@ export class MainPageController {
 
   @Get(':section')
   @UseInterceptors(ResponseInterceptor)
-  async findAllLocalNews(
-    @Param('section') section: Sections,
-  ) {
+  async findAllLocalNews(@Param('section') section: Sections) {
     switch (section) {
-      case 'local':
+      case 'Local':
         return { local: await this.mainPageService.findAllLWN('Local') };
 
-      case 'world':
+      case 'World':
         return { world: await this.mainPageService.findAllLWN('World') };
 
-      case 'video':
+      case 'Video':
         return { video: await this.mainPageService.findAllVideoN() };
 
       default:
