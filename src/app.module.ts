@@ -34,6 +34,16 @@ import { CompetitionPageModule } from './models/client/competition-page/competit
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'upload'),
+      serveStaticOptions: {
+        setHeaders(res, path, stat) {
+          console.log('RES: ');
+          console.log(res);
+          console.log('PATH:');
+          console.log(path);
+          console.log('STAT:');
+          console.log(stat);
+        },
+      },
     }),
     AuthModule,
     UsersModule,
