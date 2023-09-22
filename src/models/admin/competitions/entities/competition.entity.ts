@@ -7,6 +7,8 @@ export class CompetitionEntity implements Competitions {
   textTm: string;
   textRu: string;
   location: string;
+  dateStart: Date;
+  dateEnd: Date;
   views: number;
   imagePath: string;
   typeId: number;

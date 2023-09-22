@@ -12,8 +12,17 @@ export class CompetitionsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateCompetitionDto): Promise<CompetitionEntity> {
-    const { nameTm, nameRu, textTm, textRu, location, imagePath, typeId } =
-      data;
+    const {
+      nameTm,
+      nameRu,
+      textTm,
+      textRu,
+      location,
+      dateStart,
+      dateEnd,
+      imagePath,
+      typeId,
+    } = data;
 
     return this.prismaService.competitions.create({
       data: {
@@ -22,6 +31,8 @@ export class CompetitionsService {
         textTm,
         textRu,
         location,
+        dateStart,
+        dateEnd,
         imagePath,
         competitionType: { connect: { id: typeId } },
       },
@@ -46,6 +57,8 @@ export class CompetitionsService {
       textTm,
       textRu,
       location,
+      dateStart,
+      dateEnd,
       imagePath,
       views,
       typeId,
@@ -59,6 +72,8 @@ export class CompetitionsService {
         textTm,
         textRu,
         location,
+        dateStart,
+        dateEnd,
         imagePath,
         views,
         competitionType: { connect: { id: typeId } },

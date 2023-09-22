@@ -26,3 +26,5 @@ export class FindAllVideoNewsDto implements Videos {
   updatedAt: Date;
   videoPath: string;
 }
+
+export enum Sections{}
