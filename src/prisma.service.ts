@@ -10,17 +10,15 @@ export class PrismaService
     super({
       log: [
         'error',
-        'info',
-        'warn',
         {
           emit: 'event',
           level: 'query',
         },
       ],
+      errorFormat: 'pretty',
     });
   }
 
-  [x: string]: any;
   async onModuleInit() {
     this.$on('query', (event) => {
       // console.log(
