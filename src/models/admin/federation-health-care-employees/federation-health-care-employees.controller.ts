@@ -19,6 +19,7 @@ import { UpdateFederationHealthCareEmployeeDto } from './dto/update-federation-h
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { ResponseInterceptor } from 'src/respone/response.interceptor';
 
 @Controller('federation-health-care-employees')
 @ApiTags('Federation Health Care Employees')
@@ -39,6 +40,7 @@ export class FederationHealthCareEmployeesController {
       }),
     }),
   )
+  @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateFederationHealthCareEmployeeDto,
     @UploadedFile() file: Express.Multer.File,
@@ -49,6 +51,7 @@ export class FederationHealthCareEmployeesController {
   }
 
   @Get()
+  @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationHealthCareEmployeesDto) {
     const { skip, take, select, include, orderBy, where } = query;
     return this.federationHealthCareEmployeesService.findAll({
@@ -62,11 +65,13 @@ export class FederationHealthCareEmployeesController {
   }
 
   @Get(':id')
+  @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.federationHealthCareEmployeesService.findOne(id);
   }
 
   @Patch(':id')
+  @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationHealthCareEmployeeDto,
@@ -75,6 +80,7 @@ export class FederationHealthCareEmployeesController {
   }
 
   @Delete(':id')
+  @UseInterceptors(ResponseInterceptor)
   remove(@Param('id') id: string) {
     return this.federationHealthCareEmployeesService.remove(id);
   }

@@ -19,6 +19,7 @@ import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto'
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { ResponseInterceptor } from 'src/respone/response.interceptor';
 
 @Controller('federation-trainers')
 @ApiTags('Federation Trainers')
@@ -39,6 +40,7 @@ export class FederationTrainersController {
       }),
     }),
   )
+  @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateFederationTrainerDto,
     @UploadedFile() file: Express.Multer.File,
@@ -49,6 +51,7 @@ export class FederationTrainersController {
   }
 
   @Get()
+  @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationTrainersDto) {
     const { include, orderBy, select, skip, take, where } = query;
     return this.federationTrainersService.findAll({
@@ -62,6 +65,7 @@ export class FederationTrainersController {
   }
 
   @Get(':id')
+  @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.federationTrainersService.findOne(id);
   }
@@ -78,6 +82,7 @@ export class FederationTrainersController {
       }),
     }),
   )
+  @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationTrainerDto,
@@ -90,6 +95,7 @@ export class FederationTrainersController {
   }
 
   @Delete(':id')
+  @UseInterceptors(ResponseInterceptor)
   remove(@Param('id') id: string) {
     return this.federationTrainersService.remove(id);
   }

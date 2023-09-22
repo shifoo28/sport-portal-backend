@@ -22,6 +22,7 @@ import { UpdateCompetitionDto } from './dto/update-competition.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { ResponseInterceptor } from 'src/respone/response.interceptor';
 
 @Controller('competitions')
 @ApiTags('Competitions')
@@ -40,6 +41,7 @@ export class CompetitionsController {
       }),
     }),
   )
+  @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateCompetitionDto,
     @UploadedFile(
@@ -59,6 +61,7 @@ export class CompetitionsController {
   }
 
   @Get()
+  @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllCompetitionsDto) {
     const { skip, take, where, select, include, orderBy } = query;
 
@@ -73,6 +76,7 @@ export class CompetitionsController {
   }
 
   @Get(':id')
+  @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.competitionsService.findOne(id);
   }
@@ -89,6 +93,7 @@ export class CompetitionsController {
       }),
     }),
   )
+  @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
     @Body() data: UpdateCompetitionDto,
@@ -109,6 +114,7 @@ export class CompetitionsController {
   }
 
   @Delete(':id')
+  @UseInterceptors(ResponseInterceptor)
   remove(@Param('id') id: string) {
     return this.competitionsService.remove(id);
   }

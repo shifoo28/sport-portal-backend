@@ -7,11 +7,13 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { Lang, Prisma } from '@prisma/client';
 import { CreateLangDto, GetLangsDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
+import { ResponseInterceptor } from 'src/respone/response.interceptor';
 
 @Controller('langs')
 @ApiTags('Language')
@@ -19,11 +21,13 @@ export class LangsController {
   constructor(private readonly langService: LangService) {}
 
   @Get(':id')
+  @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.langService.lang(id);
   }
 
   @Get()
+  @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: GetLangsDto): Promise<Lang[]> {
     const { skip, take, where } = query;
 
@@ -35,11 +39,13 @@ export class LangsController {
   }
 
   @Post()
+  @UseInterceptors(ResponseInterceptor)
   saveLang(@Body() data: CreateLangDto): Promise<Lang> {
     return this.langService.createLang(data);
   }
 
   @Patch(':id')
+  @UseInterceptors(ResponseInterceptor)
   updateLang(
     @Param('id') id: string,
     @Body() body: Prisma.LangUpdateInput,
@@ -48,6 +54,7 @@ export class LangsController {
   }
 
   @Delete(':id')
+  @UseInterceptors(ResponseInterceptor)
   removeLang(@Param('id') id: string): Promise<Lang> {
     return this.langService.deleteLang(id);
   }

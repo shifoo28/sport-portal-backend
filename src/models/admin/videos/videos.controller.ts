@@ -17,6 +17,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import FindAllVideosDto from './dto/videos.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { ResponseInterceptor } from 'src/respone/response.interceptor';
 
 @Controller('videos')
 @ApiTags('Videos')
@@ -41,6 +42,7 @@ export class VideosController {
       },
     ),
   )
+  @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateVideoDto,
     @UploadedFiles()
@@ -53,11 +55,13 @@ export class VideosController {
   }
 
   @Post('many')
+  @UseInterceptors(ResponseInterceptor)
   createMany(@Body() data: CreateManyVideosDto[]) {
     return this.videosService.createMany(data);
   }
 
   @Get()
+  @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllVideosDto) {
     const { skip, take, where } = query;
 
@@ -69,16 +73,19 @@ export class VideosController {
   }
 
   @Get(':id')
+  @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.videosService.findOne(id);
   }
 
   @Patch(':id')
+  @UseInterceptors(ResponseInterceptor)
   update(@Param('id') id: string, @Body() data: UpdateVideoDto) {
     return this.videosService.update(id, data);
   }
 
   @Delete(':id')
+  @UseInterceptors(ResponseInterceptor)
   remove(@Param('id') id: string) {
     return this.videosService.remove(id);
   }
