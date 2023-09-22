@@ -24,8 +24,10 @@ export class UsersController {
 
   @Post()
   @UseInterceptors(ResponseInterceptor)
-  create(@Body() data: CreateUserDto) {
-    return this.usersService.create(data);
+  async create(@Body() data: CreateUserDto) {
+    const user = await this.usersService.create(data);
+    const { password, ...result } = user;
+    return { result };
   }
 
   @Get()
@@ -45,19 +47,27 @@ export class UsersController {
   @UseGuards(AuthGuard)
   @Get(':id')
   @UseInterceptors(ResponseInterceptor)
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne({ id });
+  async findOne(@Param('id') id: string) {
+    const user = await this.usersService.findOne({ id });
+    const { password, ...result } = user;
+
+    return { result };
   }
 
   @Patch(':id')
   @UseInterceptors(ResponseInterceptor)
-  update(@Param('id') id: string, @Body() data: UpdateUserDto) {
-    return this.usersService.update(id, data);
+  async update(@Param('id') id: string, @Body() data: UpdateUserDto) {
+    const user = await this.usersService.update(id, data);
+    const { password, ...result } = user;
+
+    return { result };
   }
 
   @Delete(':id')
   @UseInterceptors(ResponseInterceptor)
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(id);
+  async remove(@Param('id') id: string) {
+    const user = await this.usersService.remove(id);
+    const { password, ...result } = user;
+    return { result };
   }
 }
