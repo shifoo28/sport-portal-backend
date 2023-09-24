@@ -81,4 +81,5 @@ export class FindAllFederationGymsAndClubs
   @ApiProperty({ required: false }) orderBy?:
     | Prisma.FederationGymsAndClubsOrderByWithRelationInput
     | Prisma.FederationGymsAndClubsOrderByWithRelationInput[];
+    
 }

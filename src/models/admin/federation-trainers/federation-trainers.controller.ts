@@ -57,7 +57,7 @@ export class FederationTrainersController {
     return this.federationTrainersService.findAll({
       skip: skip ? +skip : 0,
       take: take ? +take : 10,
-      include,
+      include: { federation: true },
       orderBy,
       select,
       where,

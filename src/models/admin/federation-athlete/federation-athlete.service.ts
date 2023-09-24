@@ -38,10 +38,13 @@ export class FederationAthleteService {
         club,
         made,
         name,
+        links,
+        badges,
         position,
         imagePath,
         birthPlace,
         sportLevel,
+        workedAt,
         federation: { connect: { id: federationId } },
       },
     });

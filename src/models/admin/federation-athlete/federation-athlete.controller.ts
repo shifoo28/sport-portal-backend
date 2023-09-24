@@ -60,7 +60,7 @@ export class FederationAthleteController {
       select,
       where,
       orderBy,
-      include,
+      include: { federation: true },
     });
   }
 

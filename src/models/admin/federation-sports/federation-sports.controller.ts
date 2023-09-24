@@ -41,7 +41,7 @@ export class FederationSportsController {
       where,
       orderBy,
       select,
-      include,
+      include: { federation: true },
     });
   }
 
