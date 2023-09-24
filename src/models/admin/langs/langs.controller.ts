@@ -9,7 +9,7 @@ import {
   Query,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Lang, Prisma } from '@prisma/client';
 import { CreateLangDto, GetLangsDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
@@ -39,6 +39,7 @@ export class LangsController {
   }
 
   @Post()
+  @ApiBearerAuth()
   @UseInterceptors(ResponseInterceptor)
   saveLang(@Body() data: CreateLangDto): Promise<Lang> {
     return this.langService.createLang(data);

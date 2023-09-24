@@ -54,11 +54,11 @@ export class VideosController {
     return this.videosService.create(data);
   }
 
-  @Post('many')
-  @UseInterceptors(ResponseInterceptor)
-  createMany(@Body() data: CreateManyVideosDto[]) {
-    return this.videosService.createMany(data);
-  }
+  // @Post('many')
+  // @UseInterceptors(ResponseInterceptor)
+  // createMany(@Body() data: CreateManyVideosDto[]) {
+  //   return this.videosService.createMany(data);
+  // }
 
   @Get()
   @UseInterceptors(ResponseInterceptor)

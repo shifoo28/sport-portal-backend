@@ -15,7 +15,6 @@ export class MainPageService {
 
   async findAllLWN(section: 'Local' | 'World'): Promise<FindAllLWNewsDto[]> {
     return this.news.findAll({
-      take: 4,
       orderBy: { updatedAt: 'desc' },
       where: { category: { section } },
     });
