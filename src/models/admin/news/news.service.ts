@@ -34,6 +34,7 @@ export class NewsService {
     skip,
     take,
     where,
+    include,
     orderBy,
   }: FindAllNewsDto): Promise<News[]> {
     return this.prismaService.news.findMany({
@@ -41,14 +42,15 @@ export class NewsService {
       take,
       where,
       orderBy,
-      include: {
-        category: { select: { nameTm: true, nameRu: true } },
-      },
+      include,
     });
   }
 
   async findOne(id: string): Promise<News> {
-    return this.prismaService.news.findUnique({ where: { id } });
+    return this.prismaService.news.findUnique({
+      where: { id },
+      include: { category: true },
+    });
   }
 
   async update(id: string, data: UpdateNewsDto): Promise<News> {

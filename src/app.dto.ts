@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-enum Langs {
+export enum ELangs {
   Tm = 'Tm',
   Ru = 'Ru',
 }
 
 export class LangQueryDto {
-  @ApiProperty({ enum: Langs }) lang: Langs;
+  @ApiProperty({ enum: ELangs }) lang: ELangs;
 
-  constructor(lang: Langs) {
+  constructor(lang: ELangs) {
     this.lang = lang;
   }
 
@@ -16,7 +16,7 @@ export class LangQueryDto {
     return records.map((record) => {
       return {
         ...record,
-        name: this.lang === Langs.Tm ? record.nameTm : record.nameRu,
+        name: this.lang === ELangs.Tm ? record.nameTm : record.nameRu,
       };
     });
   }

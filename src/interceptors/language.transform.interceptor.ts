@@ -5,6 +5,7 @@ import {
   CallHandler,
 } from '@nestjs/common';
 import { Observable, map } from 'rxjs';
+import { ELangs } from 'src/app.dto';
 import { isArray } from 'util';
 
 export interface Response<T> {
@@ -19,12 +20,16 @@ export class LanguageTransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler,
   ): Observable<Response<T>> {
+    const { lang } = context.switchToHttp().getRequest().query;
+
     return next.handle().pipe(
       map((data) => {
-        console.log(context.switchToHttp().getRequest().query.lang);
         isArray(data)
-          ? data.map((i: any) => (i['name'] = i.nameTm))
-          : (data['name'] = data.nameTm);
+          ? data.map((i: any) => {
+              i['name'] = lang === ELangs.Tm ? i.nameTm : i.nameRu;
+              return i;
+            })
+          : (data['name'] = lang === ELangs.Tm ? data.nameTm : data.nameRu);
 
         return data;
       }),

@@ -4,10 +4,10 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from 'src/models/client/users/users.service';
 import { SignInArgsDto, SignInDto } from './dto/sign-in.dto';
 import { SignUpDto, SignedUpDto } from './dto/sign-up.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from 'src/models/admin/users/users.service';
 
 @Injectable()
 export class AuthService {

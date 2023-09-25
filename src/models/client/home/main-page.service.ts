@@ -17,6 +17,11 @@ export class MainPageService {
     return this.news.findAll({
       orderBy: { updatedAt: 'desc' },
       where: { category: { section } },
+      include: {
+        category: {
+          select: { id: true, nameTm: true, nameRu: true, section: true },
+        },
+      },
     });
   }
 
