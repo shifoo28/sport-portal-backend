@@ -13,7 +13,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Lang, Prisma } from '@prisma/client';
 import { CreateLangDto, GetLangsDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('langs')
 @ApiTags('Language')

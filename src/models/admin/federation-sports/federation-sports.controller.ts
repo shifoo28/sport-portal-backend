@@ -16,7 +16,7 @@ import {
 } from './dto/create-federation-sport.dto';
 import { UpdateFederationSportDto } from './dto/update-federation-sport.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('federation-sports')
 @ApiTags('Federation Sports')

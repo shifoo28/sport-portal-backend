@@ -16,7 +16,7 @@ import {
 } from './dto/create-competition-type.dto';
 import { UpdateCompetitionTypeDto } from './dto/update-competition-type.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('competition-types')
 @ApiTags('Competition Types')

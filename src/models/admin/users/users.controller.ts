@@ -15,7 +15,7 @@ import { CreateUserDto, FindAllUsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('users')
 @ApiTags('Users')

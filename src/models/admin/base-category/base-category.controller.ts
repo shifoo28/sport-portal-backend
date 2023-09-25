@@ -14,7 +14,7 @@ import { BaseCategoryService } from './base-category.service';
 import { FindAllBaseCategoryDto } from './dto/base-category.dto';
 import { CreateBaseCategoryDto } from './dto/create-base-category.dto';
 import { UpdateBaseCategoryDto } from './dto/update-base-category.dto';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('base-category')
 @ApiTags('Base Categries')

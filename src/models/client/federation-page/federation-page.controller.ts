@@ -1,7 +1,7 @@
 import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { FederationPageService } from './federation-page.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('federation-page')
 @ApiTags('Federations Page')

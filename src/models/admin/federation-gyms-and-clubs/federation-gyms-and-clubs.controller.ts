@@ -19,7 +19,7 @@ import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('federation-gyms-and-clubs')
 @ApiTags('Federation Gyms & Clubs')

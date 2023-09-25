@@ -16,7 +16,7 @@ import {
 } from './dto/create-shop-category.dto';
 import { UpdateShopCategoryDto } from './dto/update-shop-category.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('shop-categories')
 @ApiTags('Shop Categories')

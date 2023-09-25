@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { LangService } from './models/admin/langs/lang.service';
 import { BaseCategoryService } from './models/admin/base-category/base-category.service';
 import { SportCategoriesService } from './models/admin/sport-categories/sport-categories.service';
+import { LangQueryDto } from './app.dto';
 
 export interface IApp {
   lang: { id: string; name: string }[];
@@ -17,29 +18,23 @@ export class AppService {
     private readonly sportCategory: SportCategoriesService,
   ) {}
 
-  async getApp(): Promise<IApp> {
+  async getApp(query: LangQueryDto): Promise<IApp> {
+    const langTransform = new LangQueryDto(query.lang);
+    // Languages
     const lang = await this.lang.langs({});
-    const bc = await this.baseCategories.findAll({
+
+    // Base Categories
+    let base_categories = await this.baseCategories.findAll({
       orderBy: { createdAt: 'asc' },
     });
-    const sc = await this.sportCategory.findAll({
+    base_categories = langTransform.toName(base_categories);
+
+    // Sport Categories
+    let sport_categories = await this.sportCategory.findAll({
       where: { section: 'Local' },
     });
+    sport_categories = langTransform.toName(sport_categories);
 
-    return {
-      lang: lang.map((i) => {
-        return { id: i.id, name: i.name };
-      }),
-      base_categories: bc.map((i) => {
-        return { id: i.id, nameTm: i.nameTm, nameRu: i.nameRu };
-      }),
-      sport_categories: sc.map((i) => {
-        return {
-          id: i.id,
-          nameRu: i.nameRu,
-          nameTm: i.nameTm,
-        };
-      }),
-    };
+    return { lang, base_categories, sport_categories };
   }
 }

@@ -16,7 +16,7 @@ import {
 } from './dto/create-federation.dto';
 import { UpdateFederationDto } from './dto/update-federation.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('federations')
 @ApiTags('Federations')

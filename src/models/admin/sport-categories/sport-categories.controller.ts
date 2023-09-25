@@ -14,7 +14,7 @@ import { CreateSportCategoryDto } from './dto/create-sport-category.dto';
 import { UpdateSportCategoryDto } from './dto/update-sport-category.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { FindAllSportCategoriesDto } from './dto/sport-category.dto';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('sport-categories')
 @ApiTags('Sport Categories')

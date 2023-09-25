@@ -20,7 +20,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FindAllNewsDto } from './dto/news.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('news')
 @ApiTags('News')

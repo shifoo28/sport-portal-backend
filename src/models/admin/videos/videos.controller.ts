@@ -17,7 +17,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import FindAllVideosDto from './dto/videos.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('videos')
 @ApiTags('Videos')

@@ -1,7 +1,7 @@
 import { Controller, Param, Patch, Query, UseInterceptors } from '@nestjs/common';
 import { NewsDetailsService } from './news-details.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('news-details')
 @ApiTags('News Details Page')

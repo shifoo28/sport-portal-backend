@@ -16,7 +16,7 @@ import {
 } from './dto/create-health-care-department.dto';
 import { UpdateHealthCareDepartmentDto } from './dto/update-health-care-department.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('health-care-departments')
 @ApiTags('Health Care Departments')

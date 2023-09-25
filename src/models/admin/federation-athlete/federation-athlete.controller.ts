@@ -19,7 +19,7 @@ import { UpdateFederationAthleteDto } from './dto/update-federation-athlete.dto'
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('federation-athlete')
 @ApiTags('Federation Athlete')

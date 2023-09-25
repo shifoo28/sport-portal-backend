@@ -19,7 +19,7 @@ import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto'
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/respone/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('federation-trainers')
 @ApiTags('Federation Trainers')
