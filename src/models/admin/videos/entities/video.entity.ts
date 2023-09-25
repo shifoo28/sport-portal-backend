@@ -5,6 +5,8 @@ export class Video implements Videos {
   views: number;
   nameTm: string;
   nameRu: string;
+  textTm: string;
+  textRu: string;
   videoPath: string;
   imagePath: string;
   categoryId: string;

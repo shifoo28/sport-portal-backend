@@ -11,7 +11,7 @@ import {
   UploadedFiles,
 } from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { CreateManyVideosDto, CreateVideoDto } from './dto/create-video.dto';
+import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import FindAllVideosDto from './dto/videos.dto';
@@ -46,7 +46,7 @@ export class VideosController {
   create(
     @Body() data: CreateVideoDto,
     @UploadedFiles()
-    files: { photo?: Express.Multer.File[]; video?: Express.Multer.File[] },
+    files: { photo: Express.Multer.File[]; video: Express.Multer.File[] },
   ) {
     data.imagePath = files.photo[0].path.slice(7);
     data.videoPath = files.video[0].path.slice(7);
@@ -54,21 +54,17 @@ export class VideosController {
     return this.videosService.create(data);
   }
 
-  // @Post('many')
-  // @UseInterceptors(ResponseInterceptor)
-  // createMany(@Body() data: CreateManyVideosDto[]) {
-  //   return this.videosService.createMany(data);
-  // }
-
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllVideosDto) {
-    const { skip, take, where } = query;
+    const { skip, take, where, include, orderBy } = query;
 
     return this.videosService.findAll({
       skip: skip ? +skip : 0,
       take: take ? +take : 10,
       where,
+      include,
+      orderBy,
     });
   }
 

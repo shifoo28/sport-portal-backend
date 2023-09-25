@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateManyVideosDto, CreateVideoDto } from './dto/create-video.dto';
+import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { PrismaService } from 'src/prisma.service';
 import { Video } from './entities/video.entity';
@@ -10,27 +10,27 @@ export class VideosService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateVideoDto): Promise<Video> {
-    const { categoryId, imagePath, nameRu, nameTm, videoPath } = data;
+    const { categoryId, imagePath, nameRu, nameTm, textTm, textRu, videoPath } =
+      data;
 
     return this.prismaService.videos.create({
       data: {
         imagePath,
         nameRu,
         nameTm,
+        textTm,
+        textRu,
         videoPath,
         category: { connect: { id: categoryId } },
       },
     });
   }
 
-  async createMany(data: CreateManyVideosDto[]): Promise<object> {
-    return this.prismaService.videos.createMany({ data, skipDuplicates: true });
-  }
-
   async findAll({
     skip,
     take,
     where,
+    include,
     orderBy,
   }: FindAllVideosDto): Promise<Video[]> {
     return this.prismaService.videos.findMany({
@@ -38,9 +38,7 @@ export class VideosService {
       take,
       where,
       orderBy,
-      include: {
-        category: { select: { nameTm: true, nameRu: true } },
-      },
+      include,
     });
   }
 
@@ -49,13 +47,16 @@ export class VideosService {
   }
 
   async update(id: string, data: UpdateVideoDto): Promise<Video> {
-    const { categoryId, imagePath, nameRu, nameTm, videoPath } = data;
+    const { categoryId, imagePath, nameRu, nameTm, textTm, textRu, videoPath } =
+      data;
 
     return this.prismaService.videos.update({
       data: {
         imagePath,
         nameRu,
         nameTm,
+        textTm,
+        textRu,
         videoPath,
         category: { connect: { id: categoryId } },
       },

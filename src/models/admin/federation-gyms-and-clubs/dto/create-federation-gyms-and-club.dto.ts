@@ -8,23 +8,24 @@ export class CreateFederationGymsAndClubDto
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
   @ApiProperty() locationTm: string;
-  @ApiProperty({ required: false }) locationRu?: string;
-  @ApiProperty({ required: false }) email?: string;
-  @ApiProperty({ required: false }) link?: string;
-  @ApiProperty({ required: false, default: 0 }) views?: number;
+  @ApiProperty() locationRu: string;
+  @ApiProperty() email: string;
+  @ApiProperty() link: string;
   @ApiProperty() latitude: number;
   @ApiProperty() longitude: number;
-  @ApiProperty() tel: string[] | Prisma.FederationGymsAndClubsCreatetelInput;
-  @ApiProperty() sportsTm?:
+  @ApiProperty({ type: [String] }) tel:
+    | string[]
+    | Prisma.FederationGymsAndClubsCreatetelInput;
+  @ApiProperty({ type: [String] }) sportsTm:
     | string[]
     | Prisma.FederationGymsAndClubsCreatesportsTmInput;
-  @ApiProperty() sportsRu?:
+  @ApiProperty({ type: [String] }) sportsRu:
     | string[]
     | Prisma.FederationGymsAndClubsCreatesportsRuInput;
-  @ApiProperty() openAtTm?:
+  @ApiProperty({ type: [String] }) openAtTm:
     | string[]
     | Prisma.FederationGymsAndClubsCreateopenAtTmInput;
-  @ApiProperty() openAtRu?:
+  @ApiProperty({ type: [String] }) openAtRu:
     | string[]
     | Prisma.FederationGymsAndClubsCreateopenAtRuInput;
   @ApiProperty({
@@ -40,33 +41,33 @@ export class CreateFederationGymsAndClubDto
     description:
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
-  photo2?: Express.Multer.File;
+  photo2: Express.Multer.File;
   @ApiProperty({
     format: 'binary',
     type: 'string',
     description:
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
-  photo3?: Express.Multer.File;
+  photo3: Express.Multer.File;
   @ApiProperty({
     format: 'binary',
     type: 'string',
     description:
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
-  photo4?: Express.Multer.File;
+  photo4: Express.Multer.File;
   @ApiProperty({
     format: 'binary',
     type: 'string',
     description:
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
-  photo5?: Express.Multer.File;
+  photo5: Express.Multer.File;
   imagePath1: string;
-  imagePath2?: string;
-  imagePath3?: string;
-  imagePath4?: string;
-  imagePath5?: string;
+  imagePath2: string;
+  imagePath3: string;
+  imagePath4: string;
+  imagePath5: string;
 }
 
 export class FindAllFederationGymsAndClubs
@@ -81,5 +82,4 @@ export class FindAllFederationGymsAndClubs
   @ApiProperty({ required: false }) orderBy?:
     | Prisma.FederationGymsAndClubsOrderByWithRelationInput
     | Prisma.FederationGymsAndClubsOrderByWithRelationInput[];
-    
 }

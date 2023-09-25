@@ -84,6 +84,8 @@ model Videos {
   views      Int             @default(0)
   nameTm     String
   nameRu     String
+  textTm     String?
+  textRu     String?
   videoPath  String
   imagePath  String
   category   SportCategories @relation(fields: [categoryId], references: [id])
@@ -173,9 +175,9 @@ model FederationGymsAndClubs {
   nameTm     String
   nameRu     String
   locationTm String
-  locationRu String?
-  email      String?
-  link       String?
+  locationRu String
+  email      String
+  link       String
   views      Int      @default(0)
   latitude   Float
   longitude  Float
@@ -185,10 +187,10 @@ model FederationGymsAndClubs {
   openAtTm   String[]
   openAtRu   String[]
   imagePath1 String
-  imagePath2 String   @default("")
-  imagePath3 String   @default("")
-  imagePath4 String   @default("")
-  imagePath5 String   @default("")
+  imagePath2 String
+  imagePath3 String
+  imagePath4 String
+  imagePath5 String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

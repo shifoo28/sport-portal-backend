@@ -4,6 +4,8 @@ import { Prisma } from '@prisma/client';
 export class CreateVideoDto implements Prisma.VideosCreateInput {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
+  @ApiProperty({ required: false }) textTm?: string;
+  @ApiProperty({ required: false }) textRu?: string;
   videoPath: string;
   imagePath: string;
   @ApiProperty() categoryId: string;
@@ -17,15 +19,7 @@ export class CreateVideoDto implements Prisma.VideosCreateInput {
   @ApiProperty({
     type: 'string',
     format: 'binary',
-    description: 'Max file size: 250MB. Expected file types: MP4',
+    description: 'Max file size: 500MB. Expected file types: MP4',
   })
   video: Express.Multer.File;
-}
-
-export class CreateManyVideosDto implements Prisma.VideosCreateManyInput {
-  @ApiProperty() nameTm: string;
-  @ApiProperty() nameRu: string;
-  videoPath: string;
-  imagePath: string;
-  @ApiProperty() categoryId: string;
 }

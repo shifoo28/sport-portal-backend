@@ -2,11 +2,11 @@ import { News, Videos } from '@prisma/client';
 
 export class FindAllLWNewsDto implements News {
   id: string;
-  textTm: string;
-  textRu: string;
   views: number;
   nameTm: string;
   nameRu: string;
+  textTm: string;
+  textRu: string;
   location: string;
   imagePath: string;
   categoryId: string;
@@ -20,6 +20,8 @@ export class FindAllVideoNewsDto implements Videos {
   views: number;
   nameTm: string;
   nameRu: string;
+  textTm: string;
+  textRu: string;
   imagePath: string;
   categoryId: string;
   createdAt: Date;
