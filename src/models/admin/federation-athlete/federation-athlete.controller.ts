@@ -20,6 +20,7 @@ import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { strToArray } from 'src/tools/strToArray';
 
 @Controller('federation-athlete')
 @ApiTags('Federation Athlete')
@@ -46,6 +47,8 @@ export class FederationAthleteController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
+    data.workedAt = strToArray(data.workedAt, ',');
+    data.badges = strToArray(data.badges, ',');
 
     return this.federationAthleteService.create(data);
   }

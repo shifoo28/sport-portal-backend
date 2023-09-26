@@ -9,11 +9,15 @@ export class CreateFederationAthleteDto
   @ApiProperty() birthPlace: string;
   @ApiProperty({ default: 0 }) experience?: number;
   @ApiProperty() sportLevel: string;
-  @ApiProperty() workedAt?:
+  @ApiProperty({ type: [String] }) workedAt:
     | string[]
     | Prisma.FederationAthleteCreateworkedAtInput;
-  @ApiProperty() badges?: string[] | Prisma.FederationAthleteCreatebadgesInput;
-  @ApiProperty() links?: Prisma.NullTypes.JsonNull | Prisma.InputJsonValue;
+  @ApiProperty({ type: [String] }) badges:
+    | string[]
+    | Prisma.FederationAthleteCreatebadgesInput;
+  @ApiProperty({ type: Object }) links:
+    | Prisma.NullTypes.JsonNull
+    | Prisma.InputJsonValue;
   @ApiProperty() name: string;
   @ApiProperty() club: string;
   @ApiProperty() made: string;
