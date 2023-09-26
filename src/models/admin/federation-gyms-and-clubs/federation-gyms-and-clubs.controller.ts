@@ -16,11 +16,13 @@ import {
   FindAllFederationGymsAndClubs,
 } from './dto/create-federation-gyms-and-club.dto';
 import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and-club.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
+import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
+import { LangQueryDto } from 'src/app.dto';
 
 @Controller('federation-gyms-and-clubs')
 @ApiTags('Federation Gyms & Clubs')
@@ -77,6 +79,8 @@ export class FederationGymsAndClubsController {
   }
 
   @Get()
+  @ApiQuery({ type: LangQueryDto })
+  @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationGymsAndClubs) {
     const { skip, take, where, select, orderBy } = query;
@@ -91,6 +95,8 @@ export class FederationGymsAndClubsController {
   }
 
   @Get(':id')
+  @ApiQuery({ type: LangQueryDto })
+  @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.federationGymsAndClubsService.findOne(id);
