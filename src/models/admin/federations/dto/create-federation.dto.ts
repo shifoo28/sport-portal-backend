@@ -17,5 +17,6 @@ export class FindAllFederationsDto implements Prisma.FederationsFindManyArgs {
   @ApiProperty({ required: false }) orderBy?:
     | Prisma.FederationsOrderByWithRelationInput
     | Prisma.FederationsOrderByWithRelationInput[];
+  @ApiProperty({ required: false })
   include?: Prisma.FederationsInclude<DefaultArgs>;
 }
