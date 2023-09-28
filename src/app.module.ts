@@ -30,6 +30,7 @@ import { CompetitionsModule } from './models/admin/competitions/competitions.mod
 import { CompetitionPageModule } from './models/client/competition-page/competition-page.module';
 import { UsersModule } from './models/admin/users/users.module';
 import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepartment-page.module';
+import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms-and-clubs-page.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepa
     AuthModule,
     MainPageModule,
     FederationPageModule,
+    GymsAndClubsPageModule,
     HcdepartmentPageModule,
     CompetitionPageModule,
     NewsDetailsModule,

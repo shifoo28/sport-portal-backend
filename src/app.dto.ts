@@ -12,11 +12,15 @@ export class LangQueryDto {
     this.lang = lang;
   }
 
-  toName(records: any): any {
+  toName(records: any[]): any {
     return records.map((record) => {
       return {
         ...record,
         name: this.lang === ELangs.Tm ? record.nameTm : record.nameRu,
+        location:
+          this.lang === ELangs.Tm ? record?.locationTm : record?.locationRu,
+        sports: this.lang === ELangs.Tm ? record?.sportsTm : record?.sportsRu,
+        openAt: this.lang === ELangs.Tm ? record?.openAtTm : record?.openAtRu,
       };
     });
   }

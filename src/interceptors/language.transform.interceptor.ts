@@ -24,12 +24,17 @@ export class LanguageTransformInterceptor<T>
 
     return next.handle().pipe(
       map((data) => {
-        isArray(data)
-          ? data.map((i: any) => {
-              i['name'] = lang === ELangs.Tm ? i.nameTm : i.nameRu;
-              return i;
-            })
-          : (data['name'] = lang === ELangs.Tm ? data.nameTm : data.nameRu);
+        if (isArray(data)) {
+          data.map((i: any) => {
+            i['name'] = lang === ELangs.Tm ? i.nameTm : i.nameRu;
+            i['text'] = lang === ELangs.Tm ? i?.textTm : i?.textRu;
+
+            return i;
+          });
+        } else {
+          data['name'] = lang === ELangs.Tm ? data.nameTm : data.nameRu;
+          data['text'] = lang === ELangs.Tm ? data?.textTm : data?.textRu;
+        }
 
         return data;
       }),
