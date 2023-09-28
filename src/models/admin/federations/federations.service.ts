@@ -20,7 +20,7 @@ export class FederationsService {
       skip,
       take,
       where,
-      orderBy = { updatedAt: 'asc' },
+      orderBy,
       include,
     } = query;
 

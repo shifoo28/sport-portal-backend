@@ -39,12 +39,11 @@ export class FindAllFederationTrainersDto
 {
   @ApiProperty({ required: false }) skip?: number;
   @ApiProperty({ required: false, default: 10 }) take?: number;
-  @ApiProperty({ required: false }) where?: Prisma.FederationTrainersWhereInput;
+  @ApiProperty({ required: false })
+  where?: Prisma.FederationTrainersWhereInput;
   @ApiProperty({ required: false }) orderBy?:
     | Prisma.FederationTrainersOrderByWithRelationInput
     | Prisma.FederationTrainersOrderByWithRelationInput[];
   @ApiProperty({ required: false })
   include?: Prisma.FederationTrainersInclude<DefaultArgs>;
-  @ApiProperty({ required: false })
-  select?: Prisma.FederationTrainersSelect<DefaultArgs>;
 }

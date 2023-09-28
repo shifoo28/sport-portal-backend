@@ -16,11 +16,13 @@ import {
   FindAllFederationTrainersDto,
 } from './dto/create-federation-trainer.dto';
 import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
+import { strToObj } from 'src/tools/strToObj';
+import { FTrainersQueryDto } from './dto/find-all.dto';
 
 @Controller('federation-trainers')
 @ApiTags('Federation Trainers')
@@ -56,14 +58,14 @@ export class FederationTrainersController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationTrainersDto) {
-    const { include, orderBy, select, skip, take, where } = query;
+    let { include, orderBy, skip, take, where } = query;
+
     return this.federationTrainersService.findAll({
       skip: skip ? +skip : 0,
       take: take ? +take : 10,
-      include: { federation: true },
-      orderBy,
-      select,
-      where,
+      include: include ? strToObj(include) : { federation: true },
+      orderBy: orderBy ? strToObj(orderBy) : {},
+      where: where ? strToObj(where) : {},
     });
   }
 
