@@ -5,7 +5,6 @@ import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { FindAllFederationsDto } from 'src/models/admin/federations/dto/create-federation.dto';
-import { FindAllHealthCareDepartment } from 'src/models/admin/health-care-departments/dto/create-health-care-department.dto';
 
 @Controller('federation-page')
 @ApiTags('Federations Page')
@@ -34,15 +33,5 @@ export class FederationPageController {
   @UseInterceptors(ResponseInterceptor)
   async findAllFederationAthletes(@Query() query: FindAllFederationsDto) {
     return this.federationPageService.findAllFederationAthletes(query);
-  }
-
-  @Get('health_care')
-  @ApiQuery({ type: LangQueryDto })
-  @UseInterceptors(LanguageTransformInterceptor)
-  @UseInterceptors(ResponseInterceptor)
-  async findAllDepartmentsAndEmployees(
-    @Query() query: FindAllHealthCareDepartment,
-  ) {
-    return this.federationPageService.findAllDepartmentsAndEmployees(query);
   }
 }

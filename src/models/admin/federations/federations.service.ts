@@ -16,13 +16,7 @@ export class FederationsService {
   }
 
   async findAll(query: FindAllFederationsDto): Promise<FederationsEntity[]> {
-    const {
-      skip,
-      take,
-      where,
-      orderBy,
-      include,
-    } = query;
+    const { skip, take, where, orderBy, include } = query;
 
     return this.prismaService.federations.findMany({
       skip,

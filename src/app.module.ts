@@ -29,6 +29,7 @@ import { CompetitionTypesModule } from './models/admin/competition-types/competi
 import { CompetitionsModule } from './models/admin/competitions/competitions.module';
 import { CompetitionPageModule } from './models/client/competition-page/competition-page.module';
 import { UsersModule } from './models/admin/users/users.module';
+import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepartment-page.module';
 
 @Module({
   imports: [
@@ -46,9 +47,10 @@ import { UsersModule } from './models/admin/users/users.module';
       },
     }),
     AuthModule,
-    CompetitionPageModule,
-    FederationPageModule,
     MainPageModule,
+    FederationPageModule,
+    HcdepartmentPageModule,
+    CompetitionPageModule,
     NewsDetailsModule,
     UsersModule,
     LangsModule,

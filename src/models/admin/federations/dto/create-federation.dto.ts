@@ -6,8 +6,8 @@ export class CreateFederationDto implements Prisma.FederationsCreateInput {
   @ApiProperty({}) nameTm: string;
   @ApiProperty({}) nameRu: string;
   fsports?: Prisma.FederationSportsCreateNestedOneWithoutFederationInput;
-  fathlete?: Prisma.FederationAthleteCreateNestedOneWithoutFederationInput;
-  ftrainers?: Prisma.FederationTrainersCreateNestedOneWithoutFederationInput;
+  fathlete?: Prisma.FederationAthleteCreateNestedManyWithoutFederationInput;
+  ftrainers?: Prisma.FederationTrainersCreateNestedManyWithoutFederationInput;
 }
 
 export class FindAllFederationsDto implements Prisma.FederationsFindManyArgs {
