@@ -38,7 +38,10 @@ export class CompetitionPageController {
       return query.lang === ELangs.Tm ? c.nameTm : c.nameRu;
     });
 
-    return { competitionTypes, locations };
+    return [
+      { name: 'competitionTypes', filters: competitionTypes },
+      { name: 'locations', filters: locations },
+    ];
   }
 
   @Post('filter')
