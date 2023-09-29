@@ -8,7 +8,6 @@ import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { ApiTags } from '@nestjs/swagger';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
-import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { countries } from 'src/tools/constants';
 
 @Controller('gyms-and-clubs-page')
@@ -43,7 +42,6 @@ export class GymsAndClubsPageController {
   }
 
   @Post('filter')
-  @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   async filterGymsAndClubs(
     @Query() query: FilterOptionsDto,

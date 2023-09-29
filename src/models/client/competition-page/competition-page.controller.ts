@@ -6,6 +6,7 @@ import { LanguageTransformInterceptor } from 'src/interceptors/language.transfor
 import { ELangs, LangQueryDto } from 'src/app.dto';
 import { countries } from 'src/tools/constants';
 import { CompetitionEntity } from 'src/models/admin/competitions/entities/competition.entity';
+import { FilterOptionsDto } from './dto/filter-options.dto';
 
 @Controller('competition-page')
 @ApiTags('Competition Page')
@@ -40,12 +41,16 @@ export class CompetitionPageController {
 
     return [
       { name: 'competitionTypes', filters: competitionTypes },
-      { name: 'locations', filters: locations },
+      { name: 'location', filters: locations },
     ];
   }
 
   @Post('filter')
-  async filterCompetitions(): Promise<CompetitionEntity[]> {
-    return;
+  @UseInterceptors(LanguageTransformInterceptor)
+  @UseInterceptors(ResponseInterceptor)
+  async filterCompetitions(
+    @Query() query: FilterOptionsDto,
+  ): Promise<CompetitionEntity[]> {
+    return this.competitionPageService.filterCompetitions(query);
   }
 }

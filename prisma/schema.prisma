@@ -254,7 +254,8 @@ model Competitions {
   nameRu          String
   textTm          String
   textRu          String
-  location        String
+  locationTm      String
+  locationRu      String
   dateStart       DateTime
   dateEnd         DateTime
   views           Int              @default(0)

@@ -7,7 +7,8 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   @ApiProperty() nameRu: string;
   @ApiProperty() textTm: string;
   @ApiProperty() textRu: string;
-  @ApiProperty() location: string;
+  @ApiProperty() locationTm: string;
+  @ApiProperty() locationRu: string;
   @ApiProperty({ type: 'string' || 'Date', default: new Date() }) dateStart:
     | string
     | Date;

@@ -32,7 +32,9 @@ export class GymsAndClubsPageService {
   async filterGymsAndClubs(
     query: FilterOptionsDto,
   ): Promise<FederationGymsAndClubEntity[]> {
-    let { location, sportType, lang, name } = query;
+    const langTransform = new LangQueryDto(query.lang);
+
+    const { location, sportType, lang, name } = query;
     const where =
       lang === ELangs.Tm
         ? {
@@ -46,6 +48,9 @@ export class GymsAndClubsPageService {
             nameRu: name ? { contains: name } : undefined,
           };
 
-    return this.fgcService.findAll({ where });
+    let fgc = await this.fgcService.findAll({ where });
+    fgc = langTransform.toName(fgc);
+
+    return fgc;
   }
 }
