@@ -34,21 +34,21 @@ export class CompetitionPageService {
   ): Promise<CompetitionEntity[]> {
     const langTransform = new LangQueryDto(query.lang);
 
-    const { lang, locations, competitionType, name } = query;
+    const { lang, locations, competitionTypes, name } = query;
     const where =
       lang === ELangs.Tm
         ? {
             nameTm: name ? { contains: name } : undefined,
             locationTm: locations ? { contains: locations } : undefined,
-            competitionType: competitionType
-              ? { nameTm: { contains: competitionType } }
+            competitionType: competitionTypes
+              ? { nameTm: { contains: competitionTypes } }
               : undefined,
           }
         : {
             nameRu: name ? { contains: name } : undefined,
             locationRu: locations ? { contains: locations } : undefined,
-            competitionType: competitionType
-              ? { nameRu: { contains: competitionType } }
+            competitionType: competitionTypes
+              ? { nameRu: { contains: competitionTypes } }
               : undefined,
           };
 
