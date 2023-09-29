@@ -34,7 +34,7 @@ export class VideosController {
       ],
       {
         storage: diskStorage({
-          destination: './upload/videos',
+          destination: './upload/video',
           filename(req, file, callback) {
             callback(null, `${Date.now()}_${file.originalname}`);
           },
