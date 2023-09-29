@@ -36,7 +36,10 @@ export class GymsAndClubsPageController {
       return query.lang === ELangs.Tm ? l.nameTm : l.nameRu;
     });
 
-    return { sportTypes, locations };
+    return [
+      { name: 'sportTypes', filters: sportTypes },
+      { name: 'locations', filters: locations },
+    ];
   }
 
   @Post('filter')
@@ -45,6 +48,6 @@ export class GymsAndClubsPageController {
   async filterGymsAndClubs(
     @Query() query: FilterOptionsDto,
   ): Promise<FederationGymsAndClubEntity[]> {
-    return this.gymsAndClubsPageService.getGymsAndClubs(query);
+    return this.gymsAndClubsPageService.filterGymsAndClubs(query);
   }
 }

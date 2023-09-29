@@ -29,7 +29,7 @@ export class GymsAndClubsPageService {
     return this.stService.findAll({ take: 999 });
   }
 
-  async getGymsAndClubs(
+  async filterGymsAndClubs(
     query: FilterOptionsDto,
   ): Promise<FederationGymsAndClubEntity[]> {
     let { location, sportType, lang, name } = query;

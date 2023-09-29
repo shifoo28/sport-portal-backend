@@ -1,10 +1,11 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import { CompetitionPageService } from './competition-page.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { ELangs, LangQueryDto } from 'src/app.dto';
 import { countries } from 'src/tools/constants';
+import { CompetitionEntity } from 'src/models/admin/competitions/entities/competition.entity';
 
 @Controller('competition-page')
 @ApiTags('Competition Page')
@@ -38,5 +39,10 @@ export class CompetitionPageController {
     });
 
     return { competitionTypes, locations };
+  }
+
+  @Post('filter')
+  async filterCompetitions(): Promise<CompetitionEntity[]> {
+    return;
   }
 }
