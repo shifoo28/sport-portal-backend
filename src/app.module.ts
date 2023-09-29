@@ -31,6 +31,7 @@ import { CompetitionPageModule } from './models/client/competition-page/competit
 import { UsersModule } from './models/admin/users/users.module';
 import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepartment-page.module';
 import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms-and-clubs-page.module';
+import { SportTypesModule } from './models/admin/sport-types/sport-types.module';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms
     AdsModule,
     BaseCategoryModule,
     SportCategoriesModule,
+    SportTypesModule,
     FederationsModule,
     FederationSportsModule,
     FederationTrainersModule,
