@@ -41,7 +41,7 @@ export class CompetitionPageController {
 
     return [
       { name: 'competitionTypes', filters: competitionTypes },
-      { name: 'location', filters: locations },
+      { name: 'locations', filters: locations },
     ];
   }
 

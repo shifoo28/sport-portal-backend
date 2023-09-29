@@ -34,17 +34,17 @@ export class GymsAndClubsPageService {
   ): Promise<FederationGymsAndClubEntity[]> {
     const langTransform = new LangQueryDto(query.lang);
 
-    const { location, sportType, lang, name } = query;
+    const { locations, sports, lang, name } = query;
     const where =
       lang === ELangs.Tm
         ? {
-            locationTm: location ? { contains: location } : undefined,
-            sportsTm: sportType ? { has: sportType } : undefined,
+            locationTm: locations ? { contains: locations } : undefined,
+            sportsTm: sports ? { has: sports } : undefined,
             nameTm: name ? { contains: name } : undefined,
           }
         : {
-            locationRu: location ? { contains: location } : undefined,
-            sportsRu: sportType ? { has: sportType } : undefined,
+            locationRu: locations ? { contains: locations } : undefined,
+            sportsRu: sports ? { has: sports } : undefined,
             nameRu: name ? { contains: name } : undefined,
           };
 

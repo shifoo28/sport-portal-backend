@@ -28,15 +28,15 @@ export class GymsAndClubsPageController {
   async getFilterOptions(@Query() query: LangQueryDto) {
     const langTransform = new LangQueryDto(query.lang);
 
-    let sportTypes = await this.gymsAndClubsPageService.getSportTypes();
-    sportTypes = langTransform.toName(sportTypes);
+    let sports = await this.gymsAndClubsPageService.getSportTypes();
+    sports = langTransform.toName(sports);
 
     const locations = countries.map((l) => {
       return query.lang === ELangs.Tm ? l.nameTm : l.nameRu;
     });
 
     return [
-      { name: 'sportTypes', filters: sportTypes },
+      { name: 'sports', filters: sports },
       { name: 'locations', filters: locations },
     ];
   }
