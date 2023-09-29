@@ -9,37 +9,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
-
-const locations = [
-  {
-    nameTm: 'Türkmenistan',
-    nameRu: 'Туркменистан',
-  },
-  {
-    nameTm: 'Aşgabat',
-    nameRu: 'Ашхабад',
-  },
-  {
-    nameTm: 'Lebap',
-    nameRu: 'Лебап',
-  },
-  {
-    nameTm: 'Ahal',
-    nameRu: 'Ахал',
-  },
-  {
-    nameTm: 'Mary',
-    nameRu: 'Мари',
-  },
-  {
-    nameTm: 'Daşoguz',
-    nameRu: 'Дашогуз',
-  },
-  {
-    nameTm: 'Balkan',
-    nameRu: 'Балкан',
-  },
-];
+import { countries } from 'src/tools/constants';
 
 @Controller('gyms-and-clubs-page')
 @ApiTags('Gyms & Clubs Page')
@@ -62,11 +32,11 @@ export class GymsAndClubsPageController {
     let sportTypes = await this.gymsAndClubsPageService.getSportTypes();
     sportTypes = langTransform.toName(sportTypes);
 
-    const countries = locations.map((l) => {
+    const locations = countries.map((l) => {
       return query.lang === ELangs.Tm ? l.nameTm : l.nameRu;
     });
 
-    return { sportTypes, countries };
+    return { sportTypes, locations };
   }
 
   @Post('filter')
