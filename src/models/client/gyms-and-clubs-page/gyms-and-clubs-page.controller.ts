@@ -1,4 +1,4 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import {
   GymsAndClubsPageService,
   IGymClubPage,
@@ -6,6 +6,9 @@ import {
 import { ELangs, LangQueryDto } from 'src/app.dto';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { ApiTags } from '@nestjs/swagger';
+import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
+import { FilterOptionsDto } from './dto/filter-options.dto';
+import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 
 const locations = [
   {
@@ -52,6 +55,7 @@ export class GymsAndClubsPageController {
   }
 
   @Get('filters')
+  @UseInterceptors(ResponseInterceptor)
   async getFilterOptions(@Query() query: LangQueryDto) {
     const langTransform = new LangQueryDto(query.lang);
 
@@ -63,5 +67,14 @@ export class GymsAndClubsPageController {
     });
 
     return { sportTypes, countries };
+  }
+
+  @Post('filter')
+  @UseInterceptors(LanguageTransformInterceptor)
+  @UseInterceptors(ResponseInterceptor)
+  async filterGymsAndClubs(
+    @Query() query: FilterOptionsDto,
+  ): Promise<FederationGymsAndClubEntity[]> {
+    return this.gymsAndClubsPageService.getGymsAndClubs(query);
   }
 }
