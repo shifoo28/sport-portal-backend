@@ -1,3 +1,3 @@
-export const strToObj = (obj: any) => {
-  return JSON.parse(obj);
+export const strToObj = (obj: any): object => {
+  return obj ? JSON.parse(obj) : {};
 };
