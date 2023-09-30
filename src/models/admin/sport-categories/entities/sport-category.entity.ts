@@ -1,6 +1,6 @@
 import { Sections, SportCategories } from '@prisma/client';
 
-export class SportCategory implements SportCategories {
+export class SportCategoryEntity implements SportCategories {
   id: string;
   nameTm: string;
   nameRu: string;

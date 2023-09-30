@@ -32,12 +32,14 @@ export class SportCategoriesController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllSportCategoriesDto) {
-    const { skip, take, where } = query;
+    const { skip, take, where, include, orderBy } = query;
 
     return this.sportCategoriesService.findAll({
       skip: skip ? +skip : 0,
       take: take ? +take : 10,
       where,
+      include,
+      orderBy,
     });
   }
 

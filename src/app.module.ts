@@ -32,29 +32,19 @@ import { UsersModule } from './models/admin/users/users.module';
 import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepartment-page.module';
 import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms-and-clubs-page.module';
 import { SportTypesModule } from './models/admin/sport-types/sport-types.module';
+import { NewsPageModule } from './models/client/news-page/news-page.module';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'upload'),
-      serveStaticOptions: {
-        // setHeaders(res, path, stat) {
-        //   console.log('RES: ');
-        //   console.log(res);
-        //   console.log('PATH:');
-        //   console.log(path);
-        //   console.log('STAT:');
-        //   console.log(stat);
-        // },
-      },
-    }),
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'upload') }),
     AuthModule,
     MainPageModule,
+    NewsPageModule,
+    NewsDetailsModule,
     FederationPageModule,
     GymsAndClubsPageModule,
     HcdepartmentPageModule,
     CompetitionPageModule,
-    NewsDetailsModule,
     UsersModule,
     LangsModule,
     NewsModule,
