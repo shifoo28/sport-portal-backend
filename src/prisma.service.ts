@@ -8,31 +8,30 @@ export class PrismaService
 {
   constructor() {
     super({
-      log: [
-        'error',
-        {
-          emit: 'event',
-          level: 'query',
-        },
-      ],
-      errorFormat: 'pretty',
+      // log: [
+      //   'error',
+      //   {
+      //     emit: 'event',
+      //     level: 'query',
+      //   },
+      // ],
+      // errorFormat: 'pretty',
     });
   }
 
   async onModuleInit() {
     this.$on('query', (event) => {
-      // console.log(
-      //   event.timestamp +
-      //     '~' +
-      //     event.query +
-      //     '~' +
-      //     event.params +
-      //     '~' +
-      //     event.duration +
-      //     '~' +
-      //     event.target,
-      // ),
-      console.log(event);
+      console.log(
+        event.timestamp +
+          '~' +
+          event.query +
+          '~' +
+          event.params +
+          '~' +
+          event.duration +
+          '~' +
+          event.target,
+      );
     });
 
     await this.$connect();

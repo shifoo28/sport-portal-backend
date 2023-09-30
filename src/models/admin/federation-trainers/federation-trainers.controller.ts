@@ -16,13 +16,12 @@ import {
   FindAllFederationTrainersDto,
 } from './dto/create-federation-trainer.dto';
 import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto';
-import { ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
 import { strToObj } from 'src/tools/strToObj';
-import { FTrainersQueryDto } from './dto/find-all.dto';
 
 @Controller('federation-trainers')
 @ApiTags('Federation Trainers')
@@ -93,7 +92,6 @@ export class FederationTrainersController {
     @Body() data: UpdateFederationTrainerDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    console.log(data);
     file && (data.imagePath = file.path.slice(7));
 
     return this.federationTrainersService.update(id, data);
