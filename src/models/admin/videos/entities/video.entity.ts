@@ -1,6 +1,6 @@
 import { Videos } from '@prisma/client';
 
-export class Video implements Videos {
+export class VideoEntity implements Videos {
   id: string;
   views: number;
   nameTm: string;

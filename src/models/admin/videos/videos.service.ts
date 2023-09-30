@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { PrismaService } from 'src/prisma.service';
-import { Video } from './entities/video.entity';
+import { VideoEntity } from './entities/video.entity';
 import FindAllVideosDto from './dto/videos.dto';
 
 @Injectable()
 export class VideosService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: CreateVideoDto): Promise<Video> {
+  async create(data: CreateVideoDto): Promise<VideoEntity> {
     const { categoryId, imagePath, nameRu, nameTm, textTm, textRu, videoPath } =
       data;
 
@@ -32,7 +32,7 @@ export class VideosService {
     where,
     include,
     orderBy,
-  }: FindAllVideosDto): Promise<Video[]> {
+  }: FindAllVideosDto): Promise<VideoEntity[]> {
     return this.prismaService.videos.findMany({
       skip,
       take,
@@ -42,11 +42,11 @@ export class VideosService {
     });
   }
 
-  async findOne(id: string): Promise<Video> {
+  async findOne(id: string): Promise<VideoEntity> {
     return this.prismaService.videos.findUnique({ where: { id } });
   }
 
-  async update(id: string, data: UpdateVideoDto): Promise<Video> {
+  async update(id: string, data: UpdateVideoDto): Promise<VideoEntity> {
     const { categoryId, imagePath, nameRu, nameTm, textTm, textRu, videoPath } =
       data;
 
@@ -64,7 +64,7 @@ export class VideosService {
     });
   }
 
-  async remove(id: string): Promise<Video> {
+  async remove(id: string): Promise<VideoEntity> {
     return this.prismaService.videos.delete({ where: { id } });
   }
 }

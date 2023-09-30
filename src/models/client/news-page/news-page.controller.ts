@@ -1,21 +1,36 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import { NewsPageService } from './news-page.service';
 import { ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import { FilterOptions } from './dto/filter-options.dto';
+import { PostFilterOptions, GetFilterOptions } from './dto/filter-options.dto';
+import { NewsEntity } from 'src/models/admin/news/entities/news.entity';
+import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
+import { Sections } from '@prisma/client';
+import { VideoEntity } from 'src/models/admin/videos/entities/video.entity';
 
 @Controller('news-page')
 @ApiTags('News Page')
 export class NewsPageController {
   constructor(private readonly newsPageService: NewsPageService) {}
 
-  @Get()
+  @Get('filters')
   @UseInterceptors(ResponseInterceptor)
-  async getFilterOptions(@Query() query: FilterOptions): Promise<any> {
+  async getFilterOptions(@Query() query: GetFilterOptions): Promise<any> {
     const sportCategories = await this.newsPageService.getSportCategories(
       query,
     );
 
     return { name: 'sportCategories', filters: sportCategories };
+  }
+
+  @Post('filter')
+  @UseInterceptors(LanguageTransformInterceptor)
+  @UseInterceptors(ResponseInterceptor)
+  async filterNews(
+    @Query() query: PostFilterOptions,
+  ): Promise<NewsEntity[] | VideoEntity[]> {
+    return query.section === Sections.Video
+      ? this.newsPageService.filterVideoNews(query)
+      : this.newsPageService.filterNews(query);
   }
 }
