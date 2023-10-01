@@ -49,6 +49,7 @@ export class CompetitionPageService {
             competitionType: competitionTypes
               ? { nameTm: { contains: competitionTypes } }
               : undefined,
+            mode: 'insensitive',
           }
         : {
             nameRu: name ? { contains: name } : undefined,
@@ -56,6 +57,7 @@ export class CompetitionPageService {
             competitionType: competitionTypes
               ? { nameRu: { contains: competitionTypes } }
               : undefined,
+            mode: 'insensitive',
           };
 
     let competes = await this.competitionsService.findAll({

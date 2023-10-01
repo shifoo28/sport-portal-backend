@@ -4,6 +4,7 @@ import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-an
 import { FederationGymsAndClubsService } from 'src/models/admin/federation-gyms-and-clubs/federation-gyms-and-clubs.service';
 import { SportTypesService } from 'src/models/admin/sport-types/sport-types.service';
 import { FilterOptionsDto } from './dto/filter-options.dto';
+import { Prisma } from '@prisma/client';
 
 export interface IGymClubPage {
   gymsclubs: FederationGymsAndClubEntity[];
@@ -42,17 +43,31 @@ export class GymsAndClubsPageService {
     const where =
       lang === ELangs.Tm
         ? {
-            locationTm: locations ? { contains: locations } : undefined,
-            sportsTm: sports ? { has: sports } : undefined,
-            nameTm: name ? { contains: name } : undefined,
+            locationTm: locations
+              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
+              : undefined,
+            sportsTm: sports
+              ? { has: sports, mode: Prisma.QueryMode.insensitive }
+              : undefined,
+            nameTm: name
+              ? { contains: name, mode: Prisma.QueryMode.insensitive }
+              : undefined,
           }
         : {
-            locationRu: locations ? { contains: locations } : undefined,
-            sportsRu: sports ? { has: sports } : undefined,
-            nameRu: name ? { contains: name } : undefined,
+            locationRu: locations
+              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
+              : undefined,
+            sportsRu: sports
+              ? { has: sports, mode: Prisma.QueryMode.insensitive }
+              : undefined,
+            nameRu: name
+              ? { contains: name, mode: Prisma.QueryMode.insensitive }
+              : undefined,
           };
 
-    let fgc = await this.fgcService.findAll({ where });
+    let fgc = await this.fgcService.findAll({
+      where,
+    });
     fgc = langTransform.toName(fgc);
 
     return fgc;
