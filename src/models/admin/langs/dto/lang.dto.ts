@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
+import { IsString } from 'class-validator';
 
 export class GetLangsDto {
   @ApiProperty({ default: 0, required: false }) skip?: number;
@@ -11,5 +12,7 @@ export class GetLangsDto {
 }
 
 export class CreateLangDto implements Prisma.LangCreateInput {
-  @ApiProperty() name: string;
+  @IsString()
+  @ApiProperty()
+  name: string;
 }

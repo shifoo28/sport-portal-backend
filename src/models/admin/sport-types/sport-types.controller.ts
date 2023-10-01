@@ -22,7 +22,7 @@ export class SportTypesController {
   constructor(private readonly sportTypesService: SportTypesService) {}
 
   @Post()
-  create(@Body() data: CreateSportTypeDto) {
+  create(@Body() data: CreateSportTypeDto) {    
     return this.sportTypesService.create(data);
   }
 

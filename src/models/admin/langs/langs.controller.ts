@@ -17,7 +17,6 @@ import { Lang, Prisma } from '@prisma/client';
 import { CreateLangDto, GetLangsDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 
 @Controller('langs')
 @ApiTags('Language')
@@ -45,15 +44,8 @@ export class LangsController {
   @Post()
   @ApiBearerAuth()
   @UseInterceptors(ResponseInterceptor)
-  @UseFilters(HttpExceptionFilter)
   async saveLang(@Body() data: CreateLangDto): Promise<Lang> {
-    // try {
-    const result = await this.langService.createLang(data);
-
-    return result;
-    // } catch (error) {
-    //   throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    // }
+    return this.langService.createLang(data);
   }
 
   @Patch(':id')

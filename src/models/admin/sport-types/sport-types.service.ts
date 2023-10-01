@@ -11,7 +11,7 @@ import { PrismaService } from 'src/prisma.service';
 export class SportTypesService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: CreateSportTypeDto): Promise<SportTypeEntity> {
+  async create(data: CreateSportTypeDto): Promise<SportTypeEntity> {    
     return this.prismaService.sportTypes.create({ data });
   }
 
