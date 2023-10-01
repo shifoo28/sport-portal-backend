@@ -21,7 +21,7 @@ export class FindAllFederationSportsDto
   implements Prisma.FederationSportsFindManyArgs
 {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.FederationSportsWhereInput;
   @ApiProperty({ required: false }) orderBy?:
     | Prisma.FederationSportsOrderByWithRelationInput

@@ -60,8 +60,8 @@ export class VideosController {
     const { skip, take, where, include, orderBy } = query;
 
     return this.videosService.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip ? +skip : undefined,
+      take: take ? +take : undefined,
       where,
       include,
       orderBy,

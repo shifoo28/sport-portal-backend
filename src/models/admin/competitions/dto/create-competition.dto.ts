@@ -30,7 +30,7 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
 
 export class FindAllCompetitionsDto implements Prisma.CompetitionsFindManyArgs {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.CompetitionsWhereInput;
   @ApiProperty({ required: false })
   select?: Prisma.CompetitionsSelect<DefaultArgs>;

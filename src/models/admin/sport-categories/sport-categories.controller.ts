@@ -35,8 +35,8 @@ export class SportCategoriesController {
     const { skip, take, where, include, orderBy } = query;
 
     return this.sportCategoriesService.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip ? +skip : undefined,
+      take: take ? +take : undefined,
       where,
       include,
       orderBy,

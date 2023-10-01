@@ -58,8 +58,8 @@ export class FederationAthleteController {
   findAll(@Query() query: FindAllFederationAthleteDto) {
     const { skip, select, take, where, orderBy, include } = query;
     return this.federationAthleteService.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip ? +skip : undefined,
+      take: take ? +take : undefined,
       select,
       where,
       orderBy,

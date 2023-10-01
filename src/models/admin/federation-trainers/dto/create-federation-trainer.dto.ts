@@ -38,7 +38,7 @@ export class FindAllFederationTrainersDto
   implements Prisma.FederationTrainersFindManyArgs
 {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false })
   where?: Prisma.FederationTrainersWhereInput;
   @ApiProperty({ required: false }) orderBy?:

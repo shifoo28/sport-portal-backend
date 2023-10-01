@@ -31,7 +31,7 @@ export class FindAllFederationHealthCareEmployeesDto
   implements Prisma.FederationHealthCareEmployeesFindManyArgs
 {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false })
   select?: Prisma.FederationHealthCareEmployeesSelect<DefaultArgs>;
   @ApiProperty({ required: false })

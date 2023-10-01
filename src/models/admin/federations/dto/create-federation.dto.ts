@@ -12,7 +12,7 @@ export class CreateFederationDto implements Prisma.FederationsCreateInput {
 
 export class FindAllFederationsDto implements Prisma.FederationsFindManyArgs {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.FederationsWhereInput;
   @ApiProperty({ required: false }) orderBy?:
     | Prisma.FederationsOrderByWithRelationInput

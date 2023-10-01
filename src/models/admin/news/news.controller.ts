@@ -75,8 +75,8 @@ export class NewsController {
     const { skip, take, where } = query;
 
     return this.newsService.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip ? +skip : undefined,
+      take: take ? +take : undefined,
       where,
     });
   }

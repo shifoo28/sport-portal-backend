@@ -66,8 +66,8 @@ export class CompetitionsController {
     const { skip, take, where, select, include, orderBy } = query;
 
     return this.competitionsService.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip ? +skip : undefined,
+      take: take ? +take : undefined,
       where,
       select,
       include,

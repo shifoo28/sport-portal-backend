@@ -35,8 +35,8 @@ export class LangsController {
     const { skip, take, where } = query;
 
     return this.langService.langs({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip ? +skip : undefined,
+      take: take ? +take : undefined,
       where,
     });
   }

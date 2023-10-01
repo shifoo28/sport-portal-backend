@@ -9,7 +9,7 @@ export class CreateSportTypeDto implements Prisma.SportTypesCreateInput {
 
 export class FindAllSportTypesDto implements Prisma.SportTypesFindManyArgs {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.SportTypesWhereInput;
   @ApiProperty({ required: false })
   select?: Prisma.SportTypesSelect<DefaultArgs>;

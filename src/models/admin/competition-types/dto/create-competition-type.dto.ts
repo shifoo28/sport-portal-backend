@@ -14,7 +14,7 @@ export class FindAllCompetitionTypesDto
   implements Prisma.CompetitionTypesFindManyArgs
 {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.CompetitionTypesWhereInput;
   @ApiProperty({ required: false })
   select?: Prisma.CompetitionTypesSelect<DefaultArgs>;

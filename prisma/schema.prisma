@@ -110,6 +110,7 @@ model Federations {
   id        String               @id @default(uuid())
   nameTm    String
   nameRu    String
+  imagePath String
   fsports   FederationSports?
   fathlete  FederationAthlete[]
   ftrainers FederationTrainers[]

@@ -6,7 +6,7 @@ export class FindAllSportCategoriesDto
   implements Prisma.SportCategoriesFindManyArgs
 {
   @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false, default: 10 }) take?: number;
+  @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.SportCategoriesWhereInput;
   @ApiProperty({ required: false })
   include?: Prisma.SportCategoriesInclude<DefaultArgs>;
