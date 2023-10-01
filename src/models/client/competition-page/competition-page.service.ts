@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CompetitionEntity } from 'src/models/admin/competitions/entities/competition.entity';
 import { CompetitionsService } from 'src/models/admin/competitions/competitions.service';
 import { CompetitionTypesService } from 'src/models/admin/competition-types/competition-types.service';
-import { CompetitionTypeEntity } from 'src/models/admin/competition-types/entities/competition-type.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { ELangs, LangQueryDto } from 'src/app.dto';
 
@@ -25,8 +24,15 @@ export class CompetitionPageService {
   //   return this.competitionTypeService.findAll({});
   // }
 
-  async getcompetitionTypes(): Promise<CompetitionTypeEntity[]> {
-    return this.competitionTypeService.findAll({ take: 999 });
+  async getcompetitionTypes(lang: ELangs): Promise<string[]> {
+    const competitionTypes = await this.competitionTypeService.findAll({
+      take: 999,
+    });
+    const filteredCTs = competitionTypes.map((ct) => {
+      return lang === ELangs.Tm ? ct.nameTm : ct.nameRu;
+    });
+
+    return filteredCTs;
   }
 
   async filterCompetitions(

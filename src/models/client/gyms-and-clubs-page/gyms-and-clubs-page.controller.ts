@@ -26,10 +26,7 @@ export class GymsAndClubsPageController {
   @Get('filters')
   @UseInterceptors(ResponseInterceptor)
   async getFilterOptions(@Query() query: LangQueryDto) {
-    const langTransform = new LangQueryDto(query.lang);
-
-    let sports = await this.gymsAndClubsPageService.getSportTypes();
-    sports = langTransform.toName(sports);
+    let sports = await this.gymsAndClubsPageService.getSportTypes(query.lang);
 
     const locations = countries.map((l) => {
       return query.lang === ELangs.Tm ? l.nameTm : l.nameRu;

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { ELangs, LangQueryDto } from 'src/app.dto';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FederationGymsAndClubsService } from 'src/models/admin/federation-gyms-and-clubs/federation-gyms-and-clubs.service';
-import { SportTypeEntity } from 'src/models/admin/sport-types/entities/sport-type.entity';
 import { SportTypesService } from 'src/models/admin/sport-types/sport-types.service';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 
@@ -25,8 +24,13 @@ export class GymsAndClubsPageService {
     return { gymsclubs };
   }
 
-  async getSportTypes(): Promise<SportTypeEntity[]> {
-    return this.stService.findAll({ take: 999 });
+  async getSportTypes(lang: ELangs): Promise<string[]> {
+    const sportTypes = await this.stService.findAll({ take: 999 });
+    const filteredSTs = sportTypes.map((st) => {
+      return lang === ELangs.Tm ? st.nameTm : st.nameRu;
+    });
+
+    return filteredSTs;
   }
 
   async filterGymsAndClubs(

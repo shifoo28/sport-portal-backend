@@ -29,11 +29,8 @@ export class CompetitionPageController {
   @Get('filters')
   @UseInterceptors(ResponseInterceptor)
   async getFilterOptions(@Query() query: LangQueryDto) {
-    const langTransform = new LangQueryDto(query.lang);
-
     let competitionTypes =
-      await this.competitionPageService.getcompetitionTypes();
-    competitionTypes = langTransform.toName(competitionTypes);
+      await this.competitionPageService.getcompetitionTypes(query.lang);
 
     const locations = countries.map((c) => {
       return query.lang === ELangs.Tm ? c.nameTm : c.nameRu;
