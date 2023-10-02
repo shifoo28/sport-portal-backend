@@ -8,6 +8,7 @@ import {
   Controller,
   Query,
   UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { FederationsService } from './federations.service';
 import {
@@ -15,8 +16,10 @@ import {
   FindAllFederationsDto,
 } from './dto/create-federation.dto';
 import { UpdateFederationDto } from './dto/update-federation.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Controller('federations')
 @ApiTags('Federations')
@@ -24,8 +27,24 @@ export class FederationsController {
   constructor(private readonly federationsService: FederationsService) {}
 
   @Post()
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/icons',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
   @UseInterceptors(ResponseInterceptor)
-  create(@Body() data: CreateFederationDto) {
+  create(
+    @Body() data: CreateFederationDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    data.imagePath = file.path.slice(7);
+
     return this.federationsService.create(data);
   }
 
@@ -49,8 +68,25 @@ export class FederationsController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/icons',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
   @UseInterceptors(ResponseInterceptor)
-  update(@Param('id') id: string, @Body() data: UpdateFederationDto) {
+  update(
+    @Param('id') id: string,
+    @Body() data: UpdateFederationDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    data.imagePath = file ? file.path.slice(7) : undefined;
+
     return this.federationsService.update(id, data);
   }
 
