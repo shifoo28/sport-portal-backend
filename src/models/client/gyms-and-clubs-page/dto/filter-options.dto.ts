@@ -8,6 +8,7 @@ export class FilterOptionsDto {
   })
   lang: ELangs;
   @ApiProperty({ required: false }) locations: string;
-  @ApiProperty({ required: false }) sports: string;
+  @ApiProperty({ required: false, description: 'Case sensitive DAL!!!!' })
+  sports: string;
   @ApiProperty({ required: false }) name: string;
 }

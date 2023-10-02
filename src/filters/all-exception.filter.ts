@@ -30,6 +30,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       // @ts-ignore
       message: exception?.message,
     };
+    console.log(exception);
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
   }

@@ -46,9 +46,7 @@ export class GymsAndClubsPageService {
             locationTm: locations
               ? { contains: locations, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            sportsTm: sports
-              ? { has: sports, mode: Prisma.QueryMode.insensitive }
-              : undefined,
+            sportsTm: sports ? { has: sports } : undefined,
             nameTm: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
@@ -57,9 +55,7 @@ export class GymsAndClubsPageService {
             locationRu: locations
               ? { contains: locations, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            sportsRu: sports
-              ? { has: sports, mode: Prisma.QueryMode.insensitive }
-              : undefined,
+            sportsRu: sports ? { has: sports } : undefined,
             nameRu: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,

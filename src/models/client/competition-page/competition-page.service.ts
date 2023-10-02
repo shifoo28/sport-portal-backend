@@ -4,6 +4,7 @@ import { CompetitionsService } from 'src/models/admin/competitions/competitions.
 import { CompetitionTypesService } from 'src/models/admin/competition-types/competition-types.service';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { ELangs, LangQueryDto } from 'src/app.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class CompetitionPageService {
@@ -25,9 +26,7 @@ export class CompetitionPageService {
   // }
 
   async getcompetitionTypes(lang: ELangs): Promise<string[]> {
-    const competitionTypes = await this.competitionTypeService.findAll({
-      take: 999,
-    });
+    const competitionTypes = await this.competitionTypeService.findAll({});
     const filteredCTs = competitionTypes.map((ct) => {
       return lang === ELangs.Tm ? ct.nameTm : ct.nameRu;
     });
@@ -44,24 +43,42 @@ export class CompetitionPageService {
     const where =
       lang === ELangs.Tm
         ? {
-            nameTm: name ? { contains: name } : undefined,
-            locationTm: locations ? { contains: locations } : undefined,
-            competitionType: competitionTypes
-              ? { nameTm: { contains: competitionTypes } }
+            nameTm: name
+              ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            mode: 'insensitive',
+            locationTm: locations
+              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
+              : undefined,
+            competitionType: competitionTypes
+              ? {
+                  nameTm: {
+                    contains: competitionTypes,
+                    mode: Prisma.QueryMode.insensitive,
+                  },
+                }
+              : undefined,
           }
         : {
-            nameRu: name ? { contains: name } : undefined,
-            locationRu: locations ? { contains: locations } : undefined,
-            competitionType: competitionTypes
-              ? { nameRu: { contains: competitionTypes } }
+            nameRu: name
+              ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            mode: 'insensitive',
+            locationRu: locations
+              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
+              : undefined,
+            competitionType: competitionTypes
+              ? {
+                  nameRu: {
+                    contains: competitionTypes,
+                    mode: Prisma.QueryMode.insensitive,
+                  },
+                }
+              : undefined,
           };
-
+          
     let competes = await this.competitionsService.findAll({
-      where,
+      where: {
+        competitionType: { nameTm: { contains: '', mode: 'insensitive' } },
+      },
     });
     competes = langTransform.toName(competes);
 
