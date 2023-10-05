@@ -5,6 +5,24 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateFederationTrainerDto
   implements Prisma.FederationTrainersCreateInput
 {
+  @ApiProperty() nameTm: string;
+  @ApiProperty() nameRu: string;
+  @ApiProperty() madeTm: string;
+  @ApiProperty() madeRu: string;
+  @ApiProperty() sportLevelTm: string;
+  @ApiProperty() sportLevelRu: string;
+  @ApiProperty({ type: [String] }) workedAtTm?:
+    | Prisma.FederationTrainersCreateworkedAtTmInput
+    | string[];
+  @ApiProperty({ type: [String] }) workedAtRu?:
+    | Prisma.FederationTrainersCreateworkedAtRuInput
+    | string[];
+  @ApiProperty({ type: [String] }) badgesTm?:
+    | Prisma.FederationTrainersCreatebadgesTmInput
+    | string[];
+  @ApiProperty({ type: [String] }) badgesRu?:
+    | Prisma.FederationTrainersCreatebadgesRuInput
+    | string[];
   @ApiProperty() age: number;
   @ApiProperty() job: string;
   @ApiProperty() name: string;
@@ -16,8 +34,8 @@ export class CreateFederationTrainerDto
   @ApiProperty({ type: [String] }) workedAt:
     | Prisma.FederationTrainersCreateworkedAtInput
     | string[];
-  @ApiProperty({ type: Object }) links:
-    | Prisma.NullableJsonNullValueInput
+  @ApiProperty({ type: Object }) links?:
+    | Prisma.NullTypes.JsonNull
     | Prisma.InputJsonValue;
   @ApiProperty({ type: [String] }) badges:
     | Prisma.FederationTrainersCreatebadgesInput

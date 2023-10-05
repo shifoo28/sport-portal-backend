@@ -26,7 +26,7 @@ export class GymsAndClubsPageService {
   }
 
   async getSportTypes(lang: ELangs): Promise<string[]> {
-    const sportTypes = await this.stService.findAll({ take: 999 });
+    const sportTypes = await this.stService.findAll({});
     const filteredSTs = sportTypes.map((st) => {
       return lang === ELangs.Tm ? st.nameTm : st.nameRu;
     });

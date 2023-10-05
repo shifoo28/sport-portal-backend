@@ -15,7 +15,7 @@ export class MainPageService {
 
   async findAllLWN(section: 'Local' | 'World'): Promise<FindAllLWNewsDto[]> {
     return this.news.findAll({
-      orderBy: { updatedAt: 'desc' },
+      orderBy: { createdAt: 'desc' },
       where: { category: { section } },
       include: {
         category: {
@@ -27,8 +27,7 @@ export class MainPageService {
 
   async findAllVideoN(): Promise<FindAllVideoNewsDto[]> {
     return this.videos.findAll({
-      take: 4,
-      orderBy: { updatedAt: 'desc' },
+      orderBy: { createdAt: 'desc' },
       where: { category: { section: 'Video' } },
     });
   }

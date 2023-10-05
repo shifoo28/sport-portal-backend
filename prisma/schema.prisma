@@ -70,6 +70,8 @@ model News {
   nameTm     String
   nameRu     String
   location   String
+  locationTm String?
+  locationRu String?
   imagePath  String
   category   SportCategories @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -127,9 +129,15 @@ model FederationSports {
   web          String
   email        String
   leader       String
-  founded      String
+  leaderTm     String?
+  leaderRu     String?
+  founded      Int?
   location     String
+  locationTm   String?
+  locationRu   String?
   president    String
+  presidentTm  String?
+  presidentRu  String?
   federationId String      @unique
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
@@ -143,16 +151,26 @@ model FederationTrainers {
   age          Int
   job          String
   name         String      @unique
+  nameTm       String?
+  nameRu       String?
   made         String
+  madeTm       String?
+  madeRu       String?
   rating       Float       @default(4.5)
   imagePath    String
   experience   Int         @default(0)
   views        Int         @default(0)
   birthPlace   String
   sportLevel   String
+  sportLevelTm String?
+  sportLevelRu String?
   workedAt     String[]
+  workedAtTm   String[]
+  workedAtRu   String[]
   badges       String[]
-  links        Json?       @db.Json
+  badgesTm     String[]
+  badgesRu     String[]
+  links        Json        @default("{}") @db.Json
   federationId String
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
@@ -162,18 +180,32 @@ model FederationTrainers {
 model FederationAthlete {
   id           String      @id @default(uuid())
   name         String      @unique
+  nameTm       String?
+  nameRu       String?
   club         String?
   made         String
+  madeTm       String?
+  madeRu       String?
   rating       Float       @default(4.5)
   position     String?
+  positionTm   String?
+  positionRu   String?
   imagePath    String
   age          Int
   birthPlace   String
+  birthPlaceTm String?
+  birthPlaceRu String?
   views        Int         @default(0)
   experience   Int         @default(0)
   sportLevel   String
+  sportLevelTm String?
+  sportLevelRu String?
   workedAt     String[]
+  workedAtTm   String[]
+  workedAtRu   String[]
   badges       String[]
+  badgesTm     String[]
+  badgesRu     String[]
   links        Json        @default("{}") @db.Json
   federationId String
   federation   Federations @relation(fields: [federationId], references: [id])
@@ -222,16 +254,22 @@ model HealthCareDepartments {
 model FederationHealthCareEmployees {
   id           String                @id @default(uuid())
   name         String
+  nameTm       String?
+  nameRu       String?
   job          String
+  jobTm        String?
+  jobRu        String?
   age          Int
   workAt       String
-  departmentId String
-  department   HealthCareDepartments @relation(fields: [departmentId], references: [id])
+  workAtTm     String?
+  workAtRu     String?
   experience   Int                   @default(0)
   views        Int                   @default(0)
   rating       Float                 @default(4.5)
-  imagePath    String
   links        Json                  @default("{}") @db.Json
+  imagePath    String
+  departmentId String
+  department   HealthCareDepartments @relation(fields: [departmentId], references: [id])
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 

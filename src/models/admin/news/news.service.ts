@@ -10,13 +10,24 @@ export class NewsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateNewsDto): Promise<News> {
-    const { categoryId, imagePath, location, nameRu, nameTm, textTm, textRu } =
-      data;
+    const {
+      categoryId,
+      imagePath,
+      location,
+      locationTm,
+      locationRu,
+      nameRu,
+      nameTm,
+      textTm,
+      textRu,
+    } = data;
 
     return this.prismaService.news.create({
       data: {
         imagePath,
         location,
+        locationTm,
+        locationRu,
         nameRu,
         nameTm,
         textTm,
@@ -58,6 +69,8 @@ export class NewsService {
       categoryId,
       imagePath,
       location,
+      locationTm,
+      locationRu,
       nameRu,
       nameTm,
       textTm,
@@ -70,6 +83,8 @@ export class NewsService {
       data: {
         imagePath,
         location,
+        locationTm,
+        locationRu,
         nameRu,
         nameTm,
         textTm,

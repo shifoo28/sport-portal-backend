@@ -13,6 +13,12 @@ export class FederationSportsService {
 
   async create(data: CreateFederationSportDto): Promise<FederationSportEntity> {
     const {
+      leaderTm,
+      leaderRu,
+      locationTm,
+      locationRu,
+      presidentTm,
+      presidentRu,
       fax,
       tel,
       web,
@@ -25,12 +31,18 @@ export class FederationSportsService {
     } = data;
     return this.prismaService.federationSports.create({
       data: {
+        leaderTm,
+        leaderRu,
+        locationTm,
+        locationRu,
+        presidentTm,
+        presidentRu,
         fax,
         tel,
         web,
         email,
         leader,
-        founded,
+        founded: +founded,
         location,
         president,
         federation: { connect: { id: federationId } },
@@ -53,6 +65,12 @@ export class FederationSportsService {
     data: UpdateFederationSportDto,
   ): Promise<FederationSportEntity> {
     const {
+      leaderTm,
+      leaderRu,
+      locationTm,
+      locationRu,
+      presidentTm,
+      presidentRu,
       fax,
       tel,
       web,
@@ -66,12 +84,18 @@ export class FederationSportsService {
     return this.prismaService.federationSports.update({
       where: { id },
       data: {
+        leaderTm,
+        leaderRu,
+        locationTm,
+        locationRu,
+        presidentTm,
+        presidentRu,
         fax,
         tel,
         web,
         email,
         leader,
-        founded,
+        founded: +founded,
         location,
         president,
         federation: {

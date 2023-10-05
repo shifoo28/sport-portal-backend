@@ -5,6 +5,28 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateFederationAthleteDto
   implements Prisma.FederationAthleteCreateInput
 {
+  @ApiProperty() nameTm: string;
+  @ApiProperty() nameRu: string;
+  @ApiProperty() madeTm: string;
+  @ApiProperty() madeRu: string;
+  @ApiProperty() positionTm: string;
+  @ApiProperty() positionRu: string;
+  @ApiProperty() sportLevelTm: string;
+  @ApiProperty() sportLevelRu: string;
+  @ApiProperty({ type: [String] }) workedAtTm:
+    | Prisma.FederationAthleteCreateworkedAtTmInput
+    | string[];
+  @ApiProperty({ type: [String] }) workedAtRu:
+    | Prisma.FederationAthleteCreateworkedAtRuInput
+    | string[];
+  @ApiProperty({ type: [String] }) badgesTm:
+    | Prisma.FederationAthleteCreatebadgesTmInput
+    | string[];
+  @ApiProperty({ type: [String] }) badgesRu:
+    | Prisma.FederationAthleteCreatebadgesRuInput
+    | string[];
+  @ApiProperty() birthPlaceTm: string;
+  @ApiProperty() birthPlaceRu: string;
   @ApiProperty() age: number;
   @ApiProperty() birthPlace: string;
   @ApiProperty({ default: 0 }) experience?: number;

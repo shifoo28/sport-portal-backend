@@ -5,9 +5,15 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateFederationSportDto
   implements Prisma.FederationSportsCreateInput
 {
+  @ApiProperty() leaderTm: string;
+  @ApiProperty() leaderRu: string;
+  @ApiProperty() founded: number;
+  @ApiProperty() locationTm: string;
+  @ApiProperty() locationRu: string;
+  @ApiProperty() presidentTm: string;
+  @ApiProperty() presidentRu: string;
   @ApiProperty() president: string;
   @ApiProperty() leader: string;
-  @ApiProperty() founded: string;
   @ApiProperty() location: string;
   @ApiProperty() tel: string;
   @ApiProperty() fax: string;

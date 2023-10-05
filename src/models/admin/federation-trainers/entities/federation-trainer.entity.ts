@@ -1,6 +1,16 @@
 import { FederationTrainers, Prisma } from '@prisma/client';
 
 export class FederationTrainerEntity implements FederationTrainers {
+  nameTm: string;
+  nameRu: string;
+  madeTm: string;
+  madeRu: string;
+  sportLevelTm: string;
+  sportLevelRu: string;
+  workedAtTm: string[];
+  workedAtRu: string[];
+  badgesTm: string[];
+  badgesRu: string[];
   views: number;
   workedAt: string[];
   badges: string[];

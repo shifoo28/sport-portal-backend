@@ -8,6 +8,8 @@ export class NewsEntity implements News {
   nameTm: string;
   nameRu: string;
   location: string;
+  locationTm: string;
+  locationRu: string;
   imagePath: string;
   categoryId: string;
   createdAt: Date;

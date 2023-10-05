@@ -15,6 +15,12 @@ export class FederationHealthCareEmployeesService {
     data: CreateFederationHealthCareEmployeeDto,
   ): Promise<FederationHealthCareEmployeeEntity> {
     const {
+      nameTm,
+      nameRu,
+      jobTm,
+      jobRu,
+      workAtTm,
+      workAtRu,
       name,
       age,
       job,
@@ -28,6 +34,12 @@ export class FederationHealthCareEmployeesService {
     } = data;
     return this.prismaService.federationHealthCareEmployees.create({
       data: {
+        nameTm,
+        nameRu,
+        jobTm,
+        jobRu,
+        workAtTm,
+        workAtRu,
         name,
         job,
         workAt,
@@ -59,11 +71,45 @@ export class FederationHealthCareEmployeesService {
     id: string,
     data: UpdateFederationHealthCareEmployeeDto,
   ): Promise<FederationHealthCareEmployeeEntity> {
-    const {} = data;
+    const {
+      nameTm,
+      nameRu,
+      jobTm,
+      jobRu,
+      workAtTm,
+      workAtRu,
+      name,
+      age,
+      job,
+      workAt,
+      departmentId,
+      experience,
+      links,
+      views,
+      rating,
+      imagePath,
+    } = data;
 
     return this.prismaService.federationHealthCareEmployees.update({
       where: { id },
-      data: {},
+      data: {
+        nameTm,
+        nameRu,
+        jobTm,
+        jobRu,
+        workAtTm,
+        workAtRu,
+        name,
+        job,
+        workAt,
+        imagePath,
+        links,
+        age: +age,
+        views: +views,
+        rating: +rating,
+        experience: +experience,
+        department: { connect: { id: departmentId } },
+      },
     });
   }
 

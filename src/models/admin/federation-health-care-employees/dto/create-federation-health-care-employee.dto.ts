@@ -5,6 +5,12 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateFederationHealthCareEmployeeDto
   implements Prisma.FederationHealthCareEmployeesCreateInput
 {
+  @ApiProperty() nameTm: string;
+  @ApiProperty() nameRu: string;
+  @ApiProperty() jobTm: string;
+  @ApiProperty() jobRu: string;
+  @ApiProperty() workAtTm: string;
+  @ApiProperty() workAtRu: string;
   @ApiProperty() name: string;
   @ApiProperty() job: string;
   @ApiProperty() age: number;

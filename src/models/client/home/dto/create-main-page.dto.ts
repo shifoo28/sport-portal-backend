@@ -1,6 +1,8 @@
 import { News, Videos } from '@prisma/client';
 
 export class FindAllLWNewsDto implements News {
+  locationRu: string;
+  locationTm: string;
   id: string;
   views: number;
   nameTm: string;

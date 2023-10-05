@@ -74,12 +74,8 @@ export class CompetitionPageService {
                 }
               : undefined,
           };
-          
-    let competes = await this.competitionsService.findAll({
-      where: {
-        competitionType: { nameTm: { contains: '', mode: 'insensitive' } },
-      },
-    });
+
+    let competes = await this.competitionsService.findAll({ where });
     competes = langTransform.toName(competes);
 
     return competes;
