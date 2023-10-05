@@ -51,6 +51,7 @@ export class FederationHealthCareEmployeesService {
   async findOne(id: string): Promise<FederationHealthCareEmployeeEntity> {
     return this.prismaService.federationHealthCareEmployees.findUnique({
       where: { id },
+      include: { department: true },
     });
   }
 
