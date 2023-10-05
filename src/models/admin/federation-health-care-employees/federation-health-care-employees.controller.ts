@@ -53,14 +53,14 @@ export class FederationHealthCareEmployeesController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationHealthCareEmployeesDto) {
-    const { skip, take, select, include, orderBy, where } = query;
+    const { skip, take, select, orderBy, where } = query;
     return this.federationHealthCareEmployeesService.findAll({
       skip: skip ? +skip : undefined,
       take: take ? +take : undefined,
       where,
       select,
       orderBy,
-      include,
+      include: { department: true },
     });
   }
 
