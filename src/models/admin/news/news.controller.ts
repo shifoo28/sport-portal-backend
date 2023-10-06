@@ -72,7 +72,7 @@ export class NewsController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllNewsDto) {
-    const { skip, take, include, orderBy, section } = query;
+    const { skip, take, orderBy, section } = query;
 
     return this.newsService.findAll({
       skip: skip ? +skip : undefined,

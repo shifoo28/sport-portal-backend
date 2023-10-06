@@ -34,6 +34,10 @@ export class FederationHealthCareEmployeesService {
     } = data;
     return this.prismaService.federationHealthCareEmployees.create({
       data: {
+        age: +age,
+        views: +views,
+        rating: +rating,
+        experience: +experience,
         nameTm,
         nameRu,
         jobTm,
@@ -45,10 +49,6 @@ export class FederationHealthCareEmployeesService {
         workAt,
         imagePath,
         links,
-        age: +age,
-        views: +views,
-        rating: +rating,
-        experience: +experience,
         department: { connect: { id: departmentId } },
       },
     });
@@ -93,6 +93,10 @@ export class FederationHealthCareEmployeesService {
     return this.prismaService.federationHealthCareEmployees.update({
       where: { id },
       data: {
+        age: age && +age,
+        views: views && +views,
+        rating: rating && +rating,
+        experience: experience && +experience,
         nameTm,
         nameRu,
         jobTm,
@@ -104,11 +108,7 @@ export class FederationHealthCareEmployeesService {
         workAt,
         imagePath,
         links,
-        age: +age,
-        views: +views,
-        rating: +rating,
-        experience: +experience,
-        department: { connect: { id: departmentId } },
+        department: departmentId && { connect: { id: departmentId } },
       },
     });
   }

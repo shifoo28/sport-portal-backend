@@ -15,11 +15,11 @@ export class VideosService {
 
     return this.prismaService.videos.create({
       data: {
-        imagePath,
         nameRu,
         nameTm,
         textTm,
         textRu,
+        imagePath,
         videoPath,
         category: { connect: { id: categoryId } },
       },
@@ -52,13 +52,13 @@ export class VideosService {
 
     return this.prismaService.videos.update({
       data: {
-        imagePath,
         nameRu,
         nameTm,
         textTm,
         textRu,
+        imagePath,
         videoPath,
-        category: { connect: { id: categoryId } },
+        category: categoryId && { connect: { id: categoryId } },
       },
       where: { id },
     });

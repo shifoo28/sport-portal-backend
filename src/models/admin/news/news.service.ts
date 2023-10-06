@@ -90,7 +90,7 @@ export class NewsService {
         textTm,
         textRu,
         views,
-        category: { connect: { id: categoryId } },
+        category: categoryId && { connect: { id: categoryId } },
       },
     });
   }

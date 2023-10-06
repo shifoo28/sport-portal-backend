@@ -1,30 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Lang, Prisma } from '@prisma/client';
-import { GetLangsDto } from './dto/lang.dto';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class LangService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async lang(id: string): Promise<Lang | null> {
+  async lang(id: string): Promise<Lang> {
     return this.prisma.lang.findUnique({ where: { id } });
   }
 
-  async langs({
-    skip,
-    take,
-    where,
-    cursor,
-    orderBy,
-  }: GetLangsDto): Promise<Lang[]> {
-    return this.prisma.lang.findMany({
-      skip,
-      take,
-      cursor,
-      where,
-      orderBy,
-    });
+  async langs(): Promise<Lang[]> {
+    return this.prisma.lang.findMany({});
   }
 
   async createLang(data: Prisma.LangCreateInput): Promise<Lang> {

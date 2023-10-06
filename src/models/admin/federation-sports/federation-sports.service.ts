@@ -31,6 +31,7 @@ export class FederationSportsService {
     } = data;
     return this.prismaService.federationSports.create({
       data: {
+        founded: +founded,
         leaderTm,
         leaderRu,
         locationTm,
@@ -42,7 +43,6 @@ export class FederationSportsService {
         web,
         email,
         leader,
-        founded: +founded,
         location,
         president,
         federation: { connect: { id: federationId } },
@@ -84,6 +84,7 @@ export class FederationSportsService {
     return this.prismaService.federationSports.update({
       where: { id },
       data: {
+        founded: founded && +founded,
         leaderTm,
         leaderRu,
         locationTm,
@@ -95,10 +96,9 @@ export class FederationSportsService {
         web,
         email,
         leader,
-        founded: +founded,
         location,
         president,
-        federation: {
+        federation: federationId && {
           connect: { id: federationId },
         },
       },

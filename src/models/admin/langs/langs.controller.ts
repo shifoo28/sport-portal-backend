@@ -3,18 +3,14 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
   Param,
   Patch,
   Post,
-  Query,
-  UseFilters,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Lang, Prisma } from '@prisma/client';
-import { CreateLangDto, GetLangsDto } from './dto/lang.dto';
+import { CreateLangDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
@@ -31,14 +27,8 @@ export class LangsController {
 
   @Get()
   @UseInterceptors(ResponseInterceptor)
-  findAll(@Query() query: GetLangsDto): Promise<Lang[]> {
-    const { skip, take, where } = query;
-
-    return this.langService.langs({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
-      where,
-    });
+  findAll(): Promise<Lang[]> {
+    return this.langService.langs();
   }
 
   @Post()

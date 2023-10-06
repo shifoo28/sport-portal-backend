@@ -124,9 +124,9 @@ export class FederationAthleteService {
     return this.prismaService.federationAthlete.update({
       where: { id },
       data: {
-        age: +age,
-        rating: +rating,
-        experience: +experience,
+        age: age && +age,
+        rating: rating && +rating,
+        experience: experience && +experience,
         nameTm,
         nameRu,
         madeTm,
@@ -149,7 +149,7 @@ export class FederationAthleteService {
         imagePath,
         birthPlace,
         sportLevel,
-        federation: { connect: { id: federationId } },
+        federation: federationId && { connect: { id: federationId } },
       },
     });
   }

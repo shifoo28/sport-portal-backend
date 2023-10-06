@@ -33,7 +33,7 @@ export class UsersController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllUsersDto) {
-    const { skip, take, where, select, orderBy } = query;
+    const { skip, take, where, orderBy } = query;
 
     return this.usersService.findAll({
       skip: skip ? +skip : undefined,

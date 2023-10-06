@@ -21,7 +21,7 @@ export class AppService {
   async getApp(query: LangQueryDto): Promise<IApp> {
     const langTransform = new LangQueryDto(query.lang);
     // Languages
-    const lang = await this.lang.langs({});
+    const lang = await this.lang.langs();
 
     // Base Categories
     let base_categories = await this.baseCategories.findAll({

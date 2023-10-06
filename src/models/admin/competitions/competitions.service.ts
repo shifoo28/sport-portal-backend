@@ -80,7 +80,7 @@ export class CompetitionsService {
         dateEnd,
         imagePath,
         views,
-        competitionType: { connect: { id: typeId } },
+        competitionType: typeId && { connect: { id: typeId } },
       },
     });
   }

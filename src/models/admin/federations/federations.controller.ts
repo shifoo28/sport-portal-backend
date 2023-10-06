@@ -85,7 +85,7 @@ export class FederationsController {
     @Body() data: UpdateFederationDto,
     @UploadedFile() file?: Express.Multer.File,
   ) {
-    data.imagePath = file ? file.path.slice(7) : undefined;
+    data.imagePath = file && file.path.slice(7);
 
     return this.federationsService.update(id, data);
   }

@@ -29,12 +29,19 @@ export class ShopCategoriesService {
     return this.prismaService.shopCategories.findUnique({ where: { id } });
   }
 
-  async update(id: string, data: UpdateShopCategoryDto): Promise<ShopCategoryEntity> {
-    const { nameTm, nameRu, parentCategory, shopCategory } = data;
+  async update(
+    id: string,
+    data: UpdateShopCategoryDto,
+  ): Promise<ShopCategoryEntity> {
+    const { nameTm, nameRu, parentId } = data;
 
     return this.prismaService.shopCategories.update({
       where: { id },
-      data: { nameTm, nameRu, parentCategory, shopCategory },
+      data: {
+        nameTm,
+        nameRu,
+        parentCategory: parentId && { connect: { id: parentId } },
+      },
     });
   }
 

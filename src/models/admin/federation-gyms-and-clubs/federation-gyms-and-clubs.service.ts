@@ -36,10 +36,10 @@ export class FederationGymsAndClubsService {
     } = data;
     return this.prismaService.federationGymsAndClubs.create({
       data: {
-        nameTm,
-        nameRu,
         latitude: +latitude,
         longitude: +longitude,
+        nameTm,
+        nameRu,
         email,
         link,
         locationTm,
@@ -98,14 +98,14 @@ export class FederationGymsAndClubsService {
     return this.prismaService.federationGymsAndClubs.update({
       where: { id },
       data: {
+        views: views && +views,
+        latitude: latitude && +latitude,
+        longitude: longitude && +longitude,
         nameTm,
         nameRu,
-        latitude: +latitude,
-        longitude: +longitude,
         tel,
         email,
         link,
-        views: +views,
         locationTm,
         locationRu,
         sportsTm,

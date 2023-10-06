@@ -75,8 +75,33 @@ export class VideosController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'photo', maxCount: 1 },
+        { name: 'video', maxCount: 1 },
+      ],
+      {
+        storage: diskStorage({
+          destination: './upload/video',
+          filename(req, file, callback) {
+            callback(null, `${Date.now()}_${file.originalname}`);
+          },
+        }),
+      },
+    ),
+  )
   @UseInterceptors(ResponseInterceptor)
-  update(@Param('id') id: string, @Body() data: UpdateVideoDto) {
+  update(
+    @Param('id') id: string,
+    @Body() data: UpdateVideoDto,
+    @UploadedFiles()
+    files: { photo: Express.Multer.File[]; video: Express.Multer.File[] },
+  ) {
+    data.imagePath && (data.imagePath = files.photo[0].path.slice(7));
+    data.videoPath && (data.videoPath = files.video[0].path.slice(7));
+
     return this.videosService.update(id, data);
   }
 
