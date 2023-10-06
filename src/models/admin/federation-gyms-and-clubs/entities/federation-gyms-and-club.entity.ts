@@ -8,7 +8,6 @@ export class FederationGymsAndClubEntity implements FederationGymsAndClubs {
   locationRu: string;
   email: string;
   link: string;
-  views: number;
   latitude: number;
   longitude: number;
   tel: string[];
@@ -21,6 +20,7 @@ export class FederationGymsAndClubEntity implements FederationGymsAndClubs {
   imagePath3: string;
   imagePath4: string;
   imagePath5: string;
+  views: number;
   createdAt: Date;
   updatedAt: Date;
 }

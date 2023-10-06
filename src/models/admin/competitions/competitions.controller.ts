@@ -108,7 +108,7 @@ export class CompetitionsController {
     file: Express.Multer.File,
   ) {
     data.typeId = +data.typeId;
-    if (file.path) data.imagePath = file.path.slice(7);
+    file.path && (data.imagePath = file.path.slice(7));
 
     return this.competitionsService.update(id, data);
   }

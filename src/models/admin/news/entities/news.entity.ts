@@ -7,7 +7,6 @@ export class NewsEntity implements News {
   views: number;
   nameTm: string;
   nameRu: string;
-  location: string;
   locationTm: string;
   locationRu: string;
   imagePath: string;

@@ -103,11 +103,50 @@ export class FederationGymsAndClubsController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'photo1', maxCount: 1 },
+        { name: 'photo2', maxCount: 1 },
+        { name: 'photo3', maxCount: 1 },
+        { name: 'photo4', maxCount: 1 },
+        { name: 'photo5', maxCount: 1 },
+      ],
+      {
+        storage: diskStorage({
+          destination: './upload/images/gac',
+          filename(req, file, callback) {
+            callback(null, `${Date.now()}_${file.originalname}`);
+          },
+        }),
+      },
+    ),
+  )
   @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationGymsAndClubDto,
+    @UploadedFiles()
+    files: {
+      photo1: Express.Multer.File[];
+      photo2: Express.Multer.File[];
+      photo3: Express.Multer.File[];
+      photo4: Express.Multer.File[];
+      photo5: Express.Multer.File[];
+    },
   ) {
+    data.imagePath1 = files.photo1[0] && files.photo1[0].path.slice(7);
+    data.imagePath2 = files.photo2[0] && files.photo2[0].path.slice(7);
+    data.imagePath3 = files.photo3[0] && files.photo3[0].path.slice(7);
+    data.imagePath4 = files.photo4[0] && files.photo4[0].path.slice(7);
+    data.imagePath5 = files.photo5[0] && files.photo5[0].path.slice(7);
+    data.tel && (data.tel = strToArray(data.tel, ','));
+    data.sportsTm && (data.sportsTm = strToArray(data.sportsTm, ','));
+    data.sportsRu && (data.sportsRu = strToArray(data.sportsRu, ','));
+    data.openAtTm && (data.openAtTm = strToArray(data.openAtTm, ','));
+    data.openAtRu && (data.openAtRu = strToArray(data.openAtRu, ','));
+
     return this.federationGymsAndClubsService.update(id, data);
   }
 

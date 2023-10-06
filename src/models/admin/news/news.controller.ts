@@ -14,7 +14,7 @@ import {
   MaxFileSizeValidator,
 } from '@nestjs/common';
 import { NewsService } from './news.service';
-import { CreateManyNewsDto, CreateNewsDto } from './dto/create-news.dto';
+import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import { ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FindAllNewsDto } from './dto/news.dto';
@@ -57,12 +57,6 @@ export class NewsController {
     return this.newsService.create(data);
   }
 
-  @Post('many')
-  @UseInterceptors(ResponseInterceptor)
-  careteMany(@Body() data: CreateManyNewsDto) {
-    return this.newsService.createMany(data);
-  }
-
   @Get(':id')
   @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
@@ -84,8 +78,33 @@ export class NewsController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/images',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
   @UseInterceptors(ResponseInterceptor)
-  update(@Param('id') id: string, @Body() data: UpdateNewsDto) {
+  update(
+    @Param('id') id: string,
+    @Body() data: UpdateNewsDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
+    data.imagePath = file && file.path.slice(7);
+
     return this.newsService.update(id, data);
   }
 

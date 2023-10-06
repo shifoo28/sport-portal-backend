@@ -6,7 +6,6 @@ export class CreateNewsDto implements Prisma.NewsCreateInput {
   @ApiProperty() textRu: string;
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
-  @ApiProperty() location: string;
   @ApiProperty() locationTm?: string;
   @ApiProperty() locationRu?: string;
   imagePath: string;
@@ -19,14 +18,4 @@ export class CreateNewsDto implements Prisma.NewsCreateInput {
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
   photo: Express.Multer.File;
-}
-
-export class CreateManyNewsDto implements Prisma.NewsCreateManyInput {
-  @ApiProperty() nameTm: string;
-  @ApiProperty() nameRu: string;
-  @ApiProperty() textTm: string;
-  @ApiProperty() textRu: string;
-  @ApiProperty() location: string;
-  imagePath: string;
-  @ApiProperty() categoryId: string;
 }

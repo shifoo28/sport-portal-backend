@@ -69,7 +69,6 @@ model News {
   views      Int             @default(0)
   nameTm     String
   nameRu     String
-  location   String
   locationTm String?
   locationRu String?
   imagePath  String
@@ -128,14 +127,11 @@ model FederationSports {
   fax          String
   web          String
   email        String
-  leader       String
   leaderTm     String?
   leaderRu     String?
   founded      Int?
-  location     String
   locationTm   String?
   locationRu   String?
-  president    String
   presidentTm  String?
   presidentRu  String?
   federationId String      @unique
@@ -148,62 +144,54 @@ model FederationSports {
 
 model FederationTrainers {
   id           String      @id @default(uuid())
-  age          Int
-  job          String
-  name         String      @unique
-  nameTm       String?
-  nameRu       String?
-  made         String
-  madeTm       String?
-  madeRu       String?
   rating       Float       @default(4.5)
-  imagePath    String
   experience   Int         @default(0)
   views        Int         @default(0)
-  birthPlace   String
-  sportLevel   String
+  age          Int
+  jobTm        String?
+  jobRu        String?
+  nameTm       String?
+  nameRu       String?
+  madeTm       String?
+  madeRu       String?
+  birthPlaceTm String?
+  birthPlaceRu String?
   sportLevelTm String?
   sportLevelRu String?
-  workedAt     String[]
   workedAtTm   String[]
   workedAtRu   String[]
-  badges       String[]
   badgesTm     String[]
   badgesRu     String[]
+  imagePath    String
   links        Json        @default("{}") @db.Json
   federationId String
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
+
+  @@unique([nameTm, nameRu])
 }
 
 model FederationAthlete {
   id           String      @id @default(uuid())
-  name         String      @unique
   nameTm       String?
   nameRu       String?
   club         String?
-  made         String
   madeTm       String?
   madeRu       String?
   rating       Float       @default(4.5)
-  position     String?
   positionTm   String?
   positionRu   String?
   imagePath    String
   age          Int
-  birthPlace   String
   birthPlaceTm String?
   birthPlaceRu String?
   views        Int         @default(0)
   experience   Int         @default(0)
-  sportLevel   String
   sportLevelTm String?
   sportLevelRu String?
-  workedAt     String[]
   workedAtTm   String[]
   workedAtRu   String[]
-  badges       String[]
   badgesTm     String[]
   badgesRu     String[]
   links        Json        @default("{}") @db.Json
@@ -211,6 +199,8 @@ model FederationAthlete {
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
+
+  @@unique([nameTm, nameRu])
 }
 
 model FederationGymsAndClubs {
@@ -221,7 +211,6 @@ model FederationGymsAndClubs {
   locationRu String
   email      String
   link       String
-  views      Int      @default(0)
   latitude   Float
   longitude  Float
   tel        String[]
@@ -234,6 +223,7 @@ model FederationGymsAndClubs {
   imagePath3 String
   imagePath4 String
   imagePath5 String
+  views      Int      @default(0)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
@@ -253,14 +243,11 @@ model HealthCareDepartments {
 
 model FederationHealthCareEmployees {
   id           String                @id @default(uuid())
-  name         String
   nameTm       String?
   nameRu       String?
-  job          String
   jobTm        String?
   jobRu        String?
   age          Int
-  workAt       String
   workAtTm     String?
   workAtRu     String?
   experience   Int                   @default(0)
@@ -273,7 +260,7 @@ model FederationHealthCareEmployees {
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
-  @@unique([name, job])
+  @@unique([nameTm, nameRu])
 }
 
 model CompetitionTypes {

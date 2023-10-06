@@ -3,23 +3,20 @@ import { FederationHealthCareEmployees, Prisma } from '@prisma/client';
 export class FederationHealthCareEmployeeEntity
   implements FederationHealthCareEmployees
 {
+  id: string;
   nameTm: string;
   nameRu: string;
   jobTm: string;
   jobRu: string;
+  age: number;
   workAtTm: string;
   workAtRu: string;
-  id: string;
-  name: string;
-  job: string;
-  age: number;
-  workAt: string;
-  departmentId: string;
   experience: number;
   views: number;
   rating: number;
-  imagePath: string;
   links: Prisma.JsonValue;
+  imagePath: string;
+  departmentId: string;
   createdAt: Date;
   updatedAt: Date;
 }

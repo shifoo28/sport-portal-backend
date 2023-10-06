@@ -7,6 +7,13 @@ export class CreateFederationTrainerDto
 {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
+  @ApiProperty() age: number;
+  @ApiProperty() rating: number;
+  @ApiProperty() experience: number;
+  @ApiProperty() jobTm?: string;
+  @ApiProperty() jobRu?: string;
+  @ApiProperty() birthPlaceTm?: string;
+  @ApiProperty() birthPlaceRu?: string;
   @ApiProperty() madeTm: string;
   @ApiProperty() madeRu: string;
   @ApiProperty() sportLevelTm: string;
@@ -23,23 +30,7 @@ export class CreateFederationTrainerDto
   @ApiProperty({ type: [String] }) badgesRu?:
     | Prisma.FederationTrainersCreatebadgesRuInput
     | string[];
-  @ApiProperty() age: number;
-  @ApiProperty() job: string;
-  @ApiProperty() name: string;
-  @ApiProperty() made: string;
-  @ApiProperty() rating: number;
-  @ApiProperty() experience: number;
-  @ApiProperty() birthPlace: string;
-  @ApiProperty() sportLevel: string;
-  @ApiProperty({ type: [String] }) workedAt:
-    | Prisma.FederationTrainersCreateworkedAtInput
-    | string[];
-  @ApiProperty({ type: Object }) links?:
-    | Prisma.NullTypes.JsonNull
-    | Prisma.InputJsonValue;
-  @ApiProperty({ type: [String] }) badges:
-    | Prisma.FederationTrainersCreatebadgesInput
-    | string[];
+  @ApiProperty() links?: Prisma.NullTypes.JsonNull | Prisma.InputJsonValue;
   @ApiProperty() federationId: string;
   @ApiProperty({
     format: 'binary',

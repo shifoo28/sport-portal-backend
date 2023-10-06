@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { News } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CreateManyNewsDto, CreateNewsDto } from './dto/create-news.dto';
+import {  CreateNewsDto } from './dto/create-news.dto';
 import { FindAllNewsDto } from './dto/news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 
@@ -13,7 +13,6 @@ export class NewsService {
     const {
       categoryId,
       imagePath,
-      location,
       locationTm,
       locationRu,
       nameRu,
@@ -25,7 +24,6 @@ export class NewsService {
     return this.prismaService.news.create({
       data: {
         imagePath,
-        location,
         locationTm,
         locationRu,
         nameRu,
@@ -35,10 +33,6 @@ export class NewsService {
         category: { connect: { id: categoryId } },
       },
     });
-  }
-
-  async createMany(data: CreateManyNewsDto): Promise<object> {
-    return this.prismaService.news.createMany({ data, skipDuplicates: true });
   }
 
   async findAll({
@@ -68,7 +62,6 @@ export class NewsService {
     const {
       categoryId,
       imagePath,
-      location,
       locationTm,
       locationRu,
       nameRu,
@@ -82,7 +75,6 @@ export class NewsService {
       where: { id },
       data: {
         imagePath,
-        location,
         locationTm,
         locationRu,
         nameRu,

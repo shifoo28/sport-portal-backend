@@ -48,10 +48,8 @@ export class FederationTrainersController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
-    data.workedAt = strToArray(data.workedAt, ',');
     data.workedAtTm = strToArray(data.workedAtTm, ',');
     data.workedAtRu = strToArray(data.workedAtRu, ',');
-    data.badges = strToArray(data.badges, ',');
     data.badgesTm = strToArray(data.badgesTm, ',');
     data.badgesRu = strToArray(data.badgesRu, ',');
 
@@ -97,10 +95,8 @@ export class FederationTrainersController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     file && (data.imagePath = file.path.slice(7));
-    data.workedAt && (data.workedAt = strToArray(data.workedAt, ','));
     data.workedAtTm && (data.workedAtTm = strToArray(data.workedAtTm, ','));
     data.workedAtRu && (data.workedAtRu = strToArray(data.workedAtRu, ','));
-    data.badges && (data.badges = strToArray(data.badges, ','));
     data.badgesTm && (data.badgesTm = strToArray(data.badgesTm, ','));
     data.badgesRu && (data.badgesRu = strToArray(data.badgesRu, ','));
 

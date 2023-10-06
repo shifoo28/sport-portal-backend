@@ -11,10 +11,7 @@ export class CreateFederationHealthCareEmployeeDto
   @ApiProperty() jobRu: string;
   @ApiProperty() workAtTm: string;
   @ApiProperty() workAtRu: string;
-  @ApiProperty() name: string;
-  @ApiProperty() job: string;
   @ApiProperty() age: number;
-  @ApiProperty() workAt: string;
   @ApiProperty() departmentId: string;
   @ApiProperty({ required: false, default: 0 }) experience?: number;
   @ApiProperty({ required: false, default: 0 }) views?: number;

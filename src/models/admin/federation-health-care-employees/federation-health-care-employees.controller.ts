@@ -71,11 +71,25 @@ export class FederationHealthCareEmployeesController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/images/hc',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
   @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationHealthCareEmployeeDto,
+    @UploadedFile() file: Express.Multer.File,
   ) {
+    data.imagePath = file && file.path.slice(7);
+
     return this.federationHealthCareEmployeesService.update(id, data);
   }
 

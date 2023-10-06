@@ -47,10 +47,8 @@ export class FederationAthleteController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
-    data.workedAt = strToArray(data.workedAt, ',');
     data.workedAtTm = strToArray(data.workedAtTm, ',');
     data.workedAtRu = strToArray(data.workedAtRu, ',');
-    data.badges = strToArray(data.badges, ',');
     data.badgesTm = strToArray(data.badgesTm, ',');
     data.badgesRu = strToArray(data.badgesRu, ',');
 
@@ -78,14 +76,28 @@ export class FederationAthleteController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(
+    FileInterceptor('photo', {
+      storage: diskStorage({
+        destination: './upload/images/athletes',
+        filename(req, file, callback) {
+          callback(null, `${Date.now()}_${file.originalname}`);
+        },
+      }),
+    }),
+  )
   @UseInterceptors(ResponseInterceptor)
-  update(@Param('id') id: string, @Body() data: UpdateFederationAthleteDto) {
-    if (data.workedAt) data.workedAt = strToArray(data.workedAt, ',');
-    if (data.workedAtTm) data.workedAtTm = strToArray(data.workedAtTm, ',');
-    if (data.workedAtRu) data.workedAtRu = strToArray(data.workedAtRu, ',');
-    if (data.badges) data.badges = strToArray(data.badges, ',');
-    if (data.badgesTm) data.badgesTm = strToArray(data.badgesTm, ',');
-    if (data.badgesRu) data.badgesRu = strToArray(data.badgesRu, ',');
+  update(
+    @Param('id') id: string,
+    @Body() data: UpdateFederationAthleteDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    data.imagePath = file && file.path.slice(7);
+    data.workedAtTm && (data.workedAtTm = strToArray(data.workedAtTm, ','));
+    data.workedAtRu && (data.workedAtRu = strToArray(data.workedAtRu, ','));
+    data.badgesTm && (data.badgesTm = strToArray(data.badgesTm, ','));
+    data.badgesRu && (data.badgesRu = strToArray(data.badgesRu, ','));
 
     return this.federationAthleteService.update(id, data);
   }

@@ -6,8 +6,8 @@ export class CompetitionEntity implements Competitions {
   nameRu: string;
   textTm: string;
   textRu: string;
-  locationRu: string;
   locationTm: string;
+  locationRu: string;
   dateStart: Date;
   dateEnd: Date;
   views: number;
