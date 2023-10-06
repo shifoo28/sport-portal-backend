@@ -63,14 +63,14 @@ export class CompetitionsController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllCompetitionsDto) {
-    const { skip, take, where, select, include, orderBy } = query;
+    const { skip, take, where, select, orderBy } = query;
 
     return this.competitionsService.findAll({
       skip: skip ? +skip : undefined,
       take: take ? +take : undefined,
       where,
       select,
-      include,
+      include: { competitionType: true },
       orderBy,
     });
   }

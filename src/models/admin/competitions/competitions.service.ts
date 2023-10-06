@@ -46,7 +46,10 @@ export class CompetitionsService {
   }
 
   async findOne(id: string): Promise<CompetitionEntity> {
-    return this.prismaService.competitions.findUnique({ where: { id } });
+    return this.prismaService.competitions.findUnique({
+      where: { id },
+      include: { competitionType: true },
+    });
   }
 
   async update(
