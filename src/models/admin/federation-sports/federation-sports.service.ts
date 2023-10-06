@@ -23,10 +23,7 @@ export class FederationSportsService {
       tel,
       web,
       email,
-      leader,
       founded,
-      location,
-      president,
       federationId,
     } = data;
     return this.prismaService.federationSports.create({
@@ -42,9 +39,6 @@ export class FederationSportsService {
         tel,
         web,
         email,
-        leader,
-        location,
-        president,
         federation: { connect: { id: federationId } },
       },
     });
@@ -75,10 +69,7 @@ export class FederationSportsService {
       tel,
       web,
       email,
-      leader,
       founded,
-      location,
-      president,
       federationId,
     } = data;
     return this.prismaService.federationSports.update({
@@ -95,9 +86,6 @@ export class FederationSportsService {
         tel,
         web,
         email,
-        leader,
-        location,
-        president,
         federation: federationId && {
           connect: { id: federationId },
         },
