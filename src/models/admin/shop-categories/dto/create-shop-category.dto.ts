@@ -5,7 +5,7 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateShopCategoryDto implements Prisma.ShopCategoriesCreateInput {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
-  @ApiProperty() parentId: string;
+  @ApiProperty({ required: false }) parentId: string;
   parentCategory: Prisma.ShopCategoriesCreateNestedOneWithoutShopCategoryInput;
   shopCategory?: Prisma.ShopCategoriesCreateNestedManyWithoutParentCategoryInput;
 }

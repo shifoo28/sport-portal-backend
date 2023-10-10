@@ -32,14 +32,18 @@ export class ShopCategoriesController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllShopCategoriesDto) {
-    const { skip, take, where, select, include, orderBy } = query;
+    const { skip, take, select, orderBy } = query;
 
     return this.shopCategoriesService.findAll({
-      skip: skip ? +skip : undefined,
+      skip: skip ? +skip : 1,
       take: take ? +take : undefined,
-      where,
+      where: { parentId: '0' },
       select,
-      include,
+      include: {
+        shopCategory: {
+          include: { shopCategory: { include: { shopCategory: true } } },
+        },
+      },
       orderBy,
     });
   }

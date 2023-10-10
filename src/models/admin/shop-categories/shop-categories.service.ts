@@ -15,7 +15,11 @@ export class ShopCategoriesService {
     const { nameRu, nameTm, parentId } = data;
 
     return this.prismaService.shopCategories.create({
-      data: { nameTm, nameRu, parentCategory: { connect: { id: parentId } } },
+      data: {
+        nameTm,
+        nameRu,
+        parentCategory: parentId && { connect: { id: parentId } },
+      },
     });
   }
 
@@ -26,7 +30,14 @@ export class ShopCategoriesService {
   }
 
   async findOne(id: string): Promise<ShopCategoryEntity> {
-    return this.prismaService.shopCategories.findUnique({ where: { id } });
+    return this.prismaService.shopCategories.findUnique({
+      where: { id },
+      include: {
+        shopCategory: {
+          include: { shopCategory: { include: { shopCategory: true } } },
+        },
+      },
+    });
   }
 
   async update(
