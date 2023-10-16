@@ -2,6 +2,8 @@ import { FederationAthlete, Prisma } from '@prisma/client';
 
 export class FederationAthleteEntity implements FederationAthlete {
   id: string;
+  jobTm: string;
+  jobRu: string;
   nameTm: string;
   nameRu: string;
   club: string;

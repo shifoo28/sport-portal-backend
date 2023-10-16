@@ -24,4 +24,11 @@ export class LangQueryDto {
       };
     });
   }
+
+  toNestedName(records: any): any {}
+}
+
+export class SearchDto {
+  @ApiProperty({ description: 'Search everywhere by the Name!' }) name: string;
+  @ApiProperty({ enum: ELangs }) lang: ELangs;
 }

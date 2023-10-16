@@ -14,6 +14,6 @@ export class FindAllSportTypesDto implements Prisma.SportTypesFindManyArgs {
   @ApiProperty({ required: false })
   select?: Prisma.SportTypesSelect<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.SportTypesOrderByWithRelationInput
-    | Prisma.SportTypesOrderByWithRelationInput[];
+    | Prisma.SportTypesOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.SportTypesOrderByWithRelationAndSearchRelevanceInput[];
 }

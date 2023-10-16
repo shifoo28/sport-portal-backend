@@ -11,6 +11,6 @@ export class FindAllSportCategoriesDto
   @ApiProperty({ required: false })
   include?: Prisma.SportCategoriesInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.SportCategoriesOrderByWithRelationInput
-    | Prisma.SportCategoriesOrderByWithRelationInput[];
+    | Prisma.SportCategoriesOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.SportCategoriesOrderByWithRelationAndSearchRelevanceInput[];
 }

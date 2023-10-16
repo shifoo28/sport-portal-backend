@@ -10,6 +10,6 @@ export class FindAllNewsDto implements Prisma.NewsFindManyArgs {
   @ApiProperty({ required: false }) where?: Prisma.NewsWhereInput;
   @ApiProperty({ required: false }) include?: Prisma.NewsInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.NewsOrderByWithRelationInput
-    | Prisma.NewsOrderByWithRelationInput[];
+    | Prisma.NewsOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.NewsOrderByWithRelationAndSearchRelevanceInput[];
 }

@@ -1,8 +1,8 @@
-import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import { AppService, IApp } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
-import { LangQueryDto } from './app.dto';
+import { LangQueryDto, SearchDto } from './app.dto';
 
 @Controller()
 @ApiTags('App')
@@ -13,5 +13,13 @@ export class AppController {
   @UseInterceptors(ResponseInterceptor)
   getAppDefoults(@Query() query: LangQueryDto): Promise<IApp> {
     return this.appService.getApp(query);
+  }
+
+  @Post('search')
+  @UseInterceptors(ResponseInterceptor)
+  async search(@Query() query: SearchDto) {
+    const news = await this.appService.searchNews(query);
+
+    return { news };
   }
 }

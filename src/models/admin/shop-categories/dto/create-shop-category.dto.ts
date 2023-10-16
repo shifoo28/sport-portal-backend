@@ -21,6 +21,6 @@ export class FindAllShopCategoriesDto
   @ApiProperty({ required: false })
   include?: Prisma.ShopCategoriesInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.ShopCategoriesOrderByWithRelationInput
-    | Prisma.ShopCategoriesOrderByWithRelationInput[];
+    | Prisma.ShopCategoriesOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.ShopCategoriesOrderByWithRelationAndSearchRelevanceInput[];
 }

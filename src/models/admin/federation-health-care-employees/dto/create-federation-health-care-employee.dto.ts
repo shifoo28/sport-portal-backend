@@ -42,6 +42,6 @@ export class FindAllFederationHealthCareEmployeesDto
   @ApiProperty({ required: false })
   include?: Prisma.FederationHealthCareEmployeesInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationHealthCareEmployeesOrderByWithRelationInput
-    | Prisma.FederationHealthCareEmployeesOrderByWithRelationInput[];
+    | Prisma.FederationHealthCareEmployeesOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.FederationHealthCareEmployeesOrderByWithRelationAndSearchRelevanceInput[];
 }

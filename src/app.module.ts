@@ -33,6 +33,9 @@ import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepa
 import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms-and-clubs-page.module';
 import { SportTypesModule } from './models/admin/sport-types/sport-types.module';
 import { NewsPageModule } from './models/client/news-page/news-page.module';
+import { ShopModule } from './models/client/shop/shop.module';
+import { NewsService } from './models/admin/news/news.service';
+import { BrandsModule } from './brands/brands.module';
 
 @Module({
   imports: [
@@ -45,6 +48,7 @@ import { NewsPageModule } from './models/client/news-page/news-page.module';
     GymsAndClubsPageModule,
     HcdepartmentPageModule,
     CompetitionPageModule,
+    ShopModule,
     UsersModule,
     LangsModule,
     NewsModule,
@@ -63,6 +67,7 @@ import { NewsPageModule } from './models/client/news-page/news-page.module';
     ShopCategoriesModule,
     CompetitionTypesModule,
     CompetitionsModule,
+    BrandsModule,
   ],
   controllers: [AppController],
   providers: [
@@ -71,6 +76,7 @@ import { NewsPageModule } from './models/client/news-page/news-page.module';
     BaseCategoryService,
     SportCategoriesService,
     PrismaService,
+    NewsService,
   ],
 })
 export class AppModule {}

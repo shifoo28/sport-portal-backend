@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -36,6 +37,7 @@ model BaseCategory {
   id        String   @id @default(uuid())
   nameTm    String
   nameRu    String
+  active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -174,27 +176,29 @@ model FederationTrainers {
 
 model FederationAthlete {
   id           String      @id @default(uuid())
+  jobTm        String?
+  jobRu        String?
+  age          Int
+  club         String?
+  views        Int         @default(0)
+  links        Json        @default("{}") @db.Json
   nameTm       String?
   nameRu       String?
-  club         String?
   madeTm       String?
   madeRu       String?
   rating       Float       @default(4.5)
+  imagePath    String
   positionTm   String?
   positionRu   String?
-  imagePath    String
-  age          Int
+  experience   Int         @default(0)
   birthPlaceTm String?
   birthPlaceRu String?
-  views        Int         @default(0)
-  experience   Int         @default(0)
   sportLevelTm String?
   sportLevelRu String?
   workedAtTm   String[]
   workedAtRu   String[]
   badgesTm     String[]
   badgesRu     String[]
-  links        Json        @default("{}") @db.Json
   federationId String
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
@@ -304,5 +308,13 @@ model ShopCategories {
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
 
-  @@unique([nameTm, nameRu])
+  @@unique([nameTm, nameRu, parentId])
+}
+
+model Brands {
+  id        String   @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

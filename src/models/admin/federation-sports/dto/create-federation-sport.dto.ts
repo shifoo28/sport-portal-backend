@@ -27,8 +27,8 @@ export class FindAllFederationSportsDto
   @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.FederationSportsWhereInput;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationSportsOrderByWithRelationInput
-    | Prisma.FederationSportsOrderByWithRelationInput[];
+    | Prisma.FederationSportsOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.FederationSportsOrderByWithRelationAndSearchRelevanceInput[];
   @ApiProperty({ required: false })
   select?: Prisma.FederationSportsSelect<DefaultArgs>;
   @ApiProperty({ required: false })

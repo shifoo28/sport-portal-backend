@@ -21,6 +21,6 @@ export class FindAllCompetitionTypesDto
   @ApiProperty({ required: false })
   include?: Prisma.CompetitionTypesInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.CompetitionTypesOrderByWithRelationInput
-    | Prisma.CompetitionTypesOrderByWithRelationInput[];
+    | Prisma.CompetitionTypesOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.CompetitionTypesOrderByWithRelationAndSearchRelevanceInput[];
 }

@@ -14,6 +14,8 @@ export class CreateFederationAthleteDto
   @ApiProperty() birthPlaceRu: string;
   @ApiProperty() club: string;
   @ApiProperty() rating: number;
+  @ApiProperty() jobTm: string;
+  @ApiProperty() jobRu: string;
   @ApiProperty() positionTm: string;
   @ApiProperty() positionRu: string;
   @ApiProperty() sportLevelTm: string;
@@ -53,8 +55,8 @@ export class FindAllFederationAthleteDto
   @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.FederationAthleteWhereInput;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationAthleteOrderByWithRelationInput
-    | Prisma.FederationAthleteOrderByWithRelationInput[];
+    | Prisma.FederationAthleteOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.FederationAthleteOrderByWithRelationAndSearchRelevanceInput[];
   @ApiProperty({ required: false })
   select?: Prisma.FederationAthleteSelect<DefaultArgs>;
   @ApiProperty({ required: false })

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { SportCategoriesService } from 'src/models/admin/sport-categories/sport-categories.service';
-import { ELangs, LangQueryDto } from 'src/app.dto';
+import { LangQueryDto } from 'src/app.dto';
 import { SportCategoryEntity } from 'src/models/admin/sport-categories/entities/sport-category.entity';
 import { NewsEntity } from 'src/models/admin/news/entities/news.entity';
 import { GetFilterOptions, PostFilterOptions } from './dto/filter-options.dto';

@@ -22,6 +22,6 @@ export class FindAllHealthCareDepartment
   @ApiProperty({ required: false })
   include?: Prisma.HealthCareDepartmentsInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.HealthCareDepartmentsOrderByWithRelationInput
-    | Prisma.HealthCareDepartmentsOrderByWithRelationInput[];
+    | Prisma.HealthCareDepartmentsOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.HealthCareDepartmentsOrderByWithRelationAndSearchRelevanceInput[];
 }

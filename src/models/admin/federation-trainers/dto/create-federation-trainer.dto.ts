@@ -51,8 +51,8 @@ export class FindAllFederationTrainersDto
   @ApiProperty({ required: false })
   where?: Prisma.FederationTrainersWhereInput;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationTrainersOrderByWithRelationInput
-    | Prisma.FederationTrainersOrderByWithRelationInput[];
+    | Prisma.FederationTrainersOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.FederationTrainersOrderByWithRelationAndSearchRelevanceInput[];
   @ApiProperty({ required: false })
   include?: Prisma.FederationTrainersInclude<DefaultArgs>;
 }

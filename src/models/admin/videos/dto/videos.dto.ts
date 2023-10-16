@@ -8,6 +8,6 @@ export default class FindAllVideosDto implements Prisma.VideosFindManyArgs {
   @ApiProperty({ required: false }) where?: Prisma.VideosWhereInput;
   @ApiProperty({ required: false }) include?: Prisma.VideosInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.VideosOrderByWithRelationInput
-    | Prisma.VideosOrderByWithRelationInput[];
+    | Prisma.VideosOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.VideosOrderByWithRelationAndSearchRelevanceInput[];
 }

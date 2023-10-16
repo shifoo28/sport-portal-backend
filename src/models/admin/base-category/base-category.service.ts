@@ -28,7 +28,9 @@ export class BaseCategoryService {
   }
 
   async findOne(id: string): Promise<BaseCategory> {
-    return this.prismaService.baseCategory.findUnique({ where: { id } });
+    return this.prismaService.baseCategory.findUnique({
+      where: { id },
+    });
   }
 
   async update(id: string, data: UpdateBaseCategoryDto) {

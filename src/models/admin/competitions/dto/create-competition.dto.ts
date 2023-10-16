@@ -37,6 +37,6 @@ export class FindAllCompetitionsDto implements Prisma.CompetitionsFindManyArgs {
   @ApiProperty({ required: false })
   include?: Prisma.CompetitionsInclude<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.CompetitionsOrderByWithRelationInput
-    | Prisma.CompetitionsOrderByWithRelationInput[];
+    | Prisma.CompetitionsOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.CompetitionsOrderByWithRelationAndSearchRelevanceInput[];
 }

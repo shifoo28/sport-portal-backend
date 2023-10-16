@@ -8,7 +8,8 @@ export class CreateFederationDto implements Prisma.FederationsCreateInput {
   @ApiProperty({
     type: 'string',
     format: 'binary',
-    description: 'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP, SVG',
+    description:
+      'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP, SVG',
   })
   photo: Express.Multer.File;
   imagePath?: string;
@@ -22,8 +23,8 @@ export class FindAllFederationsDto implements Prisma.FederationsFindManyArgs {
   @ApiProperty({ required: false }) take?: number;
   @ApiProperty({ required: false }) where?: Prisma.FederationsWhereInput;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationsOrderByWithRelationInput
-    | Prisma.FederationsOrderByWithRelationInput[];
+    | Prisma.FederationsOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.FederationsOrderByWithRelationAndSearchRelevanceInput[];
   @ApiProperty({ required: false })
   include?: Prisma.FederationsInclude<DefaultArgs>;
 }

@@ -16,8 +16,8 @@ export class FindAllUsersDto implements Prisma.UsersFindManyArgs {
   @ApiProperty({ required: false }) where?: Prisma.UsersWhereInput;
   @ApiProperty({ required: false }) select?: Prisma.UsersSelect<DefaultArgs>;
   @ApiProperty({ required: false }) orderBy?:
-    | Prisma.UsersOrderByWithRelationInput
-    | Prisma.UsersOrderByWithRelationInput[];
+    | Prisma.UsersOrderByWithRelationAndSearchRelevanceInput
+    | Prisma.UsersOrderByWithRelationAndSearchRelevanceInput[];
 }
 
 export class FindOneUserDto {
