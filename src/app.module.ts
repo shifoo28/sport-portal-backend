@@ -35,7 +35,7 @@ import { SportTypesModule } from './models/admin/sport-types/sport-types.module'
 import { NewsPageModule } from './models/client/news-page/news-page.module';
 import { ShopModule } from './models/client/shop/shop.module';
 import { NewsService } from './models/admin/news/news.service';
-import { BrandsModule } from './brands/brands.module';
+import { BrandsModule } from './models/admin/brands/brands.module';
 
 @Module({
   imports: [
