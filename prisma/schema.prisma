@@ -71,8 +71,8 @@ model News {
   views      Int             @default(0)
   nameTm     String
   nameRu     String
-  locationTm String?
-  locationRu String?
+  locationTm String
+  locationRu String
   imagePath  String
   category   SportCategories @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -87,8 +87,8 @@ model Videos {
   views      Int             @default(0)
   nameTm     String
   nameRu     String
-  textTm     String?
-  textRu     String?
+  textTm     String
+  textRu     String
   videoPath  String
   imagePath  String
   category   SportCategories @relation(fields: [categoryId], references: [id])
@@ -113,7 +113,7 @@ model Federations {
   id        String               @id @default(uuid())
   nameTm    String
   nameRu    String
-  imagePath String?
+  imagePath String
   fsports   FederationSports?
   fathlete  FederationAthlete[]
   ftrainers FederationTrainers[]
@@ -129,13 +129,13 @@ model FederationSports {
   fax          String
   web          String
   email        String
-  leaderTm     String?
-  leaderRu     String?
-  founded      Int?
-  locationTm   String?
-  locationRu   String?
-  presidentTm  String?
-  presidentRu  String?
+  leaderTm     String
+  leaderRu     String
+  founded      Int
+  locationTm   String
+  locationRu   String
+  presidentTm  String
+  presidentRu  String
   federationId String      @unique
   federation   Federations @relation(fields: [federationId], references: [id])
   createdAt    DateTime    @default(now())
@@ -150,16 +150,16 @@ model FederationTrainers {
   experience   Int         @default(0)
   views        Int         @default(0)
   age          Int
-  jobTm        String?
-  jobRu        String?
-  nameTm       String?
-  nameRu       String?
-  madeTm       String?
-  madeRu       String?
-  birthPlaceTm String?
-  birthPlaceRu String?
-  sportLevelTm String?
-  sportLevelRu String?
+  jobTm        String
+  jobRu        String
+  nameTm       String
+  nameRu       String
+  madeTm       String
+  madeRu       String
+  birthPlaceTm String
+  birthPlaceRu String
+  sportLevelTm String
+  sportLevelRu String
   workedAtTm   String[]
   workedAtRu   String[]
   badgesTm     String[]
@@ -176,25 +176,25 @@ model FederationTrainers {
 
 model FederationAthlete {
   id           String      @id @default(uuid())
-  jobTm        String?
-  jobRu        String?
+  jobTm        String
+  jobRu        String
   age          Int
-  club         String?
+  club         String
   views        Int         @default(0)
   links        Json        @default("{}") @db.Json
-  nameTm       String?
-  nameRu       String?
-  madeTm       String?
-  madeRu       String?
+  nameTm       String
+  nameRu       String
+  madeTm       String
+  madeRu       String
   rating       Float       @default(4.5)
   imagePath    String
-  positionTm   String?
-  positionRu   String?
+  positionTm   String
+  positionRu   String
   experience   Int         @default(0)
-  birthPlaceTm String?
-  birthPlaceRu String?
-  sportLevelTm String?
-  sportLevelRu String?
+  birthPlaceTm String
+  birthPlaceRu String
+  sportLevelTm String
+  sportLevelRu String
   workedAtTm   String[]
   workedAtRu   String[]
   badgesTm     String[]
@@ -247,13 +247,13 @@ model HealthCareDepartments {
 
 model FederationHealthCareEmployees {
   id           String                @id @default(uuid())
-  nameTm       String?
-  nameRu       String?
-  jobTm        String?
-  jobRu        String?
+  nameTm       String
+  nameRu       String
+  jobTm        String
+  jobRu        String
   age          Int
-  workAtTm     String?
-  workAtRu     String?
+  workAtTm     String
+  workAtRu     String
   experience   Int                   @default(0)
   views        Int                   @default(0)
   rating       Float                 @default(4.5)
