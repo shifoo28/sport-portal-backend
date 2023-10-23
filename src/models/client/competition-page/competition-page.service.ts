@@ -21,10 +21,6 @@ export class CompetitionPageService {
     });
   }
 
-  // async findAllCompetitonTypes(): Promise<CompetitionTypeEntity[]> {
-  //   return this.competitionTypeService.findAll({});
-  // }
-
   async getcompetitionTypes(lang: ELangs): Promise<string[]> {
     const competitionTypes = await this.competitionTypeService.findAll({});
     const filteredCTs = competitionTypes.map((ct) => {
@@ -75,7 +71,10 @@ export class CompetitionPageService {
               : undefined,
           };
 
-    let competes = await this.competitionsService.findAll({ where });
+    let competes = await this.competitionsService.findAll({
+      where,
+      include: { competitionType: true },
+    });    
     competes = langTransform.toName(competes);
 
     return competes;
