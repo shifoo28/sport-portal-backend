@@ -12,7 +12,7 @@ export class CreateFederationDto implements Prisma.FederationsCreateInput {
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP, SVG',
   })
   photo: Express.Multer.File;
-  imagePath?: string;
+  imagePath: string;
   fsports?: Prisma.FederationSportsCreateNestedOneWithoutFederationInput;
   fathlete?: Prisma.FederationAthleteCreateNestedManyWithoutFederationInput;
   ftrainers?: Prisma.FederationTrainersCreateNestedManyWithoutFederationInput;
