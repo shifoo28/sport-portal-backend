@@ -29,7 +29,7 @@ export class AppService {
 
     // Base Categories
     let base_categories = await this.baseCategories.findAll({
-      orderBy: { createdAt: 'asc' },
+      // orderBy: { createdAt: 'asc' },
       where: { active: true },
     });
     base_categories = langTransform.toName(base_categories);
