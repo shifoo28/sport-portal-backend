@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+var path = require('path')
 import { FederationHealthCareEmployeesService } from './federation-health-care-employees.service';
 import {
   CreateFederationHealthCareEmployeeDto,
@@ -35,7 +36,7 @@ export class FederationHealthCareEmployeesController {
       storage: diskStorage({
         destination: './upload/images/hc',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
@@ -77,7 +78,7 @@ export class FederationHealthCareEmployeesController {
       storage: diskStorage({
         destination: './upload/images/hc',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),

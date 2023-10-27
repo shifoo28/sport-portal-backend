@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
+var path = require('path')
 import { FederationsService } from './federations.service';
 import {
   CreateFederationDto,
@@ -33,7 +34,7 @@ export class FederationsController {
       storage: diskStorage({
         destination: './upload/icons',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
@@ -74,7 +75,7 @@ export class FederationsController {
       storage: diskStorage({
         destination: './upload/icons',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),

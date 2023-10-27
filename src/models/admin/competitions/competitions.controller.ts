@@ -13,6 +13,7 @@ import {
   FileTypeValidator,
   MaxFileSizeValidator,
 } from '@nestjs/common';
+var path = require('path')
 import { CompetitionsService } from './competitions.service';
 import {
   CreateCompetitionDto,
@@ -36,7 +37,7 @@ export class CompetitionsController {
       storage: diskStorage({
         destination: './upload/images/competitions',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
@@ -56,6 +57,7 @@ export class CompetitionsController {
   ) {
     data.typeId = +data.typeId;
     data.imagePath = file.path.slice(7);
+    console.log(file.path);
 
     return this.competitionsService.create(data);
   }
@@ -88,7 +90,7 @@ export class CompetitionsController {
       storage: diskStorage({
         destination: './upload/images/competitions',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),

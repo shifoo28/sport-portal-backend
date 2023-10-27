@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFiles,
 } from '@nestjs/common';
+var path = require('path')
 import { FederationGymsAndClubsService } from './federation-gyms-and-clubs.service';
 import {
   CreateFederationGymsAndClubDto,
@@ -46,7 +47,7 @@ export class FederationGymsAndClubsController {
         storage: diskStorage({
           destination: './upload/images/gac',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}`);
+            callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
         }),
       },
@@ -117,7 +118,7 @@ export class FederationGymsAndClubsController {
         storage: diskStorage({
           destination: './upload/images/gac',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}`);
+            callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
         }),
       },

@@ -13,6 +13,7 @@ import {
   FileTypeValidator,
   MaxFileSizeValidator,
 } from '@nestjs/common';
+var path = require('path')
 import { NewsService } from './news.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
@@ -34,7 +35,7 @@ export class NewsController {
       storage: diskStorage({
         destination: './upload/images',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
@@ -84,7 +85,7 @@ export class NewsController {
       storage: diskStorage({
         destination: './upload/images',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}`);
+          callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),

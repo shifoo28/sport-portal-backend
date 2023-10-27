@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFiles,
 } from '@nestjs/common';
+var path = require('path')
 import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
@@ -36,7 +37,7 @@ export class VideosController {
         storage: diskStorage({
           destination: './upload/video',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}`);
+            callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
         }),
       },
@@ -86,7 +87,7 @@ export class VideosController {
         storage: diskStorage({
           destination: './upload/video',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}`);
+            callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
         }),
       },
