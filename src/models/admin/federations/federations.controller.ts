@@ -33,7 +33,7 @@ export class FederationsController {
       storage: diskStorage({
         destination: './upload/icons',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),
@@ -74,7 +74,7 @@ export class FederationsController {
       storage: diskStorage({
         destination: './upload/icons',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),

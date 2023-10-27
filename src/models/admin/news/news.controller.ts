@@ -34,7 +34,7 @@ export class NewsController {
       storage: diskStorage({
         destination: './upload/images',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),
@@ -84,7 +84,7 @@ export class NewsController {
       storage: diskStorage({
         destination: './upload/images',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),

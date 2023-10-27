@@ -36,7 +36,7 @@ export class VideosController {
         storage: diskStorage({
           destination: './upload/video',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}_${file.originalname}`);
+            callback(null, `${Date.now()}`);
           },
         }),
       },
@@ -86,7 +86,7 @@ export class VideosController {
         storage: diskStorage({
           destination: './upload/video',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}_${file.originalname}`);
+            callback(null, `${Date.now()}`);
           },
         }),
       },

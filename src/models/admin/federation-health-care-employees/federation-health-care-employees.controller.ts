@@ -35,7 +35,7 @@ export class FederationHealthCareEmployeesController {
       storage: diskStorage({
         destination: './upload/images/hc',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),
@@ -77,7 +77,7 @@ export class FederationHealthCareEmployeesController {
       storage: diskStorage({
         destination: './upload/images/hc',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),

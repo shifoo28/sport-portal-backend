@@ -37,7 +37,7 @@ export class FederationTrainersController {
       storage: diskStorage({
         destination: './upload/images/trainers',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),
@@ -83,7 +83,7 @@ export class FederationTrainersController {
       storage: diskStorage({
         destination: './upload/images/trainers',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),

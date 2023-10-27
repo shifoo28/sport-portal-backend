@@ -46,7 +46,7 @@ export class FederationGymsAndClubsController {
         storage: diskStorage({
           destination: './upload/images/gac',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}_${file.originalname}`);
+            callback(null, `${Date.now()}`);
           },
         }),
       },
@@ -117,7 +117,7 @@ export class FederationGymsAndClubsController {
         storage: diskStorage({
           destination: './upload/images/gac',
           filename(req, file, callback) {
-            callback(null, `${Date.now()}_${file.originalname}`);
+            callback(null, `${Date.now()}`);
           },
         }),
       },

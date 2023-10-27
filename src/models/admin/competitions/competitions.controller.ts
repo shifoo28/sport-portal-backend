@@ -36,7 +36,7 @@ export class CompetitionsController {
       storage: diskStorage({
         destination: './upload/images/competitions',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),
@@ -88,7 +88,7 @@ export class CompetitionsController {
       storage: diskStorage({
         destination: './upload/images/competitions',
         filename(req, file, callback) {
-          callback(null, `${Date.now()}_${file.originalname}`);
+          callback(null, `${Date.now()}`);
         },
       }),
     }),
