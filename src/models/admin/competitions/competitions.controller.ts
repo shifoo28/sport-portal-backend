@@ -57,7 +57,6 @@ export class CompetitionsController {
   ) {
     data.typeId = +data.typeId;
     data.imagePath = file.path.slice(7);
-    console.log(file.path);
 
     return this.competitionsService.create(data);
   }
