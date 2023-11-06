@@ -11,13 +11,15 @@ import { FindAllHomeNewsDto } from './dto/main-page.dto';
 export class MainPageController {
   constructor(private readonly mainPageService: MainPageService) {}
 
-  @Get(':section')
+  @Get('')
   @ApiQuery({ type: LangQueryDto })
   @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   async findAllNews(@Query() query: FindAllHomeNewsDto) {
+    console.log(query);
+    
     switch (query.section) {
-      case 'Local' || 'World':
+      case 'Local' && 'World':
         return this.mainPageService.findAllLWN(query);
 
       case 'Video':
