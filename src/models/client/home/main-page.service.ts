@@ -14,8 +14,8 @@ export class MainPageService {
     private readonly videos: VideosService,
   ) {}
 
-  async findAllLWN(params: FindAllHomeNewsDto): Promise<FindAllLWNewsDto[]> {
-    const { section, skip, take } = params;
+  async findAllLWN(query: FindAllHomeNewsDto): Promise<FindAllLWNewsDto[]> {
+    const { section, skip, take } = query;
 
     return this.news.findAll({
       skip: skip ? +skip : 0,
@@ -31,9 +31,9 @@ export class MainPageService {
   }
 
   async findAllVideoN(
-    params: FindAllHomeNewsDto,
+    query: FindAllHomeNewsDto,
   ): Promise<FindAllVideoNewsDto[]> {
-    const { section, skip, take } = params;
+    const { section, skip, take } = query;
 
     return this.videos.findAll({
       skip: skip ? +skip : 0,
