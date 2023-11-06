@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
 import { MainPageService } from './main-page.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
@@ -16,10 +16,11 @@ export class MainPageController {
   @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   async findAllNews(@Query() query: FindAllHomeNewsDto) {
-    console.log(query);
-    
     switch (query.section) {
-      case 'Local' && 'World':
+      case 'Local':
+        return this.mainPageService.findAllLWN(query);
+
+      case 'World':
         return this.mainPageService.findAllLWN(query);
 
       case 'Video':
