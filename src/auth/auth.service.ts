@@ -1,13 +1,14 @@
 import {
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { SignInArgsDto, SignInDto } from './dto/sign-in.dto';
 import { SignUpDto, SignedUpDto } from './dto/sign-up.dto';
-import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/models/admin/users/users.service';
+// import { sendOTP } from 'src/firebase/config';
+// import { UserRecord } from 'firebase-admin/lib/auth/user-record';
 
 @Injectable()
 export class AuthService {
@@ -39,4 +40,8 @@ export class AuthService {
 
     return { message: '', user: result };
   }
+
+  // async verifyPhoneNumber(phoneNumber: string): Promise<UserRecord> {
+  //   return sendOTP(phoneNumber);
+  // }
 }

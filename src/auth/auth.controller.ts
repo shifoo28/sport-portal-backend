@@ -21,4 +21,10 @@ export class AuthController {
   signUp(@Body() data: SignUpDto) {
     return this.authService.signUp(data);
   }
+
+  // @Post('verify-phone')
+  // @UseInterceptors(ResponseInterceptor)
+  // verifyPhoneNumber(@Body('phoneNumber') phoneNumber: string) {
+  //   return this.authService.verifyPhoneNumber(phoneNumber);
+  // }
 }

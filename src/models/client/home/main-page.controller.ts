@@ -4,7 +4,7 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
-import { ESection } from './dto/create-main-page.dto';
+import { FindAllHomeNewsDto } from './dto/main-page.dto';
 
 @Controller('main-page')
 @ApiTags('Main Page')
@@ -15,16 +15,13 @@ export class MainPageController {
   @ApiQuery({ type: LangQueryDto })
   @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
-  async findAllLocalNews(@Param('section') section: ESection) {
-    switch (section) {
-      case 'Local':
-        return this.mainPageService.findAllLWN('Local');
-
-      case 'World':
-        return this.mainPageService.findAllLWN('World');
+  async findAllNews(@Param() params: FindAllHomeNewsDto) {
+    switch (params.section) {
+      case 'Local' || 'World':
+        return this.mainPageService.findAllLWN(params);
 
       case 'Video':
-        return this.mainPageService.findAllVideoN();
+        return this.mainPageService.findAllVideoN(params);
 
       default:
         return { message: 'Invalid Section' };
