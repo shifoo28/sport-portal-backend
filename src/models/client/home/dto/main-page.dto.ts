@@ -37,5 +37,6 @@ export enum ESection {
 export class FindAllHomeNewsDto {
   @ApiProperty({ enum: ESection }) section: ESection;
   @ApiProperty({ required: false }) skip: number;
-  @ApiProperty({ required: false, default: 30 }) take: number;
+  @ApiProperty({ required: false, description: 'Default takes 30 records' })
+  take: number;
 }

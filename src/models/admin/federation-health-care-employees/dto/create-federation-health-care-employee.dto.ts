@@ -14,7 +14,6 @@ export class CreateFederationHealthCareEmployeeDto
   @ApiProperty() age: number;
   @ApiProperty() departmentId: string;
   @ApiProperty({ required: false, default: 0 }) experience?: number;
-  @ApiProperty({ required: false, default: 0 }) views?: number;
   @ApiProperty({ required: false, default: 4.5 }) rating?: number;
   @ApiProperty({ required: false }) links?:
     | Prisma.NullTypes.JsonNull
