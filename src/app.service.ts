@@ -6,11 +6,12 @@ import { ELangs, LangQueryDto, SearchDto } from './app.dto';
 import { NewsEntity } from './models/admin/news/entities/news.entity';
 import { NewsService } from './models/admin/news/news.service';
 import { Prisma } from '@prisma/client';
+import { ESection } from './models/client/home/dto/main-page.dto';
 
 export interface IApp {
   lang: { id: string; name: string }[];
   base_categories: { id: string; nameTm: string; nameRu: string }[];
-  sport_categories: { id: string; nameTm: string; nameRu: string }[];
+  sport_categories: {};
 }
 
 @Injectable()
@@ -29,18 +30,25 @@ export class AppService {
 
     // Base Categories
     let base_categories = await this.baseCategories.findAll({
-      // orderBy: { createdAt: 'asc' },
       where: { active: true },
     });
     base_categories = langTransform.toName(base_categories);
 
     // Sport Categories
-    let sport_categories = await this.sportCategory.findAll({
-      where: { section: 'Local' },
+    let local = await this.sportCategory.findAll({
+      where: { section: ESection.Local },
     });
-    sport_categories = langTransform.toName(sport_categories);
+    let world = await this.sportCategory.findAll({
+      where: { section: ESection.World },
+    });
+    let video = await this.sportCategory.findAll({
+      where: { section: ESection.Video },
+    });
+    local = langTransform.toName(local);
+    world = langTransform.toName(world);
+    video = langTransform.toName(video);
 
-    return { lang, base_categories, sport_categories };
+    return { lang, base_categories, sport_categories: { local, world, video } };
   }
 
   async searchNews(query: SearchDto): Promise<NewsEntity[]> {
