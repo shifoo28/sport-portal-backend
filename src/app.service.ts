@@ -11,7 +11,7 @@ import { SportCategoryEntity } from './models/admin/sport-categories/entities/sp
 import { BaseCategoryEntity } from './models/admin/base-category/entities/base-category.entity';
 import { LangEntity } from './models/admin/langs/entity/lang.entity';
 
-interface IApp {
+export interface IApp {
   lang: LangEntity[];
   base_categories: BaseCategoryEntity[];
   sport_categories: {
@@ -20,7 +20,7 @@ interface IApp {
     video: SportCategoryEntity[];
   };
 }
-interface ISearch {
+export interface ISearch {
   news: NewsEntity[];
 }
 
