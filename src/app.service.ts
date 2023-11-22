@@ -7,11 +7,21 @@ import { NewsEntity } from './models/admin/news/entities/news.entity';
 import { NewsService } from './models/admin/news/news.service';
 import { Prisma } from '@prisma/client';
 import { ESection } from './models/client/home/dto/main-page.dto';
+import { SportCategoryEntity } from './models/admin/sport-categories/entities/sport-category.entity';
+import { BaseCategoryEntity } from './models/admin/base-category/entities/base-category.entity';
+import { LangEntity } from './models/admin/langs/entity/lang.entity';
 
-export interface IApp {
-  lang: { id: string; name: string }[];
-  base_categories: { id: string; nameTm: string; nameRu: string }[];
-  sport_categories: {};
+interface IApp {
+  lang: LangEntity[];
+  base_categories: BaseCategoryEntity[];
+  sport_categories: {
+    local: SportCategoryEntity[];
+    world: SportCategoryEntity[];
+    video: SportCategoryEntity[];
+  };
+}
+interface ISearch {
+  news: NewsEntity[];
 }
 
 @Injectable()
