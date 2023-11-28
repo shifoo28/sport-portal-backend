@@ -14,7 +14,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto, FindAllUsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/guard/auth.guard';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('users')

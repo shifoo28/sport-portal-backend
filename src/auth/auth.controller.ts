@@ -1,9 +1,10 @@
-import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Post,Request, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignInArgsDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { GoogleOAuthGuard } from 'src/guard/google-oauth.guard';
 
 @Controller('auth')
 @ApiTags('Authentication')
@@ -21,10 +22,14 @@ export class AuthController {
   signUp(@Body() data: SignUpDto) {
     return this.authService.signUp(data);
   }
+  
+  @Get()
+  @UseGuards(GoogleOAuthGuard)
+  async googleAuth(@Request() req) {}
 
-  // @Post('verify-phone')
-  // @UseInterceptors(ResponseInterceptor)
-  // verifyPhoneNumber(@Body('phoneNumber') phoneNumber: string) {
-  //   return this.authService.verifyPhoneNumber(phoneNumber);
-  // }
+  @Get('google-redirect')
+  @UseGuards(GoogleOAuthGuard)
+  googleAuthRedirect(@Request() req) {
+    return this.authService.googleLogin(req);
+  }
 }

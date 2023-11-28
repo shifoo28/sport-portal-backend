@@ -5,10 +5,11 @@ import { PrismaService } from 'src/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth.constants';
 import { UsersService } from 'src/models/admin/users/users.service';
+import { GoogleStrategy } from 'src/strategy/google.strategy';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, UsersService, PrismaService],
+  providers: [AuthService, UsersService, PrismaService, GoogleStrategy],
   imports: [
     JwtModule.register({
       global: true,
