@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post,Request, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignInArgsDto } from './dto/sign-in.dto';
@@ -22,10 +30,10 @@ export class AuthController {
   signUp(@Body() data: SignUpDto) {
     return this.authService.signUp(data);
   }
-  
+
   @Get()
   @UseGuards(GoogleOAuthGuard)
-  async googleAuth(@Request() req) {}
+  async googleAuth() {}
 
   @Get('google-redirect')
   @UseGuards(GoogleOAuthGuard)

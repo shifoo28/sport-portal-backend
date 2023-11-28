@@ -3,7 +3,9 @@ import { AppService, IApp } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { LangQueryDto, SearchDto } from './app.dto';
+import { Public } from './tools/public-route';
 
+@Public()
 @Controller()
 @ApiTags('App')
 export class AppController {

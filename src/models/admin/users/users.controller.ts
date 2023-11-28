@@ -7,14 +7,12 @@ import {
   Param,
   Delete,
   Query,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, FindAllUsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/guard/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
 @Controller('users')
@@ -44,9 +42,7 @@ export class UsersController {
     });
   }
 
-  @UseGuards(AuthGuard)
   @Get(':id')
-  @ApiBearerAuth()
   @UseInterceptors(ResponseInterceptor)
   async findOne(@Param('id') id: string) {
     const user = await this.usersService.findOne({ id });
