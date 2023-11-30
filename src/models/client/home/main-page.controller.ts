@@ -5,7 +5,9 @@ import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { FindAllHomeNewsDto } from './dto/main-page.dto';
+import { Public } from 'src/tools/public-route';
 
+@Public()
 @Controller('main-page')
 @ApiTags('Main Page')
 export class MainPageController {

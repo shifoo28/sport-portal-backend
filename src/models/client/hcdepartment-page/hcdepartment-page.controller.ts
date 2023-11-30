@@ -5,7 +5,9 @@ import { LangQueryDto } from 'src/app.dto';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { FindAllHealthCareDepartment } from 'src/models/admin/health-care-departments/dto/create-health-care-department.dto';
+import { Public } from 'src/tools/public-route';
 
+@Public()
 @Controller('hcdepartment-page')
 @ApiTags('Health Care Page')
 export class HcdepartmentPageController {

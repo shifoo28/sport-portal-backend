@@ -9,7 +9,9 @@ import { ApiTags } from '@nestjs/swagger';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { countries } from 'src/tools/constants';
+import { Public } from 'src/tools/public-route';
 
+@Public()
 @Controller('gyms-and-clubs-page')
 @ApiTags('Gyms & Clubs Page')
 export class GymsAndClubsPageController {
