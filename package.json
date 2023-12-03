@@ -2,8 +2,10 @@
   "name": "sport-portal",
   "version": "0.0.1",
   "description": "",
-  "author": "",
-  "private": true,
+  "author": {
+    "name": "Hushnudbek RAHIMOW",
+    "email": "shifoo2802@gmail.com"
+  },
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
