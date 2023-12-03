@@ -6,6 +6,9 @@
 # Uploaded files
 /upload
 
+# misc
+.env
+
 # Logs
 logs
 *.log
@@ -14,9 +17,6 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
-# ENV
-.env
 
 # OS
 .DS_Store
