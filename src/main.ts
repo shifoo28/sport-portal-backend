@@ -39,8 +39,6 @@ async function bootstrap() {
 
   // Listening
   await app.listen(process.env.APP_PORT);
-  console.log(
-    `App Listening on port ${process.env.ADDRESS}:${process.env.APP_PORT}`,
-  );
+  console.log(`App running on ${process.env.ADDRESS}`);
 }
 bootstrap();
