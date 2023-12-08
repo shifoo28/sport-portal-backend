@@ -14,6 +14,8 @@ import { CreateUserDto, FindAllUsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Roles } from 'src/decorator/roles.decorator';
+import { Role } from './entities/user.entity';
 
 @Controller('users')
 @ApiTags('Users')
@@ -28,6 +30,7 @@ export class UsersController {
     return { result };
   }
 
+  @Roles(Role.Admin)
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllUsersDto) {
