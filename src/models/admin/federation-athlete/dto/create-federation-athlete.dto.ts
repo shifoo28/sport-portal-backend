@@ -13,7 +13,6 @@ export class CreateFederationAthleteDto
   @ApiProperty() birthPlaceTm: string;
   @ApiProperty() birthPlaceRu: string;
   @ApiProperty() club: string;
-  @ApiProperty() rating: number;
   @ApiProperty() jobTm: string;
   @ApiProperty() jobRu: string;
   @ApiProperty() positionTm: string;

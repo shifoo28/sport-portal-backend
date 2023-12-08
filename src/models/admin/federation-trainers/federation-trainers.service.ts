@@ -31,7 +31,6 @@ export class FederationTrainersService {
       workedAtTm,
       workedAtRu,
       age,
-      rating,
       imagePath,
       experience,
       federationId,
@@ -40,7 +39,6 @@ export class FederationTrainersService {
     return this.prismaService.federationTrainers.create({
       data: {
         age: +age,
-        rating: +rating,
         experience: +experience,
         nameTm,
         nameRu,

@@ -5,7 +5,6 @@ import { DefaultArgs } from '@prisma/client/runtime/library';
 export class CreateFederationTrainerDto
   implements Prisma.FederationTrainersCreateInput
 {
-  @ApiProperty({ required: false, default: 4.5 }) rating?: number;
   @ApiProperty({ required: false, default: 0 }) experience?: number;
   @ApiProperty() age: number;
   @ApiProperty() jobTm: string;

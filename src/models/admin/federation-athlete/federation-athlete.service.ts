@@ -34,7 +34,6 @@ export class FederationAthleteService {
       jobRu,
       club,
       links,
-      rating,
       imagePath,
       federationId,
       experience,
@@ -42,7 +41,6 @@ export class FederationAthleteService {
     return this.prismaService.federationAthlete.create({
       data: {
         age: +age,
-        rating: +rating,
         experience: +experience,
         nameTm,
         nameRu,
