@@ -3,6 +3,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { SignInArgsDto, SignInDto } from './dto/sign-in.dto';
 import { SignUpDto, SignedUpDto } from './dto/sign-up.dto';
@@ -21,18 +22,23 @@ export class AuthService {
     if (!user) throw new NotFoundException();
 
     const { password, ...result } = user;
-    if (plainPassword !== password) throw new UnauthorizedException();
+    if (!(await bcrypt.compare(plainPassword, password)))
+      throw new UnauthorizedException();
+
+    console.log('auth service');
+    console.log(result);
 
     return { ...result, token: await this.jwtService.signAsync({ ...result }) };
   }
 
   async signUp(data: SignUpDto): Promise<SignedUpDto> {
     const { name, surname, email, plainPassword } = data;
+    const hashed_password = await bcrypt.hash(plainPassword, 10);
     const user = await this.userService.create({
       name,
       surname,
       email,
-      password: plainPassword,
+      password: hashed_password,
     });
     const { password, ...result } = user;
 

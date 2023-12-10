@@ -12,10 +12,14 @@ import {
 import { SportCategoriesService } from './sport-categories.service';
 import { CreateSportCategoryDto } from './dto/create-sport-category.dto';
 import { UpdateSportCategoryDto } from './dto/update-sport-category.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { FindAllSportCategoriesDto } from './dto/sport-category.dto';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('sport-categories')
 @ApiTags('Sport Categories')
 export class SportCategoriesController {

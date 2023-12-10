@@ -17,13 +17,17 @@ import {
   FindAllFederationTrainersDto,
 } from './dto/create-federation-trainer.dto';
 import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
 import { strToObj } from 'src/tools/strToObj';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin, Role.Employee)
 @Controller('federation-trainers')
 @ApiTags('Federation Trainers')
 export class FederationTrainersController {

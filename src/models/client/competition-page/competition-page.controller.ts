@@ -7,7 +7,7 @@ import { ELangs, LangQueryDto } from 'src/app.dto';
 import { countries } from 'src/tools/constants';
 import { CompetitionEntity } from 'src/models/admin/competitions/entities/competition.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
-import { Public } from 'src/tools/public-route';
+import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
 @Controller('competition-page')

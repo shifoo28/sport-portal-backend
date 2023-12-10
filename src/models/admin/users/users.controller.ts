@@ -12,11 +12,13 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto, FindAllUsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { Roles } from 'src/decorator/roles.decorator';
-import { Role } from './entities/user.entity';
+import { Role } from '@prisma/client';
 
+@ApiBearerAuth()
+@Roles(Role.Developer)
 @Controller('users')
 @ApiTags('Users')
 export class UsersController {
@@ -30,7 +32,6 @@ export class UsersController {
     return { result };
   }
 
-  @Roles(Role.Admin)
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllUsersDto) {

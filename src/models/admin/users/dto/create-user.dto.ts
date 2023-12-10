@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
+import { $Enums, Prisma, Role } from '@prisma/client';
 import { DefaultArgs } from '@prisma/client/runtime/library';
 
 export class CreateUserDto implements Prisma.UsersCreateInput {

@@ -18,12 +18,20 @@ model Lang {
   updatedAt DateTime @updatedAt
 }
 
+enum Role {
+  Developer
+  Admin
+  Employee
+  User
+}
+
 model Users {
   id       String @id @default(uuid())
   name     String
   surname  String
   email    String @unique
   password String
+  roles    Role[] @default([User])
 }
 
 model Ads {

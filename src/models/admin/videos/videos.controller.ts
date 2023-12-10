@@ -10,16 +10,20 @@ import {
   UseInterceptors,
   UploadedFiles,
 } from '@nestjs/common';
-var path = require('path')
+var path = require('path');
 import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import FindAllVideosDto from './dto/videos.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin, Role.Employee)
 @Controller('videos')
 @ApiTags('Videos')
 export class VideosController {

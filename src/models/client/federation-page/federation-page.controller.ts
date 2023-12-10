@@ -5,7 +5,7 @@ import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { FindAllFederationsDto } from 'src/models/admin/federations/dto/create-federation.dto';
-import { Public } from 'src/tools/public-route';
+import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
 @Controller('federation-page')

@@ -11,9 +11,13 @@ import {
 import { AdsService } from './ads.service';
 import { CreateAdDto } from './dto/create-ad.dto';
 import { UpdateAdDto } from './dto/update-ad.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('ads')
 @ApiTags('Advertisement')
 export class AdsController {

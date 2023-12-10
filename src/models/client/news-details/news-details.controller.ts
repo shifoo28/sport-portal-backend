@@ -2,7 +2,7 @@ import { Controller, Param, Patch, Query, UseInterceptors } from '@nestjs/common
 import { NewsDetailsService } from './news-details.service';
 import { ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import { Public } from 'src/tools/public-route';
+import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
 @Controller('news-details')

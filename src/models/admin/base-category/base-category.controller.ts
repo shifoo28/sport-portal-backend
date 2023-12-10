@@ -9,13 +9,17 @@ import {
   Controller,
   UseInterceptors,
 } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { BaseCategoryService } from './base-category.service';
 import { FindAllBaseCategoryDto } from './dto/base-category.dto';
 import { CreateBaseCategoryDto } from './dto/create-base-category.dto';
 import { UpdateBaseCategoryDto } from './dto/update-base-category.dto';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('base-category')
 @ApiTags('Base Categries')
 export class BaseCategoryController {

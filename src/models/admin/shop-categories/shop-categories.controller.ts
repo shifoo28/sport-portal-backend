@@ -15,9 +15,10 @@ import {
   FindAllShopCategoriesDto,
 } from './dto/create-shop-category.dto';
 import { UpdateShopCategoryDto } from './dto/update-shop-category.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 
+@ApiBearerAuth()
 @Controller('shop-categories')
 @ApiTags('Shop Categories')
 export class ShopCategoriesController {

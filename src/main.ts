@@ -32,8 +32,8 @@ async function bootstrap() {
     .setTitle('SportPortal API')
     .setDescription('API Documentation of SportPortal Backend!')
     .setVersion('0.0.1.0')
-    .addBearerAuth()
     .addServer(process.env.ADDRESS)
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);

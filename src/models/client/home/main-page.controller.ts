@@ -5,7 +5,7 @@ import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { FindAllHomeNewsDto } from './dto/main-page.dto';
-import { Public } from 'src/tools/public-route';
+import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
 @Controller('main-page')

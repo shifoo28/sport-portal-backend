@@ -10,21 +10,25 @@ import {
   UseInterceptors,
   UploadedFiles,
 } from '@nestjs/common';
-var path = require('path')
+var path = require('path');
 import { FederationGymsAndClubsService } from './federation-gyms-and-clubs.service';
 import {
   CreateFederationGymsAndClubDto,
   FindAllFederationGymsAndClubs,
 } from './dto/create-federation-gyms-and-club.dto';
 import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and-club.dto';
-import { ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin, Role.Employee)
 @Controller('federation-gyms-and-clubs')
 @ApiTags('Federation Gyms & Clubs')
 export class FederationGymsAndClubsController {

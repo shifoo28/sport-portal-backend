@@ -10,18 +10,22 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
-var path = require('path')
+var path = require('path');
 import { FederationHealthCareEmployeesService } from './federation-health-care-employees.service';
 import {
   CreateFederationHealthCareEmployeeDto,
   FindAllFederationHealthCareEmployeesDto,
 } from './dto/create-federation-health-care-employee.dto';
 import { UpdateFederationHealthCareEmployeeDto } from './dto/update-federation-health-care-employee.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin, Role.Employee)
 @Controller('federation-health-care-employees')
 @ApiTags('Federation Health Care Employees')
 export class FederationHealthCareEmployeesController {

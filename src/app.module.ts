@@ -36,6 +36,8 @@ import { NewsPageModule } from './models/client/news-page/news-page.module';
 import { ShopModule } from './models/client/shop/shop.module';
 import { NewsService } from './models/admin/news/news.service';
 import { BrandsModule } from './models/admin/brands/brands.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './guard/roles.guard';
 
 @Module({
   imports: [

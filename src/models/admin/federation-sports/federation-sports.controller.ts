@@ -15,9 +15,13 @@ import {
   FindAllFederationSportsDto,
 } from './dto/create-federation-sport.dto';
 import { UpdateFederationSportDto } from './dto/update-federation-sport.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin, Role.Employee)
 @Controller('federation-sports')
 @ApiTags('Federation Sports')
 export class FederationSportsController {

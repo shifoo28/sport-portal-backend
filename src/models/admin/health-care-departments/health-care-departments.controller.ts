@@ -15,9 +15,13 @@ import {
   FindAllHealthCareDepartment,
 } from './dto/create-health-care-department.dto';
 import { UpdateHealthCareDepartmentDto } from './dto/update-health-care-department.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('health-care-departments')
 @ApiTags('Health Care Departments')
 export class HealthCareDepartmentsController {

@@ -3,7 +3,7 @@ import { ShopService } from './shop.service';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { ApiTags } from '@nestjs/swagger';
 import { LangQueryDto } from 'src/app.dto';
-import { Public } from 'src/tools/public-route';
+import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
 @Controller('shop')

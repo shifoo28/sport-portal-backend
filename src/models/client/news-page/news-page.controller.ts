@@ -7,7 +7,7 @@ import { NewsEntity } from 'src/models/admin/news/entities/news.entity';
 import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
 import { Sections } from '@prisma/client';
 import { VideoEntity } from 'src/models/admin/videos/entities/video.entity';
-import { Public } from 'src/tools/public-route';
+import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
 @Controller('news-page')

@@ -1,12 +1,4 @@
-import { Users } from '@prisma/client';
-
-export enum Role {
-  Admin = 'admin',
-  Developer = 'dev',
-  Athlete = 'athlete',
-  Trainer = 'trainer',
-  User = 'user',
-}
+import { $Enums, Users } from '@prisma/client';
 
 export class UserEntity implements Users {
   id: string;
@@ -14,4 +6,5 @@ export class UserEntity implements Users {
   surname: string;
   email: string;
   password: string;
+  roles: $Enums.Role[];
 }

@@ -15,9 +15,13 @@ import {
   FindAllCompetitionTypesDto,
 } from './dto/create-competition-type.dto';
 import { UpdateCompetitionTypeDto } from './dto/update-competition-type.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('competition-types')
 @ApiTags('Competition Types')
 export class CompetitionTypesController {

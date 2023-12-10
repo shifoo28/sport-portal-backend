@@ -10,19 +10,23 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
-var path = require('path')
+var path = require('path');
 import { FederationAthleteService } from './federation-athlete.service';
 import {
   CreateFederationAthleteDto,
   FindAllFederationAthleteDto,
 } from './dto/create-federation-athlete.dto';
 import { UpdateFederationAthleteDto } from './dto/update-federation-athlete.dto';
-import { ApiConsumes, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
+import { Role } from '@prisma/client';
+import { Roles } from 'src/decorator/roles.decorator';
 
+@ApiBearerAuth()
+@Roles(Role.Admin, Role.Employee)
 @Controller('federation-athlete')
 @ApiTags('Federation Athlete')
 export class FederationAthleteController {
