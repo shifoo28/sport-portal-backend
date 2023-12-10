@@ -20,7 +20,7 @@ import { UpdateFederationAthleteDto } from './dto/update-federation-athlete.dto'
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';

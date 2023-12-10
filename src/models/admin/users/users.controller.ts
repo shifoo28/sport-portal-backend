@@ -13,7 +13,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto, FindAllUsersDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Roles } from 'src/decorator/roles.decorator';
 import { Role } from '@prisma/client';
 

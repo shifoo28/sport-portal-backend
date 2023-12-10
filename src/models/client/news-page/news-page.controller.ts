@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import { NewsPageService } from './news-page.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { PostFilterOptions, GetFilterOptions } from './dto/filter-options.dto';
 import { NewsEntity } from 'src/models/admin/news/entities/news.entity';
-import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
+import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
 import { Sections } from '@prisma/client';
 import { VideoEntity } from 'src/models/admin/videos/entities/video.entity';
 import { Public } from 'src/decorator/public-route.decorator';

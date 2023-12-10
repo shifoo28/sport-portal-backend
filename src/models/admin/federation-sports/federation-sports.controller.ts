@@ -16,7 +16,7 @@ import {
 } from './dto/create-federation-sport.dto';
 import { UpdateFederationSportDto } from './dto/update-federation-sport.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 

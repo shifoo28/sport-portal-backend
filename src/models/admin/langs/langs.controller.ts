@@ -12,7 +12,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Lang, Prisma, Role } from '@prisma/client';
 import { CreateLangDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Roles } from 'src/decorator/roles.decorator';
 
 @ApiBearerAuth()

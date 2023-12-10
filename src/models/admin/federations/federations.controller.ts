@@ -18,7 +18,7 @@ import {
 } from './dto/create-federation.dto';
 import { UpdateFederationDto } from './dto/update-federation.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Role } from '@prisma/client';

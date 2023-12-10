@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import { AppService, IApp } from './app.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from './interceptors/response.interceptor';
+import { ResponseInterceptor } from './interceptor/response.interceptor';
 import { LangQueryDto, SearchDto } from './app.dto';
 import { Public } from './decorator/public-route.decorator';
 

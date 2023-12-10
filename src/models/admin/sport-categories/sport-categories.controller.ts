@@ -14,7 +14,7 @@ import { CreateSportCategoryDto } from './dto/create-sport-category.dto';
 import { UpdateSportCategoryDto } from './dto/update-sport-category.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { FindAllSportCategoriesDto } from './dto/sport-category.dto';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 

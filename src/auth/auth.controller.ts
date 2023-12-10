@@ -11,7 +11,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { SignInArgsDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { GoogleOAuthGuard } from 'src/guard/google-oauth.guard';
 import { Public } from 'src/decorator/public-route.decorator';
 

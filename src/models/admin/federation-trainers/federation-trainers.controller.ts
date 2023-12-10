@@ -20,7 +20,7 @@ import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto'
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
 import { strToObj } from 'src/tools/strToObj';
 import { Role } from '@prisma/client';

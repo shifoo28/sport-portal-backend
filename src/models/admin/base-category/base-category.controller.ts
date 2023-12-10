@@ -14,7 +14,7 @@ import { BaseCategoryService } from './base-category.service';
 import { FindAllBaseCategoryDto } from './dto/base-category.dto';
 import { CreateBaseCategoryDto } from './dto/create-base-category.dto';
 import { UpdateBaseCategoryDto } from './dto/update-base-category.dto';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 

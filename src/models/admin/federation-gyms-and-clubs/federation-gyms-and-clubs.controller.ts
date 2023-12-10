@@ -20,9 +20,9 @@ import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and
 import { ApiBearerAuth, ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
-import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
+import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';

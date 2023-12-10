@@ -1,8 +1,8 @@
 import { Controller, Get, Query, UseInterceptors } from '@nestjs/common';
 import { FederationPageService } from './federation-page.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
-import { LanguageTransformInterceptor } from 'src/interceptors/language.transform.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
+import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { FindAllFederationsDto } from 'src/models/admin/federations/dto/create-federation.dto';
 import { Public } from 'src/decorator/public-route.decorator';

@@ -4,7 +4,7 @@ import {
   IGymClubPage,
 } from './gyms-and-clubs-page.service';
 import { ELangs, LangQueryDto } from 'src/app.dto';
-import { ResponseInterceptor } from 'src/interceptors/response.interceptor';
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { ApiTags } from '@nestjs/swagger';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
