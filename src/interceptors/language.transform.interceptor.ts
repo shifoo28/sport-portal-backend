@@ -6,7 +6,6 @@ import {
 } from '@nestjs/common';
 import { Observable, map } from 'rxjs';
 import { ELangs } from 'src/app.dto';
-import { isArray } from 'util';
 
 export interface Response<T> {
   data: T;
@@ -23,20 +22,81 @@ export class LanguageTransformInterceptor<T>
     const { lang } = context.switchToHttp().getRequest().query;
 
     return next.handle().pipe(
-      map((data) => {
-        if (isArray(data)) {
-          data.map((i: any) => {
-            i['name'] = lang === ELangs.Tm ? i.nameTm : i.nameRu;
-            i['text'] = lang === ELangs.Tm ? i?.textTm : i?.textRu;
+      map((records) => {
+        records.map((record: any) => {
+          record['name'] = lang === ELangs.Tm ? record.nameTm : record.nameRu;
+          record['text'] = lang === ELangs.Tm ? record?.textTm : record?.textRu;
 
-            return i;
-          });
-        } else {
-          data['name'] = lang === ELangs.Tm ? data.nameTm : data.nameRu;
-          data['text'] = lang === ELangs.Tm ? data?.textTm : data?.textRu;
-        }
+          for (let key in record) {
+            if (Array.isArray(record[key]))
+              record[key].map((value) => {
+                value['job'] = lang === ELangs.Tm ? value?.jobTm : value?.jobRu;
+                value['name'] =
+                  lang === ELangs.Tm ? value.nameTm : value.nameRu;
+                value['text'] =
+                  lang === ELangs.Tm ? value?.textTm : value?.textRu;
+                value['made'] =
+                  lang === ELangs.Tm ? value?.madeTm : value?.madeRu;
+                value['workedAt'] =
+                  lang === ELangs.Tm ? value?.workedAtTm : value?.workedAtRu;
+                value['badges'] =
+                  lang === ELangs.Tm ? value?.badgesTm : value?.badgesRu;
+                value['position'] =
+                  lang === ELangs.Tm ? value?.positionTm : value?.positionRu;
+                value['birthPlace'] =
+                  lang === ELangs.Tm
+                    ? value?.birthPlaceTm
+                    : value?.birthPlaceRu;
+                value['sportLevel'] =
+                  lang === ELangs.Tm
+                    ? value?.sportLevelTm
+                    : value?.sportLevelRu;
+                value['leader'] =
+                  lang === ELangs.Tm ? value?.leaderTm : value?.leaderRu;
+                value['location'] =
+                  lang === ELangs.Tm ? value?.locationTm : value?.locationRu;
+                value['president'] =
+                  lang === ELangs.Tm ? value?.presidentTm : value?.presidentRu;
 
-        return data;
+                return value;
+              });
+            if (
+              typeof record[key] === 'object' &&
+              !Array.isArray(record[key]) &&
+              !(record[key] instanceof Date) &&
+              record[key] != null
+            ) {
+              let value = record[key];
+              value['job'] = lang === ELangs.Tm ? value?.jobTm : value?.jobRu;
+              value['name'] = lang === ELangs.Tm ? value.nameTm : value.nameRu;
+              value['text'] =
+                lang === ELangs.Tm ? value?.textTm : value?.textRu;
+              value['made'] =
+                lang === ELangs.Tm ? value?.madeTm : value?.madeRu;
+              value['workedAt'] =
+                lang === ELangs.Tm ? value?.workedAtTm : value?.workedAtRu;
+              value['badges'] =
+                lang === ELangs.Tm ? value?.badgesTm : value?.badgesRu;
+              value['position'] =
+                lang === ELangs.Tm ? value?.positionTm : value?.positionRu;
+              value['birthPlace'] =
+                lang === ELangs.Tm ? value?.birthPlaceTm : value?.birthPlaceRu;
+              value['sportLevel'] =
+                lang === ELangs.Tm ? value?.sportLevelTm : value?.sportLevelRu;
+              value['leader'] =
+                lang === ELangs.Tm ? value?.leaderTm : value?.leaderRu;
+              value['location'] =
+                lang === ELangs.Tm ? value?.locationTm : value?.locationRu;
+              value['president'] =
+                lang === ELangs.Tm ? value?.presidentTm : value?.presidentRu;
+              record[key] = value;
+            }
+          }
+
+          return record;
+        });
+
+        return records;
       }),
     );
   }

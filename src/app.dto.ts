@@ -19,13 +19,20 @@ export class LangQueryDto {
         name: this.lang === ELangs.Tm ? record.nameTm : record.nameRu,
         location:
           this.lang === ELangs.Tm ? record?.locationTm : record?.locationRu,
+        birthPlace:
+          this.lang === ELangs.Tm ? record?.birthPlaceTm : record?.birthPlaceRu,
+        sportLevel:
+          this.lang === ELangs.Tm ? record?.sportLevelTm : record?.sportLevelRu,
+        workedAt:
+          this.lang === ELangs.Tm ? record?.workedAtTm : record?.workedAtRu,
         sports: this.lang === ELangs.Tm ? record?.sportsTm : record?.sportsRu,
         openAt: this.lang === ELangs.Tm ? record?.openAtTm : record?.openAtRu,
+        job: this.lang === ELangs.Tm ? record?.jobTm : record?.jobRu,
+        made: this.lang === ELangs.Tm ? record?.madeTm : record?.madeRu,
+        badges: this.lang === ELangs.Tm ? record?.badgesTm : record?.badgesRu,
       };
     });
   }
-
-  toNestedName(records: any): any {}
 }
 
 export class SearchDto {

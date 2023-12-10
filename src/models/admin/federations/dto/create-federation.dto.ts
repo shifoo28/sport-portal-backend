@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 import { DefaultArgs } from '@prisma/client/runtime/library';
+import { ELangs } from 'src/app.dto';
 
 export class CreateFederationDto implements Prisma.FederationsCreateInput {
   @ApiProperty() nameTm: string;
