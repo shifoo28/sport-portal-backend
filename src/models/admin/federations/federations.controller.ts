@@ -49,6 +49,7 @@ export class FederationsController {
     @UploadedFile() file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
+console.log(file);
 
     return this.federationsService.create(data);
   }
