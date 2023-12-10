@@ -24,7 +24,6 @@ import { FederationGymsAndClubsModule } from './models/admin/federation-gyms-and
 import { FederationHealthCareEmployeesModule } from './models/admin/federation-health-care-employees/federation-health-care-employees.module';
 import { HealthCareDepartmentsModule } from './models/admin/health-care-departments/health-care-departments.module';
 import { AuthModule } from './auth/auth.module';
-import { ShopCategoriesModule } from './models/admin/shop-categories/shop-categories.module';
 import { CompetitionTypesModule } from './models/admin/competition-types/competition-types.module';
 import { CompetitionsModule } from './models/admin/competitions/competitions.module';
 import { CompetitionPageModule } from './models/client/competition-page/competition-page.module';
@@ -33,9 +32,7 @@ import { HcdepartmentPageModule } from './models/client/hcdepartment-page/hcdepa
 import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms-and-clubs-page.module';
 import { SportTypesModule } from './models/admin/sport-types/sport-types.module';
 import { NewsPageModule } from './models/client/news-page/news-page.module';
-import { ShopModule } from './models/client/shop/shop.module';
 import { NewsService } from './models/admin/news/news.service';
-import { BrandsModule } from './models/admin/brands/brands.module';
 
 @Module({
   imports: [
@@ -48,7 +45,6 @@ import { BrandsModule } from './models/admin/brands/brands.module';
     GymsAndClubsPageModule,
     HcdepartmentPageModule,
     CompetitionPageModule,
-    ShopModule,
     UsersModule,
     LangsModule,
     NewsModule,
@@ -64,10 +60,8 @@ import { BrandsModule } from './models/admin/brands/brands.module';
     FederationGymsAndClubsModule,
     HealthCareDepartmentsModule,
     FederationHealthCareEmployeesModule,
-    ShopCategoriesModule,
     CompetitionTypesModule,
     CompetitionsModule,
-    BrandsModule,
   ],
   controllers: [AppController],
   providers: [

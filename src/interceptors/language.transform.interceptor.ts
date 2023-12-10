@@ -26,6 +26,8 @@ export class LanguageTransformInterceptor<T>
         records.map((record: any) => {
           record['name'] = lang === ELangs.Tm ? record.nameTm : record.nameRu;
           record['text'] = lang === ELangs.Tm ? record?.textTm : record?.textRu;
+          record['location'] =
+            lang === ELangs.Tm ? record?.locationTm : record?.locationRu;
 
           for (let key in record) {
             if (Array.isArray(record[key]))
@@ -39,6 +41,8 @@ export class LanguageTransformInterceptor<T>
                   lang === ELangs.Tm ? value?.madeTm : value?.madeRu;
                 value['workedAt'] =
                   lang === ELangs.Tm ? value?.workedAtTm : value?.workedAtRu;
+                value['workAt'] =
+                  lang === ELangs.Tm ? value?.workAtTm : value?.workAtRu;
                 value['badges'] =
                   lang === ELangs.Tm ? value?.badgesTm : value?.badgesRu;
                 value['position'] =

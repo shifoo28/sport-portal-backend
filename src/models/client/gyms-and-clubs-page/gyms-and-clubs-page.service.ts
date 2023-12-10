@@ -61,9 +61,7 @@ export class GymsAndClubsPageService {
               : undefined,
           };
 
-    let fgc = await this.fgcService.findAll({
-      where,
-    });
+    let fgc = await this.fgcService.findAll({ where });
     fgc = langTransform.toName(fgc);
 
     return fgc;
