@@ -23,6 +23,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { existsSync } from 'fs';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
@@ -38,6 +39,8 @@ export class FederationsController {
       storage: diskStorage({
         destination: './upload/icons',
         filename(req, file, callback) {
+          if(!existsSync('./upload/icons'))console.log('Folder does not exist!');
+          
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),

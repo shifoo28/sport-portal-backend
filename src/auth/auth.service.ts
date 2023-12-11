@@ -25,9 +25,6 @@ export class AuthService {
     if (!(await bcrypt.compare(plainPassword, password)))
       throw new UnauthorizedException();
 
-    console.log('auth service');
-    console.log(result);
-
     return { ...result, token: await this.jwtService.signAsync({ ...result }) };
   }
 
