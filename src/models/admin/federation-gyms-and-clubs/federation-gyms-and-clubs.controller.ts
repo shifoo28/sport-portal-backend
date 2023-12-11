@@ -22,7 +22,6 @@ import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
-import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
@@ -85,7 +84,6 @@ export class FederationGymsAndClubsController {
 
   @Get()
   @ApiQuery({ type: LangQueryDto })
-  @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationGymsAndClubs) {
     const { skip, take, where, select, orderBy } = query;
@@ -101,7 +99,6 @@ export class FederationGymsAndClubsController {
 
   @Get(':id')
   @ApiQuery({ type: LangQueryDto })
-  @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
     return this.federationGymsAndClubsService.findOne(id);
