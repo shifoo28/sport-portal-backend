@@ -33,6 +33,7 @@ import { GymsAndClubsPageModule } from './models/client/gyms-and-clubs-page/gyms
 import { SportTypesModule } from './models/admin/sport-types/sport-types.module';
 import { NewsPageModule } from './models/client/news-page/news-page.module';
 import { NewsService } from './models/admin/news/news.service';
+import { VideosService } from './models/admin/videos/videos.service';
 
 @Module({
   imports: [
@@ -71,6 +72,7 @@ import { NewsService } from './models/admin/news/news.service';
     SportCategoriesService,
     PrismaService,
     NewsService,
+    VideosService,
   ],
 })
 export class AppModule {}

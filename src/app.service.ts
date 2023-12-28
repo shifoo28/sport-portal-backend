@@ -10,6 +10,7 @@ import { ESection } from './models/client/home/dto/main-page.dto';
 import { SportCategoryEntity } from './models/admin/sport-categories/entities/sport-category.entity';
 import { BaseCategoryEntity } from './models/admin/base-category/entities/base-category.entity';
 import { LangEntity } from './models/admin/langs/entity/lang.entity';
+import { VideosService } from './models/admin/videos/videos.service';
 
 export interface IApp {
   lang: LangEntity[];
@@ -31,6 +32,7 @@ export class AppService {
     private readonly baseCategories: BaseCategoryService,
     private readonly sportCategory: SportCategoriesService,
     private readonly newsService: NewsService,
+    private readonly videosService: VideosService,
   ) {}
 
   async getApp(query: LangQueryDto): Promise<IApp> {
@@ -77,11 +79,31 @@ export class AppService {
               mode: Prisma.QueryMode.insensitive,
             },
           };
-    let news = await this.newsService.findAll({
-      where,
-    });
+    let news = await this.newsService.findAll({ where });
     news = langTransform.toName(news);
 
     return news;
+  }
+
+  async searchVideos(query: SearchDto) {
+    const langTransform = new LangQueryDto(query.lang);
+    const where =
+      query.lang === ELangs.Tm
+        ? {
+            nameTm: {
+              contains: query.name,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          }
+        : {
+            nameRu: {
+              contains: query.name,
+              mode: Prisma.QueryMode.insensitive,
+            },
+          };
+    let videos = await this.videosService.findAll({ where });
+    videos = langTransform.toName(videos);
+
+    return videos;
   }
 }

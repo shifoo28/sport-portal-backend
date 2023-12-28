@@ -21,7 +21,8 @@ export class AppController {
   @UseInterceptors(ResponseInterceptor)
   async search(@Query() query: SearchDto) {
     const news = await this.appService.searchNews(query);
+    const videos = await this.appService.searchVideos(query);
 
-    return { news };
+    return { news, videos };
   }
 }
