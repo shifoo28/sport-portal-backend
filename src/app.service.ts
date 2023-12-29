@@ -79,7 +79,10 @@ export class AppService {
               mode: Prisma.QueryMode.insensitive,
             },
           };
-    let news = await this.newsService.findAll({ where });
+    let news = await this.newsService.findAll({
+      where,
+      include: { category: true },
+    });
     news = langTransform.toName(news);
 
     return news;
@@ -101,7 +104,10 @@ export class AppService {
               mode: Prisma.QueryMode.insensitive,
             },
           };
-    let videos = await this.videosService.findAll({ where });
+    let videos = await this.videosService.findAll({
+      where,
+      include: { category: true },
+    });
     videos = langTransform.toName(videos);
 
     return videos;
