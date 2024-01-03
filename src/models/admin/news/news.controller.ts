@@ -24,6 +24,7 @@ import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { join } from 'path';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
@@ -39,7 +40,10 @@ export class NewsController {
       storage: diskStorage({
         // destination: './upload/images',
         destination(req, file, callback) {
-          callback(null, './upload/images');
+          console.log(__dirname);
+          console.log(__filename);
+
+          callback(null, join(__dirname, '..', 'upload', 'images'));
         },
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
