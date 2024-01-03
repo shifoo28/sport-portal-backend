@@ -37,7 +37,10 @@ export class NewsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images',
+        // destination: './upload/images',
+        destination(req, file, callback) {
+          callback(null, './upload/images');
+        },
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
