@@ -43,7 +43,10 @@ export class NewsController {
           console.log(__dirname);
           console.log(__filename);
 
-          callback(null, join(__dirname, '..', 'upload', 'images'));
+          callback(
+            null,
+            join(__dirname, '..', '..', '..', '..', 'upload', 'images'),
+          );
         },
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
