@@ -41,8 +41,8 @@ export class CompetitionTypesController {
     const { skip, take, where, select, include, orderBy } = query;
 
     return this.competitionTypesService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       select,
       include,

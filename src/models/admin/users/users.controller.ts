@@ -38,8 +38,8 @@ export class UsersController {
     const { skip, take, where, orderBy } = query;
 
     return this.usersService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       select: { id: true, name: true, surname: true, email: true },
       orderBy,

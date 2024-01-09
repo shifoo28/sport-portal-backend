@@ -9,6 +9,9 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
+  ParseFilePipe,
+  FileTypeValidator,
+  MaxFileSizeValidator,
 } from '@nestjs/common';
 var path = require('path');
 import { FederationHealthCareEmployeesService } from './federation-health-care-employees.service';
@@ -48,7 +51,18 @@ export class FederationHealthCareEmployeesController {
   @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateFederationHealthCareEmployeeDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({
+            maxSize: 1024 * 1024 * 25,
+            message: 'max size 25 Mb',
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
 
@@ -60,8 +74,8 @@ export class FederationHealthCareEmployeesController {
   findAll(@Query() query: FindAllFederationHealthCareEmployeesDto) {
     const { skip, take, select, orderBy, where } = query;
     return this.federationHealthCareEmployeesService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       select,
       orderBy,
@@ -91,7 +105,16 @@ export class FederationHealthCareEmployeesController {
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationHealthCareEmployeeDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file && file.path.slice(7);
 

@@ -14,8 +14,8 @@ export class HcdepartmentPageService {
     const { skip, take, where, include, orderBy } = query;
 
     return this.hcDepartments.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip && +skip,
+      take: (take && +take) || 10,
       where: where ? strToObj(where) : undefined,
       orderBy: orderBy ? strToObj(orderBy) : { createdAt: 'asc' },
       include: include ? strToObj(include) : { employees: true },

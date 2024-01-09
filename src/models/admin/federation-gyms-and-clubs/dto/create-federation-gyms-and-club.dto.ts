@@ -83,3 +83,11 @@ export class FindAllFederationGymsAndClubs
     | Prisma.FederationGymsAndClubsOrderByWithRelationAndSearchRelevanceInput
     | Prisma.FederationGymsAndClubsOrderByWithRelationAndSearchRelevanceInput[];
 }
+
+export interface ITypeOfFiles {
+  photo1: Express.Multer.File[];
+  photo2: Express.Multer.File[];
+  photo3: Express.Multer.File[];
+  photo4: Express.Multer.File[];
+  photo5: Express.Multer.File[];
+}

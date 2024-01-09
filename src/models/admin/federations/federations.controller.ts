@@ -58,8 +58,8 @@ export class FederationsController {
   findAll(@Query() query: FindAllFederationsDto) {
     const { include, orderBy, skip, take, where } = query;
     return this.federationsService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       orderBy,
       include,

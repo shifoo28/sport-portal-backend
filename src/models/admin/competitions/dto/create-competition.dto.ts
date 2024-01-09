@@ -23,7 +23,6 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   })
   photo: Express.Multer.File;
   imagePath: string;
-  views?: number;
   @ApiProperty() typeId: number;
   competitionType: Prisma.CompetitionTypesCreateNestedOneWithoutCompetitionInput;
 }

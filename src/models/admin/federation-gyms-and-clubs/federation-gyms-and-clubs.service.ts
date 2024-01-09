@@ -98,9 +98,9 @@ export class FederationGymsAndClubsService {
     return this.prismaService.federationGymsAndClubs.update({
       where: { id },
       data: {
-        views: views && +views,
         latitude: latitude && +latitude,
         longitude: longitude && +longitude,
+        views,
         nameTm,
         nameRu,
         tel,

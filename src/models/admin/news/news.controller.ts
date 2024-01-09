@@ -24,7 +24,6 @@ import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
-import { join } from 'path';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
@@ -75,8 +74,8 @@ export class NewsController {
     const { skip, take, orderBy, section } = query;
 
     return this.newsService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where: { category: { section } },
       include: { category: true },
       orderBy,
@@ -105,6 +104,7 @@ export class NewsController {
           new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
           new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
         ],
+        fileIsRequired: false,
       }),
     )
     file: Express.Multer.File,

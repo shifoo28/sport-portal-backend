@@ -71,12 +71,12 @@ export class CompetitionsController {
     const { skip, take, where, select, orderBy } = query;
 
     return this.competitionsService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       select,
-      include: { competitionType: true },
       orderBy,
+      include: { competitionType: true },
     });
   }
 
@@ -108,12 +108,13 @@ export class CompetitionsController {
           new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
           new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
         ],
+        fileIsRequired: false,
       }),
     )
     file: Express.Multer.File,
   ) {
-    data.typeId = +data.typeId;
-    file.path && (data.imagePath = file.path.slice(7));
+    data.typeId = data.typeId && +data.typeId;
+    data.imagePath = file && file.path.slice(7);
 
     return this.competitionsService.update(id, data);
   }

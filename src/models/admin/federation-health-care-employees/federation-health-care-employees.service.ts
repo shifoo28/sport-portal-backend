@@ -25,13 +25,11 @@ export class FederationHealthCareEmployeesService {
       departmentId,
       experience,
       links,
-      rating,
       imagePath,
     } = data;
     return this.prismaService.federationHealthCareEmployees.create({
       data: {
         age: +age,
-        rating: +rating,
         experience: +experience,
         nameTm,
         nameRu,
@@ -75,6 +73,7 @@ export class FederationHealthCareEmployeesService {
       experience,
       links,
       rating,
+      views,
       imagePath,
     } = data;
 
@@ -91,6 +90,7 @@ export class FederationHealthCareEmployeesService {
         workAtTm,
         workAtRu,
         imagePath,
+        views,
         links,
         department: departmentId && { connect: { id: departmentId } },
       },

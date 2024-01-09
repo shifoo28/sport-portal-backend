@@ -37,8 +37,8 @@ export class BaseCategoryController {
     const { skip, take, where } = query;
 
     return this.baseCategoryService.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 10,
+      skip: skip && +skip,
+      take: (take && +take) || 10,
       where,
     });
   }

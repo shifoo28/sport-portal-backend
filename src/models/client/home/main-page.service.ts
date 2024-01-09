@@ -18,8 +18,8 @@ export class MainPageService {
     const { section, skip, take } = query;
 
     return this.news.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 30,
+      skip: skip && +skip,
+      take: (take && +take) || 30,
       orderBy: { createdAt: 'desc' },
       where: { category: { section } },
       include: {
@@ -36,8 +36,8 @@ export class MainPageService {
     const { section, skip, take } = query;
 
     return this.videos.findAll({
-      skip: skip ? +skip : 0,
-      take: take ? +take : 30,
+      skip: skip && +skip,
+      take: (take && +take) || 30,
       orderBy: { createdAt: 'desc' },
       where: { category: { section } },
       include: {

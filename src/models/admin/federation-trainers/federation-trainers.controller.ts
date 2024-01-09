@@ -67,8 +67,8 @@ export class FederationTrainersController {
     let { include, orderBy, skip, take, where } = query;
 
     return this.federationTrainersService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       include: include ? strToObj(include) : { federation: true },
       orderBy: orderBy ? strToObj(orderBy) : {},
       where: where ? strToObj(where) : {},

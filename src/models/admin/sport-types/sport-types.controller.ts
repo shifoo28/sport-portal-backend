@@ -35,8 +35,8 @@ export class SportTypesController {
     const { skip, take, where, select, orderBy } = query;
 
     return this.sportTypesService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       select,
       orderBy,

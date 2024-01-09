@@ -9,12 +9,15 @@ import {
   Query,
   UseInterceptors,
   UploadedFiles,
+  FileTypeValidator,
+  HttpException,
 } from '@nestjs/common';
 var path = require('path');
 import { FederationGymsAndClubsService } from './federation-gyms-and-clubs.service';
 import {
   CreateFederationGymsAndClubDto,
   FindAllFederationGymsAndClubs,
+  ITypeOfFiles,
 } from './dto/create-federation-gyms-and-club.dto';
 import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and-club.dto';
 import { ApiBearerAuth, ApiConsumes, ApiQuery, ApiTags } from '@nestjs/swagger';
@@ -31,6 +34,13 @@ import { Roles } from 'src/decorator/roles.decorator';
 @Controller('federation-gyms-and-clubs')
 @ApiTags('Federation Gyms & Clubs')
 export class FederationGymsAndClubsController {
+  private readonly imageFields = {
+    photo1: 'imagePath1',
+    photo2: 'imagePath2',
+    photo3: 'imagePath3',
+    photo4: 'imagePath4',
+    photo5: 'imagePath5',
+  };
   constructor(
     private readonly federationGymsAndClubsService: FederationGymsAndClubsService,
   ) {}
@@ -59,20 +69,28 @@ export class FederationGymsAndClubsController {
   @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateFederationGymsAndClubDto,
-    @UploadedFiles()
-    files: {
-      photo1: Express.Multer.File[];
-      photo2: Express.Multer.File[];
-      photo3: Express.Multer.File[];
-      photo4: Express.Multer.File[];
-      photo5: Express.Multer.File[];
-    },
+    @UploadedFiles({
+      transform: (value: ITypeOfFiles) => {
+        // Create validator object
+        const validator = new FileTypeValidator({
+          fileType: '.(png|jpg|jpeg|jfif|webp)',
+        });
+        // Check files valid or not
+        for (const key in value) {
+          if (!validator.isValid(value[key][0]))
+            throw new HttpException(
+              validator.buildErrorMessage() + ' from ' + key,
+              400,
+            );
+        }
+
+        return value;
+      },
+    })
+    files: ITypeOfFiles,
   ) {
-    data.imagePath1 = files.photo1[0].path.slice(7);
-    data.imagePath2 = files.photo2[0].path.slice(7);
-    data.imagePath3 = files.photo3[0].path.slice(7);
-    data.imagePath4 = files.photo4[0].path.slice(7);
-    data.imagePath5 = files.photo5[0].path.slice(7);
+    for (const key in files)
+      data[this.imageFields[key]] = files[key][0].path.slice(7);
     data.tel = strToArray(data.tel, ',');
     data.sportsTm = strToArray(data.sportsTm, ',');
     data.sportsRu = strToArray(data.sportsRu, ',');
@@ -89,8 +107,8 @@ export class FederationGymsAndClubsController {
     const { skip, take, where, select, orderBy } = query;
 
     return this.federationGymsAndClubsService.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where,
       select,
       orderBy,
@@ -129,20 +147,28 @@ export class FederationGymsAndClubsController {
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationGymsAndClubDto,
-    @UploadedFiles()
-    files: {
-      photo1: Express.Multer.File[];
-      photo2: Express.Multer.File[];
-      photo3: Express.Multer.File[];
-      photo4: Express.Multer.File[];
-      photo5: Express.Multer.File[];
-    },
+    @UploadedFiles({
+      transform: (value: ITypeOfFiles) => {
+        // Create validator object
+        const validator = new FileTypeValidator({
+          fileType: '.(png|jpg|jpeg|jfif|webp)',
+        });
+        // Check files valid or not
+        for (const key in value) {
+          if (!validator.isValid(value[key][0]))
+            throw new HttpException(
+              validator.buildErrorMessage() + ' from ' + key,
+              400,
+            );
+        }
+
+        return value;
+      },
+    })
+    files: ITypeOfFiles,
   ) {
-    data.imagePath1 = files.photo1[0] && files.photo1[0].path.slice(7);
-    data.imagePath2 = files.photo2[0] && files.photo2[0].path.slice(7);
-    data.imagePath3 = files.photo3[0] && files.photo3[0].path.slice(7);
-    data.imagePath4 = files.photo4[0] && files.photo4[0].path.slice(7);
-    data.imagePath5 = files.photo5[0] && files.photo5[0].path.slice(7);
+    for (const key in files)
+      data[this.imageFields[key]] = files[key][0].path.slice(7);
     data.tel && (data.tel = strToArray(data.tel, ','));
     data.sportsTm && (data.sportsTm = strToArray(data.sportsTm, ','));
     data.sportsRu && (data.sportsRu = strToArray(data.sportsRu, ','));

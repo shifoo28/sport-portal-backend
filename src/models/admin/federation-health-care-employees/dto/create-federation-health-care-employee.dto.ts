@@ -9,23 +9,22 @@ export class CreateFederationHealthCareEmployeeDto
   @ApiProperty() nameRu: string;
   @ApiProperty() jobTm: string;
   @ApiProperty() jobRu: string;
+  @ApiProperty() age: number;
   @ApiProperty() workAtTm: string;
   @ApiProperty() workAtRu: string;
-  @ApiProperty() age: number;
-  @ApiProperty() departmentId: string;
   @ApiProperty({ required: false, default: 0 }) experience?: number;
-  @ApiProperty({ required: false, default: 4.5 }) rating?: number;
   @ApiProperty({ required: false }) links?:
-    | Prisma.NullTypes.JsonNull
-    | Prisma.InputJsonValue;
+  | Prisma.NullTypes.JsonNull
+  | Prisma.InputJsonValue;
   @ApiProperty({
     format: 'binary',
     type: 'string',
     description:
-      'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
+    'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
   photo: Express.Multer.File;
   imagePath: string;
+  @ApiProperty() departmentId: string;
   department: Prisma.HealthCareDepartmentsCreateNestedOneWithoutEmployeesInput;
 }
 

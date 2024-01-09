@@ -14,8 +14,8 @@ export class FederationPageService {
     const { skip, take, where, include, orderBy } = query;
 
     return this.federation.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where: where ? strToObj(where) : undefined,
       orderBy: orderBy ? strToObj(orderBy) : undefined,
       include: include ? strToObj(include) : { fsports: true },
@@ -28,8 +28,8 @@ export class FederationPageService {
     const { skip, take, where, include, orderBy } = query;
 
     return this.federation.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where: where ? strToObj(where) : undefined,
       orderBy: orderBy ? strToObj(orderBy) : undefined,
       include: include ? strToObj(include) : { ftrainers: true },
@@ -42,8 +42,8 @@ export class FederationPageService {
     const { skip, take, where, include, orderBy } = query;
 
     return this.federation.findAll({
-      skip: skip ? +skip : undefined,
-      take: take ? +take : undefined,
+      skip: skip && +skip,
+      take: take && +take,
       where: where ? strToObj(where) : undefined,
       orderBy: orderBy ? strToObj(orderBy) : undefined,
       include: include ? strToObj(include) : { fathlete: true },
