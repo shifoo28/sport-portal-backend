@@ -47,8 +47,16 @@ export class VideosService {
   }
 
   async update(id: string, data: UpdateVideoDto): Promise<VideoEntity> {
-    const { categoryId, imagePath, nameRu, nameTm, textTm, textRu, videoPath } =
-      data;
+    const {
+      categoryId,
+      imagePath,
+      nameRu,
+      nameTm,
+      textTm,
+      textRu,
+      videoPath,
+      views,
+    } = data;
 
     return this.prismaService.videos.update({
       data: {
@@ -56,6 +64,7 @@ export class VideosService {
         nameTm,
         textTm,
         textRu,
+        views,
         imagePath,
         videoPath,
         category: categoryId && { connect: { id: categoryId } },

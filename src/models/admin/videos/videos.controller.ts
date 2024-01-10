@@ -9,13 +9,15 @@ import {
   Delete,
   UseInterceptors,
   UploadedFiles,
+  FileTypeValidator,
+  HttpException,
 } from '@nestjs/common';
 var path = require('path');
 import { VideosService } from './videos.service';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import FindAllVideosDto from './dto/videos.dto';
+import FindAllVideosDto, { ITypeOfFiles } from './dto/videos.dto';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
@@ -27,6 +29,10 @@ import { Roles } from 'src/decorator/roles.decorator';
 @Controller('videos')
 @ApiTags('Videos')
 export class VideosController {
+  private readonly imageFileds = {
+    photo: 'imagePath',
+    video: 'videoPath',
+  };
   constructor(private readonly videosService: VideosService) {}
 
   @Post()
@@ -50,11 +56,34 @@ export class VideosController {
   @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateVideoDto,
-    @UploadedFiles()
-    files: { photo: Express.Multer.File[]; video: Express.Multer.File[] },
+    @UploadedFiles({
+      transform: (value) => {
+        // Create validator object
+        const validatorImage = new FileTypeValidator({
+          fileType: '.(png|jpg|jpeg|jfif|webp)',
+        });
+        const validatorVideo = new FileTypeValidator({
+          fileType: '.(mp4|ogg|mpeg|avi|webm)',
+        });
+        // Check files valid or not
+        if (!validatorImage.isValid(value.photo[0]))
+          throw new HttpException(
+            validatorImage.buildErrorMessage() + ' from photo',
+            400,
+          );
+        if (!validatorVideo.isValid(value.video[0]))
+          throw new HttpException(
+            validatorVideo.buildErrorMessage() + ' from video',
+            400,
+          );
+
+        return value;
+      },
+    })
+    files: ITypeOfFiles,
   ) {
-    data.imagePath = files.photo[0].path.slice(7);
-    data.videoPath = files.video[0].path.slice(7);
+    for (const key in files)
+      data[this.imageFileds[key]] = files[key][0].path.slice(7);
 
     return this.videosService.create(data);
   }
@@ -101,11 +130,34 @@ export class VideosController {
   update(
     @Param('id') id: string,
     @Body() data: UpdateVideoDto,
-    @UploadedFiles()
-    files: { photo: Express.Multer.File[]; video: Express.Multer.File[] },
+    @UploadedFiles({
+      transform: (value) => {
+        // Create validator object
+        const validatorImage = new FileTypeValidator({
+          fileType: '.(png|jpg|jpeg|jfif|webp)',
+        });
+        const validatorVideo = new FileTypeValidator({
+          fileType: '.(mp4|ogg|mpeg|avi|webm)',
+        });
+        // Check files valid or not
+        if (value.photo && !validatorImage.isValid(value.photo[0]))
+          throw new HttpException(
+            validatorImage.buildErrorMessage() + ' from photo',
+            400,
+          );
+        if (value.video && !validatorVideo.isValid(value.video[0]))
+          throw new HttpException(
+            validatorVideo.buildErrorMessage() + ' from video',
+            400,
+          );
+
+        return value;
+      },
+    })
+    files: ITypeOfFiles,
   ) {
-    data.imagePath && (data.imagePath = files.photo[0].path.slice(7));
-    data.videoPath && (data.videoPath = files.video[0].path.slice(7));
+    for (const key in files)
+      data[this.imageFileds[key]] = files[key][0].path.slice(7);
 
     return this.videosService.update(id, data);
   }

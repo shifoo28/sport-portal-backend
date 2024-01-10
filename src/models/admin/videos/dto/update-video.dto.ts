@@ -4,4 +4,7 @@ import { CreateVideoDto } from './create-video.dto';
 
 export class UpdateVideoDto
   extends PartialType(CreateVideoDto)
-  implements Prisma.VideosUpdateInput {}
+  implements Prisma.VideosUpdateInput
+{
+  views?: number | Prisma.IntFieldUpdateOperationsInput;
+}

@@ -35,13 +35,13 @@ export class UsersController {
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllUsersDto) {
-    const { skip, take, where, orderBy } = query;
+    const { skip, take, where, orderBy, select } = query;
 
     return this.usersService.findAll({
       skip: skip && +skip,
       take: take && +take,
       where,
-      select: { id: true, name: true, surname: true, email: true },
+      select,
       orderBy,
     });
   }

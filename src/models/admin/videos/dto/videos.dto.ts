@@ -11,3 +11,8 @@ export default class FindAllVideosDto implements Prisma.VideosFindManyArgs {
     | Prisma.VideosOrderByWithRelationAndSearchRelevanceInput
     | Prisma.VideosOrderByWithRelationAndSearchRelevanceInput[];
 }
+
+export interface ITypeOfFiles {
+  photo: Express.Multer.File[];
+  video: Express.Multer.File[];
+}

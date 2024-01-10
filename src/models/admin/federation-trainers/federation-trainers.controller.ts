@@ -9,8 +9,11 @@ import {
   Controller,
   UploadedFile,
   UseInterceptors,
+  FileTypeValidator,
+  MaxFileSizeValidator,
+  ParseFilePipe,
 } from '@nestjs/common';
-var path = require('path')
+var path = require('path');
 import { FederationTrainersService } from './federation-trainers.service';
 import {
   CreateFederationTrainerDto,
@@ -50,7 +53,15 @@ export class FederationTrainersController {
   @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateFederationTrainerDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
     data.workedAtTm = strToArray(data.workedAtTm, ',');
@@ -97,7 +108,16 @@ export class FederationTrainersController {
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationTrainerDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     file && (data.imagePath = file.path.slice(7));
     data.workedAtTm && (data.workedAtTm = strToArray(data.workedAtTm, ','));

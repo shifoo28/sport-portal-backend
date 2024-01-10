@@ -55,10 +55,7 @@ export class FederationHealthCareEmployeesController {
       new ParseFilePipe({
         validators: [
           new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
-          new MaxFileSizeValidator({
-            maxSize: 1024 * 1024 * 25,
-            message: 'max size 25 Mb',
-          }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
         ],
       }),
     )

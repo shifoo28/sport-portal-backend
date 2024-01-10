@@ -9,6 +9,9 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
+  FileTypeValidator,
+  MaxFileSizeValidator,
+  ParseFilePipe,
 } from '@nestjs/common';
 var path = require('path');
 import { FederationAthleteService } from './federation-athlete.service';
@@ -49,7 +52,15 @@ export class FederationAthleteController {
   @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateFederationAthleteDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
     data.workedAtTm = strToArray(data.workedAtTm, ',');
@@ -96,7 +107,16 @@ export class FederationAthleteController {
   update(
     @Param('id') id: string,
     @Body() data: UpdateFederationAthleteDto,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+        fileIsRequired: false,
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file && file.path.slice(7);
     data.workedAtTm && (data.workedAtTm = strToArray(data.workedAtTm, ','));
