@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CreateFederationDto,
-  FindAllFederationsDto,
-} from './dto/create-federation.dto';
+import { CreateFederationDto } from './dto/create-federation.dto';
 import { PrismaService } from 'src/prisma.service';
 import { FederationsEntity } from './entities/federation.entity';
 import { UpdateFederationDto } from './dto/update-federation.dto';
+import { FindAllFederationsDto } from './dto/find-federation.dto';
 
 @Injectable()
 export class FederationsService {

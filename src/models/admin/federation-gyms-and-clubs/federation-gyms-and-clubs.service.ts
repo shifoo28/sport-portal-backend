@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CreateFederationGymsAndClubDto,
-  FindAllFederationGymsAndClubs,
-} from './dto/create-federation-gyms-and-club.dto';
+import { CreateFederationGymsAndClubDto } from './dto/create-federation-gyms-and-club.dto';
 import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and-club.dto';
 import { PrismaService } from 'src/prisma.service';
 import { FederationGymsAndClubEntity } from './entities/federation-gyms-and-club.entity';
+import { FindAllFederationGymsAndClubs } from './dto/find-federation-gyms-and-clubs.dto';
 
 @Injectable()
 export class FederationGymsAndClubsService {
@@ -33,6 +31,7 @@ export class FederationGymsAndClubsService {
       imagePath3,
       imagePath4,
       imagePath5,
+      environmentId,
     } = data;
     return this.prismaService.federationGymsAndClubs.create({
       data: {
@@ -54,6 +53,7 @@ export class FederationGymsAndClubsService {
         imagePath3,
         imagePath4,
         imagePath5,
+        environment: { connect: { id: environmentId } },
       },
     });
   }
@@ -94,6 +94,7 @@ export class FederationGymsAndClubsService {
       imagePath3,
       imagePath4,
       imagePath5,
+      environmentId,
     } = data;
     return this.prismaService.federationGymsAndClubs.update({
       where: { id },
@@ -117,6 +118,7 @@ export class FederationGymsAndClubsService {
         imagePath3,
         imagePath4,
         imagePath5,
+        environment: environmentId && { connect: { id: environmentId } },
       },
     });
   }

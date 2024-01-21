@@ -16,7 +16,6 @@ var path = require('path');
 import { FederationGymsAndClubsService } from './federation-gyms-and-clubs.service';
 import {
   CreateFederationGymsAndClubDto,
-  FindAllFederationGymsAndClubs,
   ITypeOfFiles,
 } from './dto/create-federation-gyms-and-club.dto';
 import { UpdateFederationGymsAndClubDto } from './dto/update-federation-gyms-and-club.dto';
@@ -28,6 +27,7 @@ import { strToArray } from 'src/tools/strToArray';
 import { LangQueryDto } from 'src/app.dto';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { FindAllFederationGymsAndClubs } from './dto/find-federation-gyms-and-clubs.dto';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
@@ -104,13 +104,13 @@ export class FederationGymsAndClubsController {
   @ApiQuery({ type: LangQueryDto })
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllFederationGymsAndClubs) {
-    const { skip, take, where, select, orderBy } = query;
+    const { skip, take, where, include, orderBy } = query;
 
     return this.federationGymsAndClubsService.findAll({
       skip: skip && +skip,
       take: take && +take,
       where,
-      select,
+      include,
       orderBy,
     });
   }

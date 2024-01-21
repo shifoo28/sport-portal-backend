@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FindAllFederationsDto } from 'src/models/admin/federations/dto/create-federation.dto';
+import { FindAllFederationsDto } from 'src/models/admin/federations/dto/find-federation.dto';
 import { FederationsEntity } from 'src/models/admin/federations/entities/federation.entity';
 import { FederationsService } from 'src/models/admin/federations/federations.service';
 import { strToObj } from 'src/tools/strToObj';

@@ -23,7 +23,7 @@ export class AuthController {
   
   @Post('signin')
   @UseInterceptors(ResponseInterceptor)
-  signIn(@Body() data: SignInArgsDto) {
+  signIn(@Body() data: SignInArgsDto) {    
     return this.authService.signIn(data);
   }
   

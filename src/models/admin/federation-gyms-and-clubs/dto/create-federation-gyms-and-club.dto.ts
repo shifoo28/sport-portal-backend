@@ -63,25 +63,13 @@ export class CreateFederationGymsAndClubDto
       'Max file size: 25MB. Expected file types: PNG, JPG, JPEG, JFIF, WEBP',
   })
   photo5: Express.Multer.File;
+  environment?: Prisma.SportEnvironmentCreateNestedOneWithoutGymsandclubsInput;
+  @ApiProperty() environmentId: string;
   imagePath1: string;
   imagePath2: string;
   imagePath3: string;
   imagePath4: string;
   imagePath5: string;
-}
-
-export class FindAllFederationGymsAndClubs
-  implements Prisma.FederationGymsAndClubsFindManyArgs
-{
-  @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false }) take?: number;
-  @ApiProperty({ required: false })
-  select?: Prisma.FederationGymsAndClubsSelect<DefaultArgs>;
-  @ApiProperty({ required: false })
-  where?: Prisma.FederationGymsAndClubsWhereInput;
-  @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationGymsAndClubsOrderByWithRelationAndSearchRelevanceInput
-    | Prisma.FederationGymsAndClubsOrderByWithRelationAndSearchRelevanceInput[];
 }
 
 export interface ITypeOfFiles {

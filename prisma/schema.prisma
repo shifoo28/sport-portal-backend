@@ -118,15 +118,16 @@ model SportTypes {
 }
 
 model Federations {
-  id        String               @id @default(uuid())
-  nameTm    String
-  nameRu    String
-  imagePath String
-  fsports   FederationSports?
-  fathlete  FederationAthlete[]
-  ftrainers FederationTrainers[]
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
+  id           String               @id @default(uuid())
+  nameTm       String
+  nameRu       String
+  imagePath    String
+  fsports      FederationSports?
+  fathlete     FederationAthlete[]
+  ftrainers    FederationTrainers[]
+  championship Championships[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
 
   @@unique([nameTm, nameRu])
 }
@@ -187,18 +188,18 @@ model FederationAthlete {
   jobTm        String
   jobRu        String
   age          Int
-  club         String
-  views        Int         @default(0)
-  links        Json        @default("{}") @db.Json
   nameTm       String
   nameRu       String
   madeTm       String
   madeRu       String
-  rating       Float       @default(4.5)
   imagePath    String
-  positionTm   String
-  positionRu   String
+  club         String // *
+  positionTm   String // *
+  positionRu   String // *
+  rating       Float       @default(4.5)
+  views        Int         @default(0)
   experience   Int         @default(0)
+  links        Json        @default("{}") @db.Json
   birthPlaceTm String
   birthPlaceRu String
   sportLevelTm String
@@ -215,31 +216,44 @@ model FederationAthlete {
   @@unique([nameTm, nameRu])
 }
 
-model FederationGymsAndClubs {
-  id         String   @id @default(uuid())
-  nameTm     String
-  nameRu     String
-  locationTm String
-  locationRu String
-  email      String
-  link       String
-  latitude   Float
-  longitude  Float
-  tel        String[]
-  sportsTm   String[]
-  sportsRu   String[]
-  openAtTm   String[]
-  openAtRu   String[]
-  imagePath1 String
-  imagePath2 String
-  imagePath3 String
-  imagePath4 String
-  imagePath5 String
-  views      Int      @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+model SportEnvironment {
+  id           String                   @id @default(uuid())
+  nameTm       String
+  nameRu       String
+  gymsandclubs FederationGymsAndClubs[]
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
 
   @@unique([nameTm, nameRu])
+}
+
+model FederationGymsAndClubs {
+  id            String            @id @default(uuid())
+  nameTm        String
+  nameRu        String
+  locationTm    String
+  locationRu    String
+  email         String
+  link          String
+  latitude      Float
+  longitude     Float
+  tel           String[]
+  sportsTm      String[]
+  sportsRu      String[]
+  openAtTm      String[]
+  openAtRu      String[]
+  imagePath1    String
+  imagePath2    String
+  imagePath3    String
+  imagePath4    String
+  imagePath5    String
+  views         Int               @default(0)
+  environment   SportEnvironment? @relation(fields: [environmentId], references: [id])
+  environmentId String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@unique([nameTm, nameRu, environmentId])
 }
 
 model HealthCareDepartments {
@@ -306,23 +320,50 @@ model Competitions {
   @@unique([nameTm, nameRu])
 }
 
-// model ShopCategories {
-//   id             String           @id @default(uuid())
-//   nameTm         String
-//   nameRu         String
-//   parentId       String           @default("0")
-//   parentCategory ShopCategories   @relation("InfinteShopCategory", fields: [parentId], references: [id])
-//   shopCategory   ShopCategories[] @relation("InfinteShopCategory")
-//   createdAt      DateTime         @default(now())
-//   updatedAt      DateTime         @updatedAt
+model Championships {
+  id              String            @id @default(uuid())
+  nameTm          String
+  nameRu          String
+  imagePath       String
+  federation      Federations       @relation(fields: [federationId], references: [id])
+  federationId    String
+  FootballTeams   FootballTeams[]
+  BasketballTeams BasketballTeams[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 
-//   @@unique([nameTm, nameRu, parentId])
-// }
+  @@unique([nameTm, nameRu, federationId])
+}
 
-// model Brands {
-//   id        String   @id @default(uuid())
-//   nameTm    String
-//   nameRu    String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-// }
+model FootballTeams {
+  id             String        @id @default(uuid())
+  nameTm         String
+  nameRu         String
+  imagePath      String
+  win            Int           @db.SmallInt
+  draw           Int           @db.SmallInt
+  loss           Int           @db.SmallInt
+  goalsScored    Int           @db.SmallInt
+  goalsAgainst   Int           @db.SmallInt
+  points         Int           @db.SmallInt
+  chamionship    Championships @relation(fields: [championshipId], references: [id])
+  championshipId String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@unique([nameTm, nameRu, championshipId])
+}
+
+model BasketballTeams {
+  id             String        @id @default(uuid())
+  nameTm         String
+  nameRu         String
+  imagePath      String
+  // Basgada parametrler...
+  championship   Championships @relation(fields: [championshipId], references: [id])
+  championshipId String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@unique([nameTm, nameRu, championshipId])
+}

@@ -1,52 +1,52 @@
 import {
+  Controller,
   Get,
   Post,
   Body,
   Patch,
   Param,
   Delete,
-  Controller,
-  Query,
   UseInterceptors,
   UploadedFile,
+  ParseFilePipe,
   FileTypeValidator,
   MaxFileSizeValidator,
-  ParseFilePipe,
+  Query,
 } from '@nestjs/common';
-var path = require('path');
-import { FederationsService } from './federations.service';
-import { CreateFederationDto } from './dto/create-federation.dto';
-import { UpdateFederationDto } from './dto/update-federation.dto';
+import { ChampionshipsService } from './championships.service';
+import { CreateChampionshipDto } from './dto/create-championship.dto';
+import { UpdateChampionshipDto } from './dto/update-championship.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
+import { Roles } from 'src/decorator/roles.decorator';
+import { Role } from '@prisma/client';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { Role } from '@prisma/client';
-import { Roles } from 'src/decorator/roles.decorator';
-import { FindAllFederationsDto } from './dto/find-federation.dto';
+const path = require('path');
+import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
+import { FindAllChampionships } from './dto/find-championship.dto';
 
 @ApiBearerAuth()
-@Roles(Role.Admin)
-@Controller('federations')
-@ApiTags('Federations')
-export class FederationsController {
-  constructor(private readonly federationsService: FederationsService) {}
+@Roles(Role.Admin, Role.Employee)
+@ApiTags('Championship')
+@Controller('championships')
+export class ChampionshipsController {
+  constructor(private readonly championshipsService: ChampionshipsService) {}
 
   @Post()
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/icons',
+        destination: './upload/icons/championships',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
+    ResponseInterceptor,
   )
-  @UseInterceptors(ResponseInterceptor)
   create(
-    @Body() data: CreateFederationDto,
+    @Body() data: CreateChampionshipDto,
     @UploadedFile(
       new ParseFilePipe({
         validators: [
@@ -59,26 +59,27 @@ export class FederationsController {
   ) {
     data.imagePath = file.path.slice(7);
 
-    return this.federationsService.create(data);
+    return this.championshipsService.create(data);
   }
 
   @Get()
   @UseInterceptors(ResponseInterceptor)
-  findAll(@Query() query: FindAllFederationsDto) {
-    const { include, orderBy, skip, take, where } = query;
-    return this.federationsService.findAll({
+  findAll(@Query() query: FindAllChampionships) {
+    const { skip, take, orderBy, include, where } = query;
+
+    return this.championshipsService.findAll({
       skip: skip && +skip,
       take: take && +take,
       where,
-      orderBy,
       include,
+      orderBy,
     });
   }
 
   @Get(':id')
   @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
-    return this.federationsService.findOne(id);
+    return this.championshipsService.findOne(id);
   }
 
   @Patch(':id')
@@ -86,36 +87,35 @@ export class FederationsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/icons',
+        destination: './upload/icons/championships',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
       }),
     }),
+    ResponseInterceptor,
   )
-  @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
-    @Body() data: UpdateFederationDto,
+    @Body() data: UpdateChampionshipDto,
     @UploadedFile(
       new ParseFilePipe({
         validators: [
           new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
           new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
         ],
-        fileIsRequired: false,
       }),
     )
-    file?: Express.Multer.File,
+    file: Express.Multer.File,
   ) {
     data.imagePath = file && file.path.slice(7);
 
-    return this.federationsService.update(id, data);
+    return this.championshipsService.update(id, data);
   }
 
   @Delete(':id')
   @UseInterceptors(ResponseInterceptor)
   remove(@Param('id') id: string) {
-    return this.federationsService.remove(id);
+    return this.championshipsService.remove(id);
   }
 }

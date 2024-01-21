@@ -10,15 +10,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { CompetitionTypesService } from './competition-types.service';
-import {
-  CreateCompetitionTypeDto,
-  FindAllCompetitionTypesDto,
-} from './dto/create-competition-type.dto';
+import { CreateCompetitionTypeDto } from './dto/create-competition-type.dto';
 import { UpdateCompetitionTypeDto } from './dto/update-competition-type.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { FindAllCompetitionTypesDto } from './dto/find-competition-type.dto';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)

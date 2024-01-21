@@ -9,8 +9,8 @@ export class CreateNewsDto implements Prisma.NewsCreateInput {
   @ApiProperty() locationTm: string;
   @ApiProperty() locationRu: string;
   imagePath: string;
-  @ApiProperty() categoryId: string;
   category: Prisma.SportCategoriesCreateNestedOneWithoutNewsInput;
+  @ApiProperty() categoryId: string;
   @ApiProperty({
     type: 'string',
     format: 'binary',

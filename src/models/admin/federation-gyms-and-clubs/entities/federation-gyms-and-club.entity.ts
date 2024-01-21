@@ -21,6 +21,7 @@ export class FederationGymsAndClubEntity implements FederationGymsAndClubs {
   imagePath4: string;
   imagePath5: string;
   views: number;
+  environmentId: string;
   createdAt: Date;
   updatedAt: Date;
 }

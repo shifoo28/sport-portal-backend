@@ -4,8 +4,8 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
 import { LangQueryDto } from 'src/app.dto';
-import { FindAllFederationsDto } from 'src/models/admin/federations/dto/create-federation.dto';
 import { Public } from 'src/decorator/public-route.decorator';
+import { FindAllFederationsDto } from 'src/models/admin/federations/dto/find-federation.dto';
 
 @Public()
 @Controller('federation-page')

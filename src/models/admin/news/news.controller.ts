@@ -43,8 +43,8 @@ export class NewsController {
         },
       }),
     }),
+    ResponseInterceptor,
   )
-  @UseInterceptors(ResponseInterceptor)
   create(
     @Body() data: CreateNewsDto,
     @UploadedFile(
@@ -62,12 +62,6 @@ export class NewsController {
     return this.newsService.create(data);
   }
 
-  @Get(':id')
-  @UseInterceptors(ResponseInterceptor)
-  findOne(@Param('id') id: string) {
-    return this.newsService.findOne(id);
-  }
-
   @Get()
   @UseInterceptors(ResponseInterceptor)
   findAll(@Query() query: FindAllNewsDto) {
@@ -82,6 +76,12 @@ export class NewsController {
     });
   }
 
+  @Get(':id')
+  @UseInterceptors(ResponseInterceptor)
+  findOne(@Param('id') id: string) {
+    return this.newsService.findOne(id);
+  }
+
   @Patch(':id')
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(
@@ -93,8 +93,8 @@ export class NewsController {
         },
       }),
     }),
+    ResponseInterceptor,
   )
-  @UseInterceptors(ResponseInterceptor)
   update(
     @Param('id') id: string,
     @Body() data: UpdateNewsDto,

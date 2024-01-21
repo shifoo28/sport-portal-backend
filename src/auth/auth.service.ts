@@ -19,11 +19,11 @@ export class AuthService {
   async signIn(args: SignInArgsDto): Promise<SignInDto> {
     const { email, plainPassword } = args;
     const user = await this.userService.findOne({ email });
-    if (!user) throw new NotFoundException();
+    if (!user) throw new NotFoundException('User not found!');
 
     const { password, ...result } = user;
     if (!(await bcrypt.compare(plainPassword, password)))
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("Invalid password");
 
     return { ...result, token: await this.jwtService.signAsync({ ...result }) };
   }

@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { News } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { FindAllNewsDto } from './dto/news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
+import { NewsEntity } from './entities/news.entity';
 
 @Injectable()
 export class NewsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: CreateNewsDto): Promise<News> {
+  async create(data: CreateNewsDto): Promise<NewsEntity> {
     const {
       categoryId,
       imagePath,
@@ -41,7 +41,7 @@ export class NewsService {
     where,
     include,
     orderBy,
-  }: FindAllNewsDto): Promise<News[]> {
+  }: FindAllNewsDto): Promise<NewsEntity[]> {
     return this.prismaService.news.findMany({
       skip,
       take,
@@ -51,14 +51,14 @@ export class NewsService {
     });
   }
 
-  async findOne(id: string): Promise<News> {
+  async findOne(id: string): Promise<NewsEntity> {
     return this.prismaService.news.findUnique({
       where: { id },
       include: { category: true },
     });
   }
 
-  async update(id: string, data: UpdateNewsDto): Promise<News> {
+  async update(id: string, data: UpdateNewsDto): Promise<NewsEntity> {
     const {
       categoryId,
       imagePath,
@@ -87,7 +87,7 @@ export class NewsService {
     });
   }
 
-  async remove(id: string): Promise<News> {
+  async remove(id: string): Promise<NewsEntity> {
     return this.prismaService.news.delete({ where: { id } });
   }
 }
