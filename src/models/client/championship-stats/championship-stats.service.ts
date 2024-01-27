@@ -8,7 +8,15 @@ export class ChampionshipStatsService {
 
   async findFootballTeams(): Promise<ChampionshipEntity[]> {
     return this.championshipsService.findAll({
-      include: { FootballTeams: true },
+      include: {
+        FootballTeams: {
+          orderBy: [
+            { points: 'desc' },
+            { win: 'desc' },
+            { goalsScored: 'desc' },
+          ],
+        },
+      },
     });
   }
 }
