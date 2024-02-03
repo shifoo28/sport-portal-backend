@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
 
-export class CreateFootballTeamDto implements Prisma.FootballTeamsCreateInput {
+export class CreateTeamDto implements Prisma.TeamsCreateInput {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
   @ApiProperty({ required: false, default: 0 }) win: number;
@@ -14,10 +14,10 @@ export class CreateFootballTeamDto implements Prisma.FootballTeamsCreateInput {
     type: 'string',
     format: 'binary',
     description:
-      'Max file size: 25MB. Expected file types PNG, JPG, JPEG, WEBP, JFIF, GIF',
+      'Max file size: 25Mb. Expected file types PNG, JPG, JPEG, WEBP, JFIF',
   })
   photo: Express.Multer.File;
   imagePath: string;
-  chamionship: Prisma.ChampionshipsCreateNestedOneWithoutFootballTeamsInput;
+  chamionship: Prisma.ChampionshipsCreateNestedOneWithoutTeamInput;
   @ApiProperty() championshipId: string;
 }

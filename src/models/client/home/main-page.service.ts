@@ -6,12 +6,16 @@ import {
   FindAllVideoNewsDto,
 } from './dto/main-page.dto';
 import { VideosService } from 'src/models/admin/videos/videos.service';
+import { ChampionshipEntity } from 'src/models/admin/championships/entities/championship.entity';
+import { ChampionshipsService } from 'src/models/admin/championships/championships.service';
+import { $Enums } from '@prisma/client';
 
 @Injectable()
 export class MainPageService {
   constructor(
     private readonly news: NewsService,
     private readonly videos: VideosService,
+    private readonly championshipsService: ChampionshipsService,
   ) {}
 
   async findAllLWN(query: FindAllHomeNewsDto): Promise<FindAllLWNewsDto[]> {
@@ -46,5 +50,9 @@ export class MainPageService {
         },
       },
     });
+  }
+
+  async findTeams(type: $Enums.Statistics): Promise<ChampionshipEntity[]> {
+    return this.championshipsService.findAll({ where: { type } });
   }
 }

@@ -26,20 +26,8 @@ export class VideosService {
     });
   }
 
-  async findAll({
-    skip,
-    take,
-    where,
-    include,
-    orderBy,
-  }: FindAllVideosDto): Promise<VideoEntity[]> {
-    return this.prismaService.videos.findMany({
-      skip,
-      take,
-      where,
-      orderBy,
-      include,
-    });
+  async findAll(query: FindAllVideosDto): Promise<VideoEntity[]> {
+    return this.prismaService.videos.findMany(query);
   }
 
   async findOne(id: string): Promise<VideoEntity> {

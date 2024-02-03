@@ -9,22 +9,25 @@ import {
   UseInterceptors,
   UploadedFile,
   Query,
+  ParseFilePipe,
+  FileTypeValidator,
+  MaxFileSizeValidator,
 } from '@nestjs/common';
-import { FootballTeamsService } from './football-teams.service';
-import { CreateFootballTeamDto } from './dto/create-football-team.dto';
-import { UpdateFootballTeamDto } from './dto/update-football-team.dto';
+import { TeamsService } from './teams.service';
+import { CreateTeamDto } from './dto/create-team.dto';
+import { UpdateTeamDto } from './dto/update-team.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { FindAllTeamsDto } from './dto/find-team.dto';
 const path = require('path');
-import { FindAllFootballTeamsDto } from './dto/find-footbal-teams.dto';
 
+@ApiTags('Teams')
 @ApiBearerAuth()
-@ApiTags('Football Teams')
-@Controller('football-teams')
-export class FootballTeamsController {
-  constructor(private readonly footballTeamsService: FootballTeamsService) {}
+@Controller('teams')
+export class TeamsController {
+  constructor(private readonly teamsService: TeamsService) {}
 
   @Post()
   @ApiConsumes('multipart/form-data')
@@ -40,20 +43,28 @@ export class FootballTeamsController {
     ResponseInterceptor,
   )
   create(
-    @Body() data: CreateFootballTeamDto,
-    @UploadedFile() file: Express.Multer.File,
+    @Body() data: CreateTeamDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file.path.slice(7);
 
-    return this.footballTeamsService.create(data);
+    return this.teamsService.create(data);
   }
 
   @Get()
   @UseInterceptors(ResponseInterceptor)
-  findAll(@Query() query: FindAllFootballTeamsDto) {
+  findAll(@Query() query: FindAllTeamsDto) {
     const { skip, take, where, include, orderBy } = query;
 
-    return this.footballTeamsService.findAll({
+    return this.teamsService.findAll({
       skip: skip && +skip,
       take: take && +take,
       where,
@@ -65,11 +76,10 @@ export class FootballTeamsController {
   @Get(':id')
   @UseInterceptors(ResponseInterceptor)
   findOne(@Param('id') id: string) {
-    return this.footballTeamsService.findOne(id);
+    return this.teamsService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiConsumes('multipart/form-data')
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
@@ -83,17 +93,25 @@ export class FootballTeamsController {
   )
   update(
     @Param('id') id: string,
-    @Body() data: UpdateFootballTeamDto,
-    @UploadedFile() file: Express.Multer.File,
+    @Body() data: UpdateTeamDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
   ) {
     data.imagePath = file && file.path.slice(7);
 
-    return this.footballTeamsService.update(id, data);
+    return this.teamsService.update(id, data);
   }
 
   @Delete(':id')
   @UseInterceptors(ResponseInterceptor)
   remove(@Param('id') id: string) {
-    return this.footballTeamsService.remove(id);
+    return this.teamsService.remove(id);
   }
 }

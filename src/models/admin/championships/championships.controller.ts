@@ -104,6 +104,7 @@ export class ChampionshipsController {
           new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
           new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
         ],
+        fileIsRequired: false,
       }),
     )
     file: Express.Multer.File,

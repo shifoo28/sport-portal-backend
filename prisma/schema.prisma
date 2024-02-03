@@ -118,16 +118,15 @@ model SportTypes {
 }
 
 model Federations {
-  id           String               @id @default(uuid())
-  nameTm       String
-  nameRu       String
-  imagePath    String
-  fsports      FederationSports?
-  fathlete     FederationAthlete[]
-  ftrainers    FederationTrainers[]
-  championship Championships[]
-  createdAt    DateTime             @default(now())
-  updatedAt    DateTime             @updatedAt
+  id        String               @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  imagePath String
+  fsports   FederationSports?
+  fathlete  FederationAthlete[]
+  ftrainers FederationTrainers[]
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
 
   @@unique([nameTm, nameRu])
 }
@@ -320,22 +319,25 @@ model Competitions {
   @@unique([nameTm, nameRu])
 }
 
-model Championships {
-  id              String            @id @default(uuid())
-  nameTm          String
-  nameRu          String
-  imagePath       String
-  federation      Federations       @relation(fields: [federationId], references: [id])
-  federationId    String
-  FootballTeams   FootballTeams[]
-  BasketballTeams BasketballTeams[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-
-  @@unique([nameTm, nameRu, federationId])
+enum Statistics {
+  Football
+  Volleyball
 }
 
-model FootballTeams {
+model Championships {
+  id        String           @id @default(uuid())
+  nameTm    String
+  nameRu    String
+  imagePath String
+  type      Statistics?
+  team      Teams[]
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([nameTm, nameRu, type])
+}
+
+model Teams {
   id             String        @id @default(uuid())
   nameTm         String
   nameRu         String
@@ -347,20 +349,6 @@ model FootballTeams {
   goalsAgainst   Int           @db.SmallInt
   points         Int           @db.SmallInt
   chamionship    Championships @relation(fields: [championshipId], references: [id])
-  championshipId String
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-
-  @@unique([nameTm, nameRu, championshipId])
-}
-
-model BasketballTeams {
-  id             String        @id @default(uuid())
-  nameTm         String
-  nameRu         String
-  imagePath      String
-  // Basgada parametrler...
-  championship   Championships @relation(fields: [championshipId], references: [id])
   championshipId String
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt

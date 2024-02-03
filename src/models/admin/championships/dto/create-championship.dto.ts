@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
+import { $Enums, Prisma } from '@prisma/client';
 
 export class CreateChampionshipDto implements Prisma.ChampionshipsCreateInput {
   @ApiProperty() nameTm: string;
@@ -12,6 +12,6 @@ export class CreateChampionshipDto implements Prisma.ChampionshipsCreateInput {
   })
   photo: Express.Multer.File;
   imagePath: string;
-  federation: Prisma.FederationsCreateNestedOneWithoutChampionshipInput;
-  @ApiProperty() federationId: string;
+  team?: Prisma.TeamsCreateNestedManyWithoutChamionshipInput;
+  @ApiProperty({ enum: $Enums.Statistics }) type: $Enums.Statistics;
 }

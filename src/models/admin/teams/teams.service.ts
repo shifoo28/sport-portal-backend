@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFootballTeamDto } from './dto/create-football-team.dto';
-import { UpdateFootballTeamDto } from './dto/update-football-team.dto';
+import { CreateTeamDto } from './dto/create-team.dto';
+import { UpdateTeamDto } from './dto/update-team.dto';
+import { FindAllTeamsDto } from './dto/find-team.dto';
 import { PrismaService } from 'src/prisma.service';
-import { FootballTeamEntity } from './entities/football-team.entity';
-import { FindAllFootballTeamsDto } from './dto/find-footbal-teams.dto';
+import { TeamEntity } from './entities/team.entity';
 
 @Injectable()
-export class FootballTeamsService {
+export class TeamsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async create(data: CreateFootballTeamDto): Promise<FootballTeamEntity> {
+  async create(data: CreateTeamDto): Promise<TeamEntity> {
     const {
       nameTm,
       nameRu,
@@ -23,7 +23,7 @@ export class FootballTeamsService {
       championshipId,
     } = data;
 
-    return this.prismaService.footballTeams.create({
+    return this.prismaService.teams.create({
       data: {
         nameTm,
         nameRu,
@@ -39,18 +39,15 @@ export class FootballTeamsService {
     });
   }
 
-  async findAll(query: FindAllFootballTeamsDto): Promise<FootballTeamEntity[]> {
-    return this.prismaService.footballTeams.findMany(query);
+  async findAll(query: FindAllTeamsDto): Promise<TeamEntity[]> {
+    return this.prismaService.teams.findMany(query);
   }
 
-  async findOne(id: string): Promise<FootballTeamEntity> {
-    return this.prismaService.footballTeams.findUnique({ where: { id } });
+  async findOne(id: string): Promise<TeamEntity> {
+    return this.prismaService.teams.findUnique({ where: { id } });
   }
 
-  async update(
-    id: string,
-    data: UpdateFootballTeamDto,
-  ): Promise<FootballTeamEntity> {
+  async update(id: string, data: UpdateTeamDto): Promise<TeamEntity> {
     const {
       nameTm,
       nameRu,
@@ -64,7 +61,7 @@ export class FootballTeamsService {
       championshipId,
     } = data;
 
-    return this.prismaService.footballTeams.update({
+    return this.prismaService.teams.update({
       where: { id },
       data: {
         nameTm,
@@ -81,7 +78,7 @@ export class FootballTeamsService {
     });
   }
 
-  async remove(id: string): Promise<FootballTeamEntity> {
-    return this.prismaService.footballTeams.delete({ where: { id } });
+  async remove(id: string): Promise<TeamEntity> {
+    return this.prismaService.teams.delete({ where: { id } });
   }
 }

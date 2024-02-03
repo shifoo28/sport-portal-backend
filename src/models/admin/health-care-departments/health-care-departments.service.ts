@@ -24,15 +24,7 @@ export class HealthCareDepartmentsService {
   async findAll(
     query: FindAllHealthCareDepartment,
   ): Promise<HealthCareDepartmentEntity[]> {
-    const { skip, take, where, orderBy, include } = query;
-
-    return this.prismaService.healthCareDepartments.findMany({
-      skip,
-      take,
-      where,
-      orderBy,
-      include,
-    });
+    return this.prismaService.healthCareDepartments.findMany(query);
   }
 
   async findOne(id: string): Promise<HealthCareDepartmentEntity> {

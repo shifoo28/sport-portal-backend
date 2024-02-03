@@ -13,18 +13,8 @@ export class BaseCategoryService {
     return this.prismaService.baseCategory.create({ data });
   }
 
-  async findAll({
-    skip,
-    take,
-    where,
-    orderBy,
-  }: FindAllBaseCategoryDto): Promise<BaseCategory[]> {
-    return this.prismaService.baseCategory.findMany({
-      skip,
-      take,
-      where,
-      orderBy,
-    });
+  async findAll(query: FindAllBaseCategoryDto): Promise<BaseCategory[]> {
+    return this.prismaService.baseCategory.findMany(query);
   }
 
   async findOne(id: string): Promise<BaseCategory> {

@@ -35,25 +35,24 @@ import { NewsPageModule } from './models/client/news-page/news-page.module';
 import { NewsService } from './models/admin/news/news.service';
 import { VideosService } from './models/admin/videos/videos.service';
 import { SportEnvironmentsModule } from './models/admin/sport-environments/sport-environments.module';
-import { FootballTeamsModule } from './models/admin/football-teams/football-teams.module';
 import { ChampionshipsModule } from './models/admin/championships/championships.module';
-import { ChampionshipStatsModule } from './models/client/championship-stats/championship-stats.module';
+import { TeamsModule } from './models/admin/teams/teams.module';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'upload') }),
     AuthModule,
     MainPageModule,
-    ChampionshipStatsModule,
     NewsPageModule,
     NewsDetailsModule,
     FederationPageModule,
     GymsAndClubsPageModule,
     HcdepartmentPageModule,
     CompetitionPageModule,
-    UsersModule,
     LangsModule,
     NewsModule,
+    ChampionshipsModule,
+    TeamsModule,
     VideosModule,
     AdsModule,
     BaseCategoryModule,
@@ -69,8 +68,7 @@ import { ChampionshipStatsModule } from './models/client/championship-stats/cham
     FederationHealthCareEmployeesModule,
     CompetitionTypesModule,
     CompetitionsModule,
-    ChampionshipsModule,
-    FootballTeamsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [

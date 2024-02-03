@@ -25,20 +25,8 @@ export class SportCategoriesService {
     return sportCategories;
   }
 
-  async findAll({
-    skip,
-    take,
-    where,
-    include,
-    orderBy,
-  }: FindAllSportCategoriesDto): Promise<SportCategoryEntity[]> {
-    return this.prismaService.sportCategories.findMany({
-      skip,
-      take,
-      where,
-      include,
-      orderBy,
-    });
+  async findAll(query: FindAllSportCategoriesDto): Promise<SportCategoryEntity[]> {
+    return this.prismaService.sportCategories.findMany(query);
   }
 
   async findOne(id: string): Promise<SportCategoryEntity> {

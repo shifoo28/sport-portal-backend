@@ -17,7 +17,7 @@ export class MainPageController {
   @ApiQuery({ type: LangQueryDto })
   @UseInterceptors(LanguageTransformInterceptor)
   @UseInterceptors(ResponseInterceptor)
-  async findAllNews(@Query() query: FindAllHomeNewsDto) {
+  findAllNews(@Query() query: FindAllHomeNewsDto) {
     switch (query.section) {
       case 'Local':
         return this.mainPageService.findAllLWN(query);
@@ -31,5 +31,14 @@ export class MainPageController {
       default:
         return { message: 'Invalid Section' };
     }
+  }
+
+  @Get('championships')
+  @UseInterceptors(ResponseInterceptor)
+  async findTeams() {
+    const football = await this.mainPageService.findTeams('Football');
+    const volleyball = await this.mainPageService.findTeams('Volleyball');
+
+    return { football, volleyball };
   }
 }

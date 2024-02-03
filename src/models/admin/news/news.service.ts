@@ -46,8 +46,8 @@ export class NewsService {
       skip,
       take,
       where,
-      orderBy,
       include,
+      orderBy,
     });
   }
 

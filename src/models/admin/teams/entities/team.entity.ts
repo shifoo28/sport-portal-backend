@@ -1,6 +1,6 @@
-import { FootballTeams } from '@prisma/client';
+import { Teams } from '@prisma/client';
 
-export class FootballTeamEntity implements FootballTeams {
+export class TeamEntity implements Teams {
   id: string;
   nameTm: string;
   nameRu: string;

@@ -10,32 +10,20 @@ export class ChampionshipsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(data: CreateChampionshipDto): Promise<ChampionshipEntity> {
-    const { nameTm, nameRu, imagePath, federationId } = data;
+    const { nameTm, nameRu, imagePath, type } = data;
 
     return this.prismaService.championships.create({
       data: {
         nameTm,
         nameRu,
         imagePath,
-        federation: { connect: { id: federationId } },
+        type,
       },
     });
   }
 
-  async findAll({
-    skip,
-    take,
-    where,
-    include,
-    orderBy,
-  }: FindAllChampionships): Promise<ChampionshipEntity[]> {
-    return this.prismaService.championships.findMany({
-      skip,
-      take,
-      where,
-      include,
-      orderBy,
-    });
+  async findAll(query: FindAllChampionships): Promise<ChampionshipEntity[]> {
+    return this.prismaService.championships.findMany(query);
   }
 
   async findOne(id: string): Promise<ChampionshipEntity> {
@@ -46,7 +34,7 @@ export class ChampionshipsService {
     id: string,
     data: UpdateChampionshipDto,
   ): Promise<ChampionshipEntity> {
-    const { nameTm, nameRu, imagePath, federationId } = data;
+    const { nameTm, nameRu, imagePath, type } = data;
 
     return this.prismaService.championships.update({
       where: { id },
@@ -54,7 +42,7 @@ export class ChampionshipsService {
         nameTm,
         nameRu,
         imagePath,
-        federation: federationId && { connect: { id: federationId } },
+        type,
       },
     });
   }
