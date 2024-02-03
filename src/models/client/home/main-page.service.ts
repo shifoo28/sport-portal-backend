@@ -53,6 +53,9 @@ export class MainPageService {
   }
 
   async findTeams(type: $Enums.Statistics): Promise<ChampionshipEntity[]> {
-    return this.championshipsService.findAll({ where: { type } });
+    return this.championshipsService.findAll({
+      where: { type },
+      include: { team: true },
+    });
   }
 }
