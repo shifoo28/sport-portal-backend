@@ -39,6 +39,6 @@ export class MainPageController {
     const football = await this.mainPageService.findTeams('Football');
     const volleyball = await this.mainPageService.findTeams('Volleyball');
 
-    return { football, volleyball };
+    return [football, volleyball];
   }
 }
