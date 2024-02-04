@@ -22,10 +22,10 @@ import { Roles } from 'src/decorator/roles.decorator';
 export class LangsController {
   constructor(private readonly langService: LangService) {}
 
-  @Get(':id')
+  @Post()
   @UseInterceptors(ResponseInterceptor)
-  findOne(@Param('id') id: string) {
-    return this.langService.lang(id);
+  create(@Body() data: CreateLangDto): Promise<Lang> {
+    return this.langService.createLang(data);
   }
 
   @Get()
@@ -34,15 +34,15 @@ export class LangsController {
     return this.langService.langs();
   }
 
-  @Post()
+  @Get(':id')
   @UseInterceptors(ResponseInterceptor)
-  async saveLang(@Body() data: CreateLangDto): Promise<Lang> {
-    return this.langService.createLang(data);
+  findOne(@Param('id') id: string) {
+    return this.langService.lang(id);
   }
 
   @Patch(':id')
   @UseInterceptors(ResponseInterceptor)
-  updateLang(
+  update(
     @Param('id') id: string,
     @Body() body: Prisma.LangUpdateInput,
   ): Promise<Lang> {
@@ -51,7 +51,7 @@ export class LangsController {
 
   @Delete(':id')
   @UseInterceptors(ResponseInterceptor)
-  removeLang(@Param('id') id: string): Promise<Lang> {
+  remove(@Param('id') id: string): Promise<Lang> {
     return this.langService.deleteLang(id);
   }
 }
