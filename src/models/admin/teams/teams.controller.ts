@@ -80,6 +80,7 @@ export class TeamsController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
