@@ -37,7 +37,7 @@ export class NewsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: __dirname + '/upload/images',
+        destination: './upload/images',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -57,6 +57,8 @@ export class NewsController {
     )
     file: Express.Multer.File,
   ) {
+    console.log(file);
+
     data.imagePath = file.path.slice(7);
 
     return this.newsService.create(data);

@@ -39,9 +39,11 @@ import { TeamsModule } from './models/admin/teams/teams.module';
 import { EmployeeRatingsModule } from './models/admin/employee-ratings/employee-ratings.module';
 import { AthleteRatingsModule } from './models/admin/athlete-ratings/athlete-ratings.module';
 import { TrainerRatingsModule } from './models/admin/trainer-ratings/trainer-ratings.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register(),
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', 'upload') }),
     AuthModule,
     MainPageModule,
