@@ -59,8 +59,8 @@ export class NewsController {
   ) {
     console.log(process.env.PM2_PATH.length);
     console.log(file);
-    
-    data.imagePath = file.path.slice(process.env.PM2_PATH.length);
+
+    data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.newsService.create(data);
   }
