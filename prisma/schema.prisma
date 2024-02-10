@@ -26,12 +26,15 @@ enum Role {
 }
 
 model Users {
-  id       String @id @default(uuid())
-  name     String
-  surname  String
-  email    String @unique
-  password String
-  roles    Role[] @default([User])
+  id              String            @id @default(uuid())
+  name            String
+  surname         String
+  email           String            @unique
+  password        String
+  roles           Role[]            @default([User])
+  employeeRatings EmployeeRatings[]
+  athleteRatings  AthleteRatings[]
+  trainerRatings  TrainerRatings[]
 }
 
 model Ads {
@@ -153,66 +156,92 @@ model FederationSports {
 }
 
 model FederationTrainers {
-  id           String      @id @default(uuid())
-  rating       Float       @default(4.5)
-  experience   Int         @default(0)
-  views        Int         @default(0)
-  age          Int
-  jobTm        String
-  jobRu        String
-  nameTm       String
-  nameRu       String
-  madeTm       String
-  madeRu       String
-  birthPlaceTm String
-  birthPlaceRu String
-  sportLevelTm String
-  sportLevelRu String
-  workedAtTm   String[]
-  workedAtRu   String[]
-  badgesTm     String[]
-  badgesRu     String[]
-  imagePath    String
-  links        Json        @default("{}") @db.Json
-  federationId String
-  federation   Federations @relation(fields: [federationId], references: [id])
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id             String           @id @default(uuid())
+  rating         Float            @default(4.5)
+  experience     Int              @default(0)
+  views          Int              @default(0)
+  age            Int
+  jobTm          String
+  jobRu          String
+  nameTm         String
+  nameRu         String
+  madeTm         String
+  madeRu         String
+  birthPlaceTm   String
+  birthPlaceRu   String
+  sportLevelTm   String
+  sportLevelRu   String
+  workedAtTm     String[]
+  workedAtRu     String[]
+  badgesTm       String[]
+  badgesRu       String[]
+  imagePath      String
+  links          Json             @default("{}") @db.Json
+  federationId   String
+  federation     Federations      @relation(fields: [federationId], references: [id])
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  trainerRatings TrainerRatings[]
 
   @@unique([nameTm, nameRu])
 }
 
+model TrainerRatings {
+  id        String             @id @default(uuid())
+  user      Users              @relation(fields: [userId], references: [id])
+  userId    String
+  trainer   FederationTrainers @relation(fields: [trainerId], references: [id])
+  trainerId String
+  rating    Int                @db.SmallInt
+  comment   String
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
 model FederationAthlete {
-  id           String      @id @default(uuid())
-  jobTm        String
-  jobRu        String
-  age          Int
-  nameTm       String
-  nameRu       String
-  madeTm       String
-  madeRu       String
-  imagePath    String
-  club         String // *
-  positionTm   String // *
-  positionRu   String // *
-  rating       Float       @default(4.5)
-  views        Int         @default(0)
-  experience   Int         @default(0)
-  links        Json        @default("{}") @db.Json
-  birthPlaceTm String
-  birthPlaceRu String
-  sportLevelTm String
-  sportLevelRu String
-  workedAtTm   String[]
-  workedAtRu   String[]
-  badgesTm     String[]
-  badgesRu     String[]
-  federationId String
-  federation   Federations @relation(fields: [federationId], references: [id])
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id             String           @id @default(uuid())
+  jobTm          String
+  jobRu          String
+  age            Int
+  nameTm         String
+  nameRu         String
+  madeTm         String
+  madeRu         String
+  imagePath      String
+  club           String // *
+  positionTm     String // *
+  positionRu     String // *
+  rating         Float            @default(4.5)
+  views          Int              @default(0)
+  experience     Int              @default(0)
+  links          Json             @default("{}") @db.Json
+  birthPlaceTm   String
+  birthPlaceRu   String
+  sportLevelTm   String
+  sportLevelRu   String
+  workedAtTm     String[]
+  workedAtRu     String[]
+  badgesTm       String[]
+  badgesRu       String[]
+  federationId   String
+  federation     Federations      @relation(fields: [federationId], references: [id])
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  athleteRatings AthleteRatings[]
 
   @@unique([nameTm, nameRu])
+}
+
+model AthleteRatings {
+  id        String            @id @default(uuid())
+  user      Users             @relation(fields: [userId], references: [id])
+  userId    String
+  athlete   FederationAthlete @relation(fields: [athleteId], references: [id])
+  athleteId String
+  rating    Int               @db.SmallInt
+  comment   String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
 }
 
 model SportEnvironment {
@@ -267,25 +296,38 @@ model HealthCareDepartments {
 }
 
 model FederationHealthCareEmployees {
-  id           String                @id @default(uuid())
-  nameTm       String
-  nameRu       String
-  jobTm        String
-  jobRu        String
-  age          Int
-  workAtTm     String
-  workAtRu     String
-  experience   Int                   @default(0)
-  views        Int                   @default(0)
-  rating       Float                 @default(4.5)
-  links        Json                  @default("{}") @db.Json
-  imagePath    String
-  departmentId String
-  department   HealthCareDepartments @relation(fields: [departmentId], references: [id])
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
+  id              String                @id @default(uuid())
+  nameTm          String
+  nameRu          String
+  jobTm           String
+  jobRu           String
+  age             Int
+  workAtTm        String
+  workAtRu        String
+  experience      Int                   @default(0)
+  views           Int                   @default(0)
+  rating          Float                 @default(4.5)
+  links           Json                  @default("{}") @db.Json
+  imagePath       String
+  departmentId    String
+  department      HealthCareDepartments @relation(fields: [departmentId], references: [id])
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  employeeRatings EmployeeRatings[]
 
   @@unique([nameTm, nameRu])
+}
+
+model EmployeeRatings {
+  id         String                        @id @default(uuid())
+  user       Users                         @relation(fields: [userId], references: [id])
+  userId     String
+  employee   FederationHealthCareEmployees @relation(fields: [employeeId], references: [id])
+  employeeId String
+  rating     Int                           @db.SmallInt
+  comment    String
+  createdAt  DateTime                      @default(now())
+  updatedAt  DateTime                      @updatedAt
 }
 
 model CompetitionTypes {
@@ -325,14 +367,14 @@ enum Statistics {
 }
 
 model Championships {
-  id        String           @id @default(uuid())
+  id        String      @id @default(uuid())
   nameTm    String
   nameRu    String
   imagePath String
   type      Statistics?
   team      Teams[]
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
   @@unique([nameTm, nameRu, type])
 }

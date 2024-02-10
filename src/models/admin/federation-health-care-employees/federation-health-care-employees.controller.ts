@@ -15,10 +15,7 @@ import {
 } from '@nestjs/common';
 var path = require('path');
 import { FederationHealthCareEmployeesService } from './federation-health-care-employees.service';
-import {
-  CreateFederationHealthCareEmployeeDto,
-  FindAllFederationHealthCareEmployeesDto,
-} from './dto/create-federation-health-care-employee.dto';
+import { CreateFederationHealthCareEmployeeDto } from './dto/create-federation-health-care-employee.dto';
 import { UpdateFederationHealthCareEmployeeDto } from './dto/update-federation-health-care-employee.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -26,6 +23,7 @@ import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { FindAllFederationHealthCareEmployeesDto } from './dto/find-federation-health-care.dto';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
@@ -76,7 +74,7 @@ export class FederationHealthCareEmployeesController {
       where,
       select,
       orderBy,
-      include: { department: true },
+      include: { department: true, employeeRatings: true },
     });
   }
 

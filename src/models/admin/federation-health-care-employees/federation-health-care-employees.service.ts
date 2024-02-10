@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CreateFederationHealthCareEmployeeDto,
-  FindAllFederationHealthCareEmployeesDto,
-} from './dto/create-federation-health-care-employee.dto';
+import { CreateFederationHealthCareEmployeeDto } from './dto/create-federation-health-care-employee.dto';
 import { UpdateFederationHealthCareEmployeeDto } from './dto/update-federation-health-care-employee.dto';
 import { PrismaService } from 'src/prisma.service';
 import { FederationHealthCareEmployeeEntity } from './entities/federation-health-care-employee.entity';
+import { FindAllFederationHealthCareEmployeesDto } from './dto/find-federation-health-care.dto';
 
 @Injectable()
 export class FederationHealthCareEmployeesService {
@@ -53,7 +51,7 @@ export class FederationHealthCareEmployeesService {
   async findOne(id: string): Promise<FederationHealthCareEmployeeEntity> {
     return this.prismaService.federationHealthCareEmployees.findUnique({
       where: { id },
-      include: { department: true },
+      include: { department: true, employeeRatings: true },
     });
   }
 

@@ -19,7 +19,6 @@ import { FederationAthleteModule } from './models/admin/federation-athlete/feder
 import { FederationTrainersModule } from './models/admin/federation-trainers/federation-trainers.module';
 import { FederationsModule } from './models/admin/federations/federations.module';
 import { FederationPageModule } from './models/client/federation-page/federation-page.module';
-import { NewsDetailsModule } from './models/client/news-details/news-details.module';
 import { FederationGymsAndClubsModule } from './models/admin/federation-gyms-and-clubs/federation-gyms-and-clubs.module';
 import { FederationHealthCareEmployeesModule } from './models/admin/federation-health-care-employees/federation-health-care-employees.module';
 import { HealthCareDepartmentsModule } from './models/admin/health-care-departments/health-care-departments.module';
@@ -37,6 +36,9 @@ import { VideosService } from './models/admin/videos/videos.service';
 import { SportEnvironmentsModule } from './models/admin/sport-environments/sport-environments.module';
 import { ChampionshipsModule } from './models/admin/championships/championships.module';
 import { TeamsModule } from './models/admin/teams/teams.module';
+import { EmployeeRatingsModule } from './models/admin/employee-ratings/employee-ratings.module';
+import { AthleteRatingsModule } from './models/admin/athlete-ratings/athlete-ratings.module';
+import { TrainerRatingsModule } from './models/admin/trainer-ratings/trainer-ratings.module';
 
 @Module({
   imports: [
@@ -44,7 +46,6 @@ import { TeamsModule } from './models/admin/teams/teams.module';
     AuthModule,
     MainPageModule,
     NewsPageModule,
-    NewsDetailsModule,
     FederationPageModule,
     GymsAndClubsPageModule,
     HcdepartmentPageModule,
@@ -61,10 +62,13 @@ import { TeamsModule } from './models/admin/teams/teams.module';
     FederationsModule,
     FederationSportsModule,
     FederationTrainersModule,
+    TrainerRatingsModule,
     FederationAthleteModule,
+    AthleteRatingsModule,
     SportEnvironmentsModule,
     FederationGymsAndClubsModule,
     HealthCareDepartmentsModule,
+    EmployeeRatingsModule,
     FederationHealthCareEmployeesModule,
     CompetitionTypesModule,
     CompetitionsModule,

@@ -68,7 +68,10 @@ export class FederationTrainersService {
   }
 
   async findOne(id: string): Promise<FederationTrainerEntity> {
-    return this.prismaService.federationTrainers.findUnique({ where: { id } });
+    return this.prismaService.federationTrainers.findUnique({
+      where: { id },
+      include: { federation: true, trainerRatings: true },
+    });
   }
 
   async update(

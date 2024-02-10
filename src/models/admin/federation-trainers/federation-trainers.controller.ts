@@ -80,7 +80,9 @@ export class FederationTrainersController {
     return this.federationTrainersService.findAll({
       skip: skip && +skip,
       take: take && +take,
-      include: include ? strToObj(include) : { federation: true },
+      include: include
+        ? strToObj(include)
+        : { federation: true, trainerRatings: true },
       orderBy: orderBy ? strToObj(orderBy) : {},
       where: where ? strToObj(where) : {},
     });
