@@ -57,6 +57,9 @@ export class NewsController {
     )
     file: Express.Multer.File,
   ) {
+    console.log(process.env.PM2_PATH.length);
+    console.log(file);
+    
     data.imagePath = file.path.slice(process.env.PM2_PATH.length);
 
     return this.newsService.create(data);
