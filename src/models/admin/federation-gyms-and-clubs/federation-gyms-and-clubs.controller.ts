@@ -58,7 +58,7 @@ export class FederationGymsAndClubsController {
       ],
       {
         storage: diskStorage({
-          destination: './upload/images/gac',
+          destination: process.env.PM2_PATH + 'upload/images/gac',
           filename(req, file, callback) {
             callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
@@ -90,7 +90,9 @@ export class FederationGymsAndClubsController {
     files: ITypeOfFiles,
   ) {
     for (const key in files)
-      data[this.imageFields[key]] = files[key][0].path.slice(7);
+      data[this.imageFields[key]] = files[key][0].path.slice(
+        process.env.PM2_PATH.length + 5,
+      );
     data.tel = strToArray(data.tel, ',');
     data.sportsTm = strToArray(data.sportsTm, ',');
     data.sportsRu = strToArray(data.sportsRu, ',');
@@ -135,7 +137,7 @@ export class FederationGymsAndClubsController {
       ],
       {
         storage: diskStorage({
-          destination: './upload/images/gac',
+          destination: process.env.PM2_PATH + 'upload/images/gac',
           filename(req, file, callback) {
             callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
@@ -168,7 +170,9 @@ export class FederationGymsAndClubsController {
     files: ITypeOfFiles,
   ) {
     for (const key in files)
-      data[this.imageFields[key]] = files[key][0].path.slice(7);
+      data[this.imageFields[key]] = files[key][0].path.slice(
+        process.env.PM2_PATH.length + 5,
+      );
     data.tel && (data.tel = strToArray(data.tel, ','));
     data.sportsTm && (data.sportsTm = strToArray(data.sportsTm, ','));
     data.sportsRu && (data.sportsRu = strToArray(data.sportsRu, ','));

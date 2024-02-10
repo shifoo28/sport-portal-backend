@@ -42,7 +42,7 @@ export class FederationAthleteController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images/athletes',
+        destination: process.env.PM2_PATH + 'upload/images/athletes',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -62,7 +62,7 @@ export class FederationAthleteController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file.path.slice(7);
+    data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
     data.workedAtTm = strToArray(data.workedAtTm, ',');
     data.workedAtRu = strToArray(data.workedAtRu, ',');
     data.badgesTm = strToArray(data.badgesTm, ',');
@@ -96,7 +96,7 @@ export class FederationAthleteController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images/athletes',
+        destination: process.env.PM2_PATH + 'upload/images/athletes',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -118,7 +118,7 @@ export class FederationAthleteController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file && file.path.slice(7);
+    data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
     data.workedAtTm && (data.workedAtTm = strToArray(data.workedAtTm, ','));
     data.workedAtRu && (data.workedAtRu = strToArray(data.workedAtRu, ','));
     data.badgesTm && (data.badgesTm = strToArray(data.badgesTm, ','));

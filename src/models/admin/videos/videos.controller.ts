@@ -45,7 +45,7 @@ export class VideosController {
       ],
       {
         storage: diskStorage({
-          destination: './upload/video',
+          destination: process.env.PM2_PATH + 'upload/video',
           filename(req, file, callback) {
             callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
@@ -83,7 +83,9 @@ export class VideosController {
     files: ITypeOfFiles,
   ) {
     for (const key in files)
-      data[this.imageFileds[key]] = files[key][0].path.slice(7);
+      data[this.imageFileds[key]] = files[key][0].path.slice(
+        process.env.PM2_PATH.length + 5,
+      );
 
     return this.videosService.create(data);
   }
@@ -118,7 +120,7 @@ export class VideosController {
       ],
       {
         storage: diskStorage({
-          destination: './upload/video',
+          destination: process.env.PM2_PATH + 'upload/video',
           filename(req, file, callback) {
             callback(null, `${Date.now()}${path.extname(file.originalname)}`);
           },
@@ -157,7 +159,9 @@ export class VideosController {
     files: ITypeOfFiles,
   ) {
     for (const key in files)
-      data[this.imageFileds[key]] = files[key][0].path.slice(7);
+      data[this.imageFileds[key]] = files[key][0].path.slice(
+        process.env.PM2_PATH.length + 5,
+      );
 
     return this.videosService.update(id, data);
   }

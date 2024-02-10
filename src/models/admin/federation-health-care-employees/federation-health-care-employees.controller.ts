@@ -39,7 +39,7 @@ export class FederationHealthCareEmployeesController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images/hc',
+        destination: process.env.PM2_PATH + 'upload/images/hc',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -59,7 +59,7 @@ export class FederationHealthCareEmployeesController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file.path.slice(7);
+    data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.federationHealthCareEmployeesService.create(data);
   }
@@ -89,7 +89,7 @@ export class FederationHealthCareEmployeesController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images/hc',
+        destination: process.env.PM2_PATH + 'upload/images/hc',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -111,7 +111,7 @@ export class FederationHealthCareEmployeesController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file && file.path.slice(7);
+    data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.federationHealthCareEmployeesService.update(id, data);
   }

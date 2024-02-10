@@ -37,7 +37,7 @@ export class FederationsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/icons',
+        destination: process.env.PM2_PATH + 'upload/icons',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -57,7 +57,7 @@ export class FederationsController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file.path.slice(7);
+    data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.federationsService.create(data);
   }
@@ -86,7 +86,7 @@ export class FederationsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/icons',
+        destination: process.env.PM2_PATH + 'upload/icons',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -108,7 +108,7 @@ export class FederationsController {
     )
     file?: Express.Multer.File,
   ) {
-    data.imagePath = file && file.path.slice(7);
+    data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.federationsService.update(id, data);
   }

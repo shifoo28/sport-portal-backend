@@ -39,7 +39,7 @@ export class CompetitionsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images/competitions',
+        destination: process.env.PM2_PATH + 'upload/images/competitions',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -60,7 +60,7 @@ export class CompetitionsController {
     file: Express.Multer.File,
   ) {
     data.typeId = +data.typeId;
-    data.imagePath = file.path.slice(7);
+    data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.competitionsService.create(data);
   }
@@ -91,7 +91,7 @@ export class CompetitionsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images/competitions',
+        destination: process.env.PM2_PATH + 'upload/images/competitions',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -114,7 +114,7 @@ export class CompetitionsController {
     file: Express.Multer.File,
   ) {
     data.typeId = data.typeId && +data.typeId;
-    data.imagePath = file && file.path.slice(7);
+    data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.competitionsService.update(id, data);
   }

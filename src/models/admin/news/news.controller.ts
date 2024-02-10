@@ -57,9 +57,6 @@ export class NewsController {
     )
     file: Express.Multer.File,
   ) {
-    console.log(process.env.PM2_PATH.length);
-    console.log(file);
-
     data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.newsService.create(data);
@@ -90,7 +87,7 @@ export class NewsController {
   @UseInterceptors(
     FileInterceptor('photo', {
       storage: diskStorage({
-        destination: './upload/images',
+        destination: process.env.PM2_PATH + 'upload/images',
         filename(req, file, callback) {
           callback(null, `${Date.now()}${path.extname(file.originalname)}`);
         },
@@ -112,7 +109,7 @@ export class NewsController {
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file && file.path.slice(7);
+    data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.newsService.update(id, data);
   }
