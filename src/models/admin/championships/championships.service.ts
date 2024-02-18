@@ -41,7 +41,7 @@ export class ChampionshipsService {
       data: {
         nameTm,
         nameRu,
-        imagePath: imagePath || null,
+        imagePath,
         type,
       },
     });
