@@ -50,11 +50,12 @@ export class TeamsController {
           new FileTypeValidator({ fileType: '.(png|jpg|jpeg|jfif|webp)' }),
           new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 25 }),
         ],
+        fileIsRequired: false,
       }),
     )
     file: Express.Multer.File,
   ) {
-    data.imagePath = file.path.slice(process.env.PM2_PATH.length + 5);
+    data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.teamsService.create(data);
   }

@@ -383,7 +383,7 @@ model Teams {
   id             String        @id @default(uuid())
   nameTm         String
   nameRu         String
-  imagePath      String
+  imagePath      String?
   win            Int           @db.SmallInt
   draw           Int           @db.SmallInt
   loss           Int           @db.SmallInt

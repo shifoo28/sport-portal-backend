@@ -72,7 +72,7 @@ export class TeamsService {
         goalsScored: goalsScored && +goalsScored,
         goalsAgainst: goalsAgainst && +goalsAgainst,
         points: points && +points,
-        imagePath,
+        imagePath: imagePath || null,
         chamionship: championshipId && { connect: { id: championshipId } },
       },
     });

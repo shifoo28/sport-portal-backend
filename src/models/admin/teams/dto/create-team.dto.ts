@@ -15,9 +15,10 @@ export class CreateTeamDto implements Prisma.TeamsCreateInput {
     format: 'binary',
     description:
       'Max file size: 25Mb. Expected file types PNG, JPG, JPEG, WEBP, JFIF',
+    required: false,
   })
   photo: Express.Multer.File;
-  imagePath: string;
+  imagePath?: string;
   chamionship: Prisma.ChampionshipsCreateNestedOneWithoutTeamInput;
   @ApiProperty() championshipId: string;
 }
