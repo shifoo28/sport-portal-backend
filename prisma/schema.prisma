@@ -370,7 +370,7 @@ model Championships {
   id        String      @id @default(uuid())
   nameTm    String
   nameRu    String
-  imagePath String
+  imagePath String?
   type      Statistics?
   team      Teams[]
   createdAt DateTime    @default(now())

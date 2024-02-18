@@ -9,9 +9,10 @@ export class CreateChampionshipDto implements Prisma.ChampionshipsCreateInput {
     format: 'binary',
     description:
       'Max file size: 25MB. expected file types: PNG, JPG, JPEG, JFIF, WEBP',
+    required: false,
   })
-  photo: Express.Multer.File;
-  imagePath: string;
+  photo?: Express.Multer.File;
+  imagePath?: string;
   team?: Prisma.TeamsCreateNestedManyWithoutChamionshipInput;
   @ApiProperty({ enum: $Enums.Statistics }) type: $Enums.Statistics;
 }
