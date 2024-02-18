@@ -60,6 +60,7 @@ export class MainPageService {
           orderBy: [
             { points: 'desc' },
             { win: 'desc' },
+            { loss: 'asc' },
             { goalsScored: 'desc' },
           ],
         },
