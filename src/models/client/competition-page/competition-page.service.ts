@@ -33,8 +33,6 @@ export class CompetitionPageService {
   async filterCompetitions(
     query: FilterOptionsDto,
   ): Promise<CompetitionEntity[]> {
-    const langTransform = new LangQueryDto(query.lang);
-
     const { lang, locations, competitionTypes, name } = query;
     const where =
       lang === ELangs.Tm
@@ -53,6 +51,8 @@ export class CompetitionPageService {
                   },
                 }
               : undefined,
+            startDate: { gte: new Date(query.startDate) },
+            endDate: { lte: new Date(query.endDate) },
           }
         : {
             nameRu: name
@@ -69,14 +69,18 @@ export class CompetitionPageService {
                   },
                 }
               : undefined,
+            startDate: { gte: new Date(query.startDate) },
+            endDate: { lte: new Date(query.endDate) },
           };
 
-    let competes = await this.competitionsService.findAll({
+    let competitions = await this.competitionsService.findAll({
       where,
       include: { competitionType: true },
-    });    
-    competes = langTransform.toName(competes);
+    });
 
-    return competes;
+    const langTransform = new LangQueryDto(query.lang);
+    competitions = langTransform.toName(competitions);
+
+    return competitions;
   }
 }

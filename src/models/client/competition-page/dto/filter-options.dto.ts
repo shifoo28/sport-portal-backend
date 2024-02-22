@@ -6,4 +6,6 @@ export class FilterOptionsDto {
   @ApiProperty({ required: false }) competitionTypes: string;
   @ApiProperty({ required: false }) locations: string;
   @ApiProperty({ required: false }) name: string;
+  @ApiProperty({ required: false }) startDate: Date;
+  @ApiProperty({ required: false }) endDate: Date;
 }

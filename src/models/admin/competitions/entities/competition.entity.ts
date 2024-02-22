@@ -8,8 +8,8 @@ export class CompetitionEntity implements Competitions {
   textRu: string;
   locationTm: string;
   locationRu: string;
-  dateStart: Date;
-  dateEnd: Date;
+  startDate: Date;
+  endDate: Date;
   views: number;
   imagePath: string;
   typeId: number;

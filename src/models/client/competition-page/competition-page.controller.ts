@@ -46,7 +46,6 @@ export class CompetitionPageController {
 
   @Post('filter')
   @UseInterceptors(LanguageTransformInterceptor)
-  @UseInterceptors(ResponseInterceptor)
   async filterCompetitions(
     @Query() query: FilterOptionsDto,
   ): Promise<CompetitionEntity[]> {

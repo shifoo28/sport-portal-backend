@@ -349,8 +349,8 @@ model Competitions {
   textRu          String
   locationTm      String
   locationRu      String
-  dateStart       DateTime
-  dateEnd         DateTime
+  startDate       DateTime
+  endDate         DateTime
   views           Int              @default(0)
   imagePath       String
   competitionType CompetitionTypes @relation(fields: [typeId], references: [id])

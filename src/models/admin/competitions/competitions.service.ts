@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CreateCompetitionDto,
-  FindAllCompetitionsDto,
-} from './dto/create-competition.dto';
+import { CreateCompetitionDto } from './dto/create-competition.dto';
 import { UpdateCompetitionDto } from './dto/update-competition.dto';
 import { PrismaService } from 'src/prisma.service';
 import { CompetitionEntity } from './entities/competition.entity';
+import { FindAllCompetitionsDto } from './dto/find-competitions.dto';
 
 @Injectable()
 export class CompetitionsService {
@@ -19,8 +17,8 @@ export class CompetitionsService {
       textRu,
       locationTm,
       locationRu,
-      dateStart,
-      dateEnd,
+      startDate,
+      endDate,
       imagePath,
       typeId,
     } = data;
@@ -33,8 +31,8 @@ export class CompetitionsService {
         textRu,
         locationTm,
         locationRu,
-        dateStart,
-        dateEnd,
+        startDate,
+        endDate,
         imagePath,
         competitionType: { connect: { id: typeId } },
       },
@@ -63,8 +61,8 @@ export class CompetitionsService {
       textRu,
       locationTm,
       locationRu,
-      dateStart,
-      dateEnd,
+      startDate,
+      endDate,
       imagePath,
       views,
       typeId,
@@ -79,8 +77,8 @@ export class CompetitionsService {
         textRu,
         locationTm,
         locationRu,
-        dateStart,
-        dateEnd,
+        startDate,
+        endDate,
         imagePath,
         views,
         competitionType: typeId && { connect: { id: typeId } },

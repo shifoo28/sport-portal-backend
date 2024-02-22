@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Prisma } from '@prisma/client';
-import { DefaultArgs } from '@prisma/client/runtime/library';
 
 export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   @ApiProperty() nameTm: string;
@@ -9,10 +8,10 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   @ApiProperty() textRu: string;
   @ApiProperty() locationTm: string;
   @ApiProperty() locationRu: string;
-  @ApiProperty({ type: 'string' || 'Date', default: new Date() }) dateStart:
+  @ApiProperty({ type: 'string' || 'Date', default: new Date() }) startDate:
     | string
     | Date;
-  @ApiProperty({ type: 'string' || 'Date', default: new Date() }) dateEnd:
+  @ApiProperty({ type: 'string' || 'Date', default: new Date() }) endDate:
     | string
     | Date;
   @ApiProperty({
@@ -25,17 +24,4 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   imagePath: string;
   @ApiProperty() typeId: number;
   competitionType: Prisma.CompetitionTypesCreateNestedOneWithoutCompetitionInput;
-}
-
-export class FindAllCompetitionsDto implements Prisma.CompetitionsFindManyArgs {
-  @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false }) take?: number;
-  @ApiProperty({ required: false }) where?: Prisma.CompetitionsWhereInput;
-  @ApiProperty({ required: false })
-  select?: Prisma.CompetitionsSelect<DefaultArgs>;
-  @ApiProperty({ required: false })
-  include?: Prisma.CompetitionsInclude<DefaultArgs>;
-  @ApiProperty({ required: false }) orderBy?:
-    | Prisma.CompetitionsOrderByWithRelationAndSearchRelevanceInput
-    | Prisma.CompetitionsOrderByWithRelationAndSearchRelevanceInput[];
 }
