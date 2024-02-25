@@ -8,7 +8,7 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { ApiTags } from '@nestjs/swagger';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
-import { countries } from 'src/tools/constants';
+import { COUNTRIES, SPORT_ENVIRONMENTS } from 'src/tools/constants';
 import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
@@ -30,13 +30,17 @@ export class GymsAndClubsPageController {
   async getFilterOptions(@Query() query: LangQueryDto) {
     let sports = await this.gymsAndClubsPageService.getSportTypes(query.lang);
 
-    const locations = countries.map((l) => {
-      return query.lang === ELangs.Tm ? l.nameTm : l.nameRu;
+    const locations = COUNTRIES.map((location) => {
+      return query.lang === ELangs.Tm ? location.nameTm : location.nameRu;
+    });
+    const environments = SPORT_ENVIRONMENTS.map((env) => {
+      return query.lang === ELangs.Tm ? env.nameTm : env.nameRu;
     });
 
     return [
       { name: 'sports', filters: sports },
       { name: 'locations', filters: locations },
+      { name: 'environments', filters: environments },
     ];
   }
 

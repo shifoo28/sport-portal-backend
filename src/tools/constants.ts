@@ -1,4 +1,4 @@
-export const countries = [
+export const COUNTRIES = [
   { nameTm: 'Aşgabat', nameRu: 'Ашхабад' },
   { nameTm: 'Lebap', nameRu: 'Лебап' },
   { nameTm: 'Ahal', nameRu: 'Ахал' },
@@ -7,7 +7,7 @@ export const countries = [
   { nameTm: 'Balkan', nameRu: 'Балкан' },
 ];
 
-export const sportEnvironment = [
+export const SPORT_ENVIRONMENTS = [
   { nameTm: 'Suw toplumy', nameRu: 'Водный комплекс' },
   { nameTm: 'Stadion', nameRu: 'Стадион' },
   { nameTm: 'Sport mekdebi', nameRu: 'Спорт школа' },
