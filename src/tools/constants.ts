@@ -1,10 +1,10 @@
 export const countries = [
   { nameTm: 'Aşgabat', nameRu: 'Ашхабад' },
-  { nameTm: 'Türkmenabat', nameRu: 'Туркменабат' },
-  { nameTm: 'Änew', nameRu: 'Анев' },
+  { nameTm: 'Lebap', nameRu: 'Лебап' },
+  { nameTm: 'Ahal', nameRu: 'Ахал' },
   { nameTm: 'Daşoguz', nameRu: 'Дашогуз' },
   { nameTm: 'Mary', nameRu: 'Мари' },
-  { nameTm: 'Balkanabat', nameRu: 'Балканабат' },
+  { nameTm: 'Balkan', nameRu: 'Балкан' },
 ];
 
 export const sportEnvironment = [
