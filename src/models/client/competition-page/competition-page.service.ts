@@ -43,13 +43,15 @@ export class CompetitionPageService {
     query: FilterOptionsDto,
   ): Promise<CompetitionEntity[]> {
     const { lang, venues, competitionTypes, name, startDate, endDate } = query;
+    // where clouse tayyarlamak
     const where =
       lang === ELangs.Tm
         ? {
+            // Turkmen dilinde
             nameTm: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            venue: venues ? { nameTm: venues } : undefined,
+            venue: venues ? { nameTm: venues } : { NOT: { nameTm: 'Halkara' } },
             competitionType: competitionTypes
               ? {
                   nameTm: {
@@ -62,10 +64,11 @@ export class CompetitionPageService {
             endDate: endDate ? { lte: new Date(endDate) } : undefined,
           }
         : {
+            // Rus dilinde
             nameRu: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            venue: venues ? { nameRu: venues } : undefined,
+            venue: venues ? { nameRu: venues } : { NOT: { nameRu: 'Halkara' } },
             competitionType: competitionTypes
               ? {
                   nameRu: {
@@ -80,7 +83,7 @@ export class CompetitionPageService {
 
     let competitions = await this.competitionsService.findAll({
       where,
-      include: { competitionType: true },
+      include: { competitionType: true, venue: true },
     });
 
     const langTransform = new LangQueryDto(query.lang);
