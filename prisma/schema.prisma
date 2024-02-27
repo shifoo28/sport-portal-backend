@@ -358,8 +358,8 @@ model Competitions {
   nameRu          String
   textTm          String
   textRu          String
-  venue           Venues?          @relation(fields: [venueId], references: [id])
-  venueId         String?
+  venue           Venues           @relation(fields: [venueId], references: [id])
+  venueId         String
   locationTm      String
   locationRu      String
   startDate       DateTime
