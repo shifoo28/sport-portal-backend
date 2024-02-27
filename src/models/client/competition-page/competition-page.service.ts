@@ -5,12 +5,14 @@ import { CompetitionTypesService } from 'src/models/admin/competition-types/comp
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { ELangs, LangQueryDto } from 'src/app.dto';
 import { Prisma } from '@prisma/client';
+import { VenuesService } from 'src/models/admin/venues/venues.service';
 
 @Injectable()
 export class CompetitionPageService {
   constructor(
     private readonly competitionsService: CompetitionsService,
     private readonly competitionTypeService: CompetitionTypesService,
+    private readonly venueService: VenuesService,
   ) {}
 
   async findAllCompetitions(): Promise<CompetitionEntity[]> {
@@ -23,11 +25,18 @@ export class CompetitionPageService {
 
   async getcompetitionTypes(lang: ELangs): Promise<string[]> {
     const competitionTypes = await this.competitionTypeService.findAll({});
-    const filteredCTs = competitionTypes.map((ct) => {
+
+    return competitionTypes.map((ct) => {
       return lang === ELangs.Tm ? ct.nameTm : ct.nameRu;
     });
+  }
 
-    return filteredCTs;
+  async getVenues(lang: ELangs): Promise<string[]> {
+    const venues = await this.venueService.findAll({});
+
+    return venues.map((ct) => {
+      return lang === ELangs.Tm ? ct.nameTm : ct.nameRu;
+    });
   }
 
   async filterCompetitions(

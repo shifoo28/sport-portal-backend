@@ -40,6 +40,7 @@ import { EmployeeRatingsModule } from './models/admin/employee-ratings/employee-
 import { AthleteRatingsModule } from './models/admin/athlete-ratings/athlete-ratings.module';
 import { TrainerRatingsModule } from './models/admin/trainer-ratings/trainer-ratings.module';
 import { MulterModule } from '@nestjs/platform-express';
+import { VenuesModule } from './models/admin/venues/venues.module';
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import { MulterModule } from '@nestjs/platform-express';
     EmployeeRatingsModule,
     FederationHealthCareEmployeesModule,
     CompetitionTypesModule,
+    VenuesModule,
     CompetitionsModule,
     UsersModule,
   ],

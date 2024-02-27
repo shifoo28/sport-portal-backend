@@ -74,7 +74,7 @@ export class CompetitionsController {
       where,
       select,
       orderBy,
-      include: { competitionType: true },
+      include: { competitionType: true, venue: true },
     });
   }
 

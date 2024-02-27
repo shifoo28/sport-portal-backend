@@ -6,8 +6,6 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   @ApiProperty() nameRu: string;
   @ApiProperty() textTm: string;
   @ApiProperty() textRu: string;
-  @ApiProperty() venueTm: string;
-  @ApiProperty() venueRu: string;
   @ApiProperty() locationTm: string;
   @ApiProperty() locationRu: string;
   @ApiProperty({ type: 'string' || 'Date', default: new Date() }) startDate:
@@ -24,6 +22,8 @@ export class CreateCompetitionDto implements Prisma.CompetitionsCreateInput {
   })
   photo: Express.Multer.File;
   imagePath: string;
+  @ApiProperty() venueId: string;
+  venue: Prisma.VenuesCreateNestedOneWithoutCompetitionsInput;
   @ApiProperty() typeId: number;
   competitionType: Prisma.CompetitionTypesCreateNestedOneWithoutCompetitionInput;
 }

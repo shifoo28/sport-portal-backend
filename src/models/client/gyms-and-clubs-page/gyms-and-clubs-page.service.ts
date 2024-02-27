@@ -5,6 +5,7 @@ import { FederationGymsAndClubsService } from 'src/models/admin/federation-gyms-
 import { SportTypesService } from 'src/models/admin/sport-types/sport-types.service';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { Prisma } from '@prisma/client';
+import { VenuesService } from 'src/models/admin/venues/venues.service';
 
 export interface IGymClubPage {
   gymsclubs: FederationGymsAndClubEntity[];
@@ -15,6 +16,7 @@ export class GymsAndClubsPageService {
   constructor(
     private readonly fgcService: FederationGymsAndClubsService,
     private readonly stService: SportTypesService,
+    private readonly venueService: VenuesService,
   ) {}
 
   async findAll(query: LangQueryDto): Promise<IGymClubPage> {
@@ -32,6 +34,14 @@ export class GymsAndClubsPageService {
     });
 
     return filteredSTs;
+  }
+
+  async getVenues(lang: ELangs): Promise<string[]> {
+    const venues = await this.venueService.findAll({});
+
+    return venues.map((venue) => {
+      return lang === ELangs.Tm ? venue.nameTm : venue.nameRu;
+    });
   }
 
   async filterGymsAndClubs(

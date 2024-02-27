@@ -341,14 +341,15 @@ model CompetitionTypes {
   @@unique([nameRu, nameTm])
 }
 
-enum EVenues {
-  Ashgabat
-  Dashoguz
-  Balkan
-  Lebap
-  Ahal
-  Mary
-  Halkara
+model Venues {
+  id           String         @id @default(uuid())
+  nameTm       String
+  nameRu       String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Competitions Competitions[]
+
+  @@unique([nameTm, nameRu])
 }
 
 model Competitions {
@@ -357,7 +358,8 @@ model Competitions {
   nameRu          String
   textTm          String
   textRu          String
-  venue           EVenues          @default(Halkara)
+  venue           Venues?          @relation(fields: [venueId], references: [id])
+  venueId         String?
   locationTm      String
   locationRu      String
   startDate       DateTime

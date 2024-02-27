@@ -1,13 +1,3 @@
-export const VENUES = [
-  { nameTm: 'Halkara', nameRu: 'Международный' },
-  { nameTm: 'Aşgabat', nameRu: 'Ашхабад' },
-  { nameTm: 'Lebap', nameRu: 'Лебап' },
-  { nameTm: 'Ahal', nameRu: 'Ахал' },
-  { nameTm: 'Daşoguz', nameRu: 'Дашогуз' },
-  { nameTm: 'Mary', nameRu: 'Мари' },
-  { nameTm: 'Balkan', nameRu: 'Балкан' },
-];
-
 export const SPORT_ENVIRONMENTS = [
   { nameTm: 'Suw toplumy', nameRu: 'Водный комплекс' },
   { nameTm: 'Stadion', nameRu: 'Стадион' },

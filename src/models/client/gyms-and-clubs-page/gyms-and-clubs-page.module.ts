@@ -4,6 +4,7 @@ import { GymsAndClubsPageController } from './gyms-and-clubs-page.controller';
 import { PrismaService } from 'src/prisma.service';
 import { FederationGymsAndClubsService } from 'src/models/admin/federation-gyms-and-clubs/federation-gyms-and-clubs.service';
 import { SportTypesService } from 'src/models/admin/sport-types/sport-types.service';
+import { VenuesService } from 'src/models/admin/venues/venues.service';
 
 @Module({
   controllers: [GymsAndClubsPageController],
@@ -12,6 +13,7 @@ import { SportTypesService } from 'src/models/admin/sport-types/sport-types.serv
     PrismaService,
     FederationGymsAndClubsService,
     SportTypesService,
+    VenuesService,
   ],
 })
 export class GymsAndClubsPageModule {}

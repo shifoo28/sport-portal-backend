@@ -4,7 +4,6 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
 import { ELangs, LangQueryDto } from 'src/app.dto';
-import { COUNTRIES } from 'src/tools/constants';
 import { CompetitionEntity } from 'src/models/admin/competitions/entities/competition.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { Public } from 'src/decorator/public-route.decorator';
@@ -31,16 +30,13 @@ export class CompetitionPageController {
   @Get('filters')
   @UseInterceptors(ResponseInterceptor)
   async getFilterOptions(@Query() query: LangQueryDto) {
-    let competitionTypes =
+    const competitionTypes =
       await this.competitionPageService.getcompetitionTypes(query.lang);
-
-    const locations = COUNTRIES.map((country) => {
-      return query.lang === ELangs.Tm ? country.nameTm : country.nameRu;
-    });
+    const venues = await this.competitionPageService.getVenues(query.lang);
 
     return [
       { name: 'competitionTypes', filters: competitionTypes },
-      { name: 'locations', filters: locations },
+      { name: 'venues', filters: venues },
     ];
   }
 

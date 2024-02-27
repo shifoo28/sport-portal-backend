@@ -15,6 +15,7 @@ export class CompetitionsService {
       nameRu,
       textTm,
       textRu,
+      venueId,
       locationTm,
       locationRu,
       startDate,
@@ -35,6 +36,7 @@ export class CompetitionsService {
         endDate,
         imagePath,
         competitionType: { connect: { id: typeId } },
+        venue: { connect: { id: venueId } },
       },
     });
   }
@@ -46,7 +48,7 @@ export class CompetitionsService {
   async findOne(id: string): Promise<CompetitionEntity> {
     return this.prismaService.competitions.findUnique({
       where: { id },
-      include: { competitionType: true },
+      include: { competitionType: true, venue: true },
     });
   }
 
@@ -59,6 +61,7 @@ export class CompetitionsService {
       nameRu,
       textTm,
       textRu,
+      venue,
       locationTm,
       locationRu,
       startDate,
@@ -75,6 +78,7 @@ export class CompetitionsService {
         nameRu,
         textTm,
         textRu,
+        venue,
         locationTm,
         locationRu,
         startDate,
