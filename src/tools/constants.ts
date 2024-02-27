@@ -1,4 +1,5 @@
-export const COUNTRIES = [
+export const VENUES = [
+  { nameTm: 'Halkara', nameRu: 'Международный' },
   { nameTm: 'Aşgabat', nameRu: 'Ашхабад' },
   { nameTm: 'Lebap', nameRu: 'Лебап' },
   { nameTm: 'Ahal', nameRu: 'Ахал' },

@@ -37,6 +37,7 @@ export class NewsPageService {
   async filterVideoNews(query: PostFilterOptions): Promise<VideoEntity[]> {
     return this.videosService.findAll({
       where: { categoryId: query.sportCategories },
+      orderBy: { createdAt: 'desc' },
     });
   }
 }

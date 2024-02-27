@@ -341,12 +341,23 @@ model CompetitionTypes {
   @@unique([nameRu, nameTm])
 }
 
+enum EVenues {
+  Ashgabat
+  Dashoguz
+  Balkan
+  Lebap
+  Ahal
+  Mary
+  Halkara
+}
+
 model Competitions {
   id              String           @id @default(uuid())
   nameTm          String
   nameRu          String
   textTm          String
   textRu          String
+  venue           EVenues          @default(Halkara)
   locationTm      String
   locationRu      String
   startDate       DateTime
