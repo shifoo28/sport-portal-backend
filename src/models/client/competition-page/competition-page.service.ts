@@ -51,7 +51,7 @@ export class CompetitionPageService {
             nameTm: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            venue: venues ? { nameTm: venues } : { NOT: { nameTm: 'Halkara' } },
+            venue: venues ? { nameTm: venues } : { NOT: { nameTm: 'Halkara' } }, // Bad experience
             competitionType: competitionTypes
               ? {
                   nameTm: {
@@ -68,7 +68,7 @@ export class CompetitionPageService {
             nameRu: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            venue: venues ? { nameRu: venues } : { NOT: { nameRu: 'Halkara' } },
+            venue: venues ? { nameRu: venues } : { NOT: { nameRu: 'Halkara' } }, // Bad experience
             competitionType: competitionTypes
               ? {
                   nameRu: {
