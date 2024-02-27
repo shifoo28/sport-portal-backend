@@ -74,7 +74,7 @@ export class GymsAndClubsPageService {
           };
 
     let fgc = await this.fgcService.findAll({
-      where,
+      where:{},
       include: { environment: true },
     });
     fgc = langTransform.toName(fgc);

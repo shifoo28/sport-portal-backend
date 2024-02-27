@@ -42,17 +42,14 @@ export class CompetitionPageService {
   async filterCompetitions(
     query: FilterOptionsDto,
   ): Promise<CompetitionEntity[]> {
-    const { lang, locations, competitionTypes, name, startDate, endDate } =
-      query;
+    const { lang, venues, competitionTypes, name, startDate, endDate } = query;
     const where =
       lang === ELangs.Tm
         ? {
             nameTm: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            locationTm: locations
-              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
-              : undefined,
+            venue: venues ? { nameTm: venues } : undefined,
             competitionType: competitionTypes
               ? {
                   nameTm: {
@@ -68,9 +65,7 @@ export class CompetitionPageService {
             nameRu: name
               ? { contains: name, mode: Prisma.QueryMode.insensitive }
               : undefined,
-            locationRu: locations
-              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
-              : undefined,
+            venue: venues ? { nameRu: venues } : undefined,
             competitionType: competitionTypes
               ? {
                   nameRu: {
