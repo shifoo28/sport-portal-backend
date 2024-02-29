@@ -9,6 +9,7 @@ export class CreateFederationHealthCareEmployeeDto
   @ApiProperty() jobTm: string;
   @ApiProperty() jobRu: string;
   @ApiProperty() age: number;
+  @ApiProperty({ default: new Date() }) birthday: Date;
   @ApiProperty() workAtTm: string;
   @ApiProperty() workAtRu: string;
   @ApiProperty({ required: false, default: 0 }) experience?: number;

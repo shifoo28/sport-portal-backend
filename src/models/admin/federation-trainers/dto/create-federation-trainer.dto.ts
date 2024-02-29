@@ -7,6 +7,7 @@ export class CreateFederationTrainerDto
 {
   @ApiProperty({ required: false, default: 0 }) experience?: number;
   @ApiProperty() age: number;
+  @ApiProperty({ default: new Date() }) birthday: Date;
   @ApiProperty() jobTm: string;
   @ApiProperty() jobRu: string;
   @ApiProperty() nameTm: string;

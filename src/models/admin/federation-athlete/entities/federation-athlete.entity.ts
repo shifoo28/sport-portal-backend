@@ -14,6 +14,7 @@ export class FederationAthleteEntity implements FederationAthlete {
   positionRu: string;
   imagePath: string;
   age: number;
+  birthday: Date;
   birthPlaceTm: string;
   birthPlaceRu: string;
   views: number;

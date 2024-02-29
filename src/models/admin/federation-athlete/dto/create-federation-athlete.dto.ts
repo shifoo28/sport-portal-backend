@@ -8,6 +8,7 @@ export class CreateFederationAthleteDto
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
   @ApiProperty() age: number;
+  @ApiProperty({ default: new Date() }) birthday: Date;
   @ApiProperty() madeTm: string;
   @ApiProperty() madeRu: string;
   @ApiProperty() birthPlaceTm: string;

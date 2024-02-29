@@ -161,6 +161,7 @@ model FederationTrainers {
   experience     Int              @default(0)
   views          Int              @default(0)
   age            Int
+  birthday       DateTime?
   jobTm          String
   jobRu          String
   nameTm         String
@@ -203,6 +204,7 @@ model FederationAthlete {
   jobTm          String
   jobRu          String
   age            Int
+  birthday       DateTime?
   nameTm         String
   nameRu         String
   madeTm         String
@@ -302,6 +304,7 @@ model FederationHealthCareEmployees {
   jobTm           String
   jobRu           String
   age             Int
+  birthday        DateTime?
   workAtTm        String
   workAtRu        String
   experience      Int                   @default(0)

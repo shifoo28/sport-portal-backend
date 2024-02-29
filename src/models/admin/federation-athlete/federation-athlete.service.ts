@@ -30,6 +30,7 @@ export class FederationAthleteService {
       sportLevelTm,
       sportLevelRu,
       age,
+      birthday,
       jobTm,
       jobRu,
       club,
@@ -41,6 +42,7 @@ export class FederationAthleteService {
     return this.prismaService.federationAthlete.create({
       data: {
         age: +age,
+        birthday,
         experience: +experience,
         nameTm,
         nameRu,
@@ -99,6 +101,7 @@ export class FederationAthleteService {
       sportLevelTm,
       sportLevelRu,
       age,
+      birthday,
       views,
       jobTm,
       jobRu,
@@ -113,6 +116,7 @@ export class FederationAthleteService {
       where: { id },
       data: {
         age: age && +age,
+        birthday,
         rating: rating && +rating,
         experience: experience && +experience,
         nameTm,

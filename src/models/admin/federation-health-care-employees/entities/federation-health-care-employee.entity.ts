@@ -9,6 +9,7 @@ export class FederationHealthCareEmployeeEntity
   jobTm: string;
   jobRu: string;
   age: number;
+  birthday: Date;
   workAtTm: string;
   workAtRu: string;
   experience: number;
