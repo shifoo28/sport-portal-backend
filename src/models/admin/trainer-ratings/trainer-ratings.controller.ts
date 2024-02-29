@@ -16,11 +16,12 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/decorator/roles.decorator';
 import { Role } from '@prisma/client';
 import { FindAllTrainerRatingsDto } from './dto/find-trainer-ratings.dto';
+import { ENDPOINT_TRAINER_RATINGS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
 @ApiTags('Trainer Ratings')
-@Controller('trainer-ratings')
+@Controller(ENDPOINT_TRAINER_RATINGS)
 export class TrainerRatingsController {
   constructor(private readonly trainerRatingsService: TrainerRatingsService) {}
 

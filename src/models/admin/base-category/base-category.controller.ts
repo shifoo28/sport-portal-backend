@@ -17,10 +17,11 @@ import { UpdateBaseCategoryDto } from './dto/update-base-category.dto';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_BASE_CATEGORY } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('base-category')
+@Controller(ENDPOINT_BASE_CATEGORY)
 @ApiTags('Base Categries')
 export class BaseCategoryController {
   constructor(private readonly baseCategoryService: BaseCategoryService) {}

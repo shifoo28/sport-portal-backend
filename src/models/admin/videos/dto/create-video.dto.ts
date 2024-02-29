@@ -19,7 +19,7 @@ export class CreateVideoDto implements Prisma.VideosCreateInput {
   @ApiProperty({
     type: 'string',
     format: 'binary',
-    description: 'Max file size: 500MB. Expected file types: MP4',
+    description: 'Max file size: 500MB. Expected file types: MP4, OGG, MPEG, WEBM',
   })
   video: Express.Multer.File;
 }

@@ -28,10 +28,11 @@ import { strToArray } from 'src/tools/strToArray';
 import { strToObj } from 'src/tools/strToObj';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_FEDERATION_TRAINERS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('federation-trainers')
+@Controller(ENDPOINT_FEDERATION_TRAINERS)
 @ApiTags('Federation Trainers')
 export class FederationTrainersController {
   constructor(

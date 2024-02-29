@@ -14,10 +14,11 @@ import { CreateLangDto } from './dto/lang.dto';
 import { LangService } from './lang.service';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_LANGS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('langs')
+@Controller(ENDPOINT_LANGS)
 @ApiTags('Language')
 export class LangsController {
   constructor(private readonly langService: LangService) {}

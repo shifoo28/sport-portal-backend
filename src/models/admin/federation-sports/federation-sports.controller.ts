@@ -19,10 +19,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_FEDERATION_SPORTS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('federation-sports')
+@Controller(ENDPOINT_FEDERATION_SPORTS)
 @ApiTags('Federation Sports')
 export class FederationSportsController {
   constructor(

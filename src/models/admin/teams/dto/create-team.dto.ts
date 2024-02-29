@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client';
 export class CreateTeamDto implements Prisma.TeamsCreateInput {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
+  @ApiProperty({ required: false, default: 1 }) played: number;
   @ApiProperty({ required: false, default: 0 }) win: number;
   @ApiProperty({ required: false, default: 0 }) draw: number;
   @ApiProperty({ required: false, default: 0 }) loss: number;

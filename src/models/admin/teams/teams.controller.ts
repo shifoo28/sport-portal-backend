@@ -21,11 +21,12 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FindAllTeamsDto } from './dto/find-team.dto';
+import { ENDPOINT_TEAMS } from 'src/tools/endpoints';
 const path = require('path');
 
-@ApiTags('Teams')
 @ApiBearerAuth()
-@Controller('teams')
+@ApiTags('Teams')
+@Controller(ENDPOINT_TEAMS)
 export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 

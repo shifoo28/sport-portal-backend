@@ -24,10 +24,11 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 import { FindAllFederationHealthCareEmployeesDto } from './dto/find-federation-health-care.dto';
+import { ENDPOINT_FEDERATION_HEALTH_CARE_EMPLOYEES } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('federation-health-care-employees')
+@Controller(ENDPOINT_FEDERATION_HEALTH_CARE_EMPLOYEES)
 @ApiTags('Federation Health Care Employees')
 export class FederationHealthCareEmployeesController {
   constructor(

@@ -27,10 +27,11 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { strToArray } from 'src/tools/strToArray';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_FEDERATION_ATHLETE } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('federation-athlete')
+@Controller(ENDPOINT_FEDERATION_ATHLETE)
 @ApiTags('Federation Athlete')
 export class FederationAthleteController {
   constructor(

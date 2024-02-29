@@ -24,10 +24,11 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 import { FindAllCompetitionsDto } from './dto/find-competitions.dto';
+import { ENDPOINT_COMPETITIONS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('competitions')
+@Controller(ENDPOINT_COMPETITIONS)
 @ApiTags('Competitions')
 export class CompetitionsController {
   constructor(private readonly competitionsService: CompetitionsService) {}

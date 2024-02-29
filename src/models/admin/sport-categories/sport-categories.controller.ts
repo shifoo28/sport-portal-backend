@@ -17,10 +17,11 @@ import { FindAllSportCategoriesDto } from './dto/sport-category.dto';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_SPORT_CATEGORIES } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('sport-categories')
+@Controller(ENDPOINT_SPORT_CATEGORIES)
 @ApiTags('Sport Categories')
 export class SportCategoriesController {
   constructor(

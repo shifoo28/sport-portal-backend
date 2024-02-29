@@ -18,11 +18,12 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FindAllEmployeeRatingsDto } from './dto/find-employee-rating.dto';
 import { Roles } from 'src/decorator/roles.decorator';
 import { Role } from '@prisma/client';
+import { ENDPOINT_EMPLOYEE_RATINGS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
 @ApiTags('Emplyee Ratings')
-@Controller('employee-ratings')
+@Controller(ENDPOINT_EMPLOYEE_RATINGS)
 export class EmployeeRatingsController {
   constructor(
     private readonly employeeRatingsService: EmployeeRatingsService,

@@ -2,7 +2,7 @@ import { Controller, Get, Post, Query, UseInterceptors } from '@nestjs/common';
 import { CompetitionPageService } from './competition-page.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
-import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
+import { LanguageTransformInterceptor } from 'src/interceptor/language-transform.interceptor';
 import { ELangs, LangQueryDto } from 'src/app.dto';
 import { CompetitionEntity } from 'src/models/admin/competitions/entities/competition.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';

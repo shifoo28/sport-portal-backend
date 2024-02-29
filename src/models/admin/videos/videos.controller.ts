@@ -23,10 +23,11 @@ import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_VIDEOS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('videos')
+@Controller(ENDPOINT_VIDEOS)
 @ApiTags('Videos')
 export class VideosController {
   private readonly imageFileds = {
@@ -63,7 +64,7 @@ export class VideosController {
           fileType: '.(png|jpg|jpeg|jfif|webp)',
         });
         const validatorVideo = new FileTypeValidator({
-          fileType: '.(mp4|ogg|mpeg|avi|webm)',
+          fileType: '.(mp4|ogg|mpeg|webm)',
         });
         // Check files valid or not
         if (!validatorImage.isValid(value.photo[0]))

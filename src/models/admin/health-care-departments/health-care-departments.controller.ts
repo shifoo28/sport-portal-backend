@@ -19,10 +19,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_HEALTH_CARE_DEPARTMENTS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('health-care-departments')
+@Controller(ENDPOINT_HEALTH_CARE_DEPARTMENTS)
 @ApiTags('Health Care Departments')
 export class HealthCareDepartmentsController {
   constructor(

@@ -397,6 +397,7 @@ model Teams {
   nameTm         String
   nameRu         String
   imagePath      String?
+  played         Int           @default(1) @db.SmallInt
   win            Int           @db.SmallInt
   draw           Int           @db.SmallInt
   loss           Int           @db.SmallInt

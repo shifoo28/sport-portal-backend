@@ -16,10 +16,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Roles } from 'src/decorator/roles.decorator';
 import { Role } from '@prisma/client';
+import { ENDPOINT_USERS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Developer)
-@Controller('users')
+@Controller(ENDPOINT_USERS)
 @ApiTags('Users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

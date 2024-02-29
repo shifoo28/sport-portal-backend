@@ -15,10 +15,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_ADS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('ads')
+@Controller(ENDPOINT_ADS)
 @ApiTags('Advertisement')
 export class AdsController {
   constructor(private readonly adsService: AdsService) {}

@@ -24,10 +24,11 @@ import { diskStorage } from 'multer';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_NEWS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('news')
+@Controller(ENDPOINT_NEWS)
 @ApiTags('News')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}

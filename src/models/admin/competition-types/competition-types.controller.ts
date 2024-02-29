@@ -17,10 +17,11 @@ import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 import { FindAllCompetitionTypesDto } from './dto/find-competition-type.dto';
+import { ENDPOINT_COMPETITION_TYPES } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('competition-types')
+@Controller(ENDPOINT_COMPETITION_TYPES)
 @ApiTags('Competition Types')
 export class CompetitionTypesController {
   constructor(

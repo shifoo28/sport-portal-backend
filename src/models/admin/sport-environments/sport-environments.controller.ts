@@ -17,10 +17,11 @@ import { Roles } from 'src/decorator/roles.decorator';
 import { Role } from '@prisma/client';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FindAllSportEnvironmentsDto } from './dto/find-sport-environment.dto';
+import { ENDPOINT_SPORT_ENVIRONMENTS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('sport-environments')
+@Controller(ENDPOINT_SPORT_ENVIRONMENTS)
 @ApiTags('Sport Environments')
 export class SportEnvironmentsController {
   constructor(

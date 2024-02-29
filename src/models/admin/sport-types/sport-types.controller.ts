@@ -17,10 +17,11 @@ import { UpdateSportTypeDto } from './dto/update-sport-type.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
+import { ENDPOINT_SPORT_TYPES } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('sport-types')
+@Controller(ENDPOINT_SPORT_TYPES)
 @ApiTags('Sport Types')
 export class SportTypesController {
   constructor(private readonly sportTypesService: SportTypesService) {}

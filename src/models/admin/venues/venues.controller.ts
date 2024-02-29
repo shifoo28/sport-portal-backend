@@ -15,10 +15,11 @@ import { UpdateVenueDto } from './dto/update-venue.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FindAllVenuesDto } from './dto/find-venues.dto';
+import { ENDPOINT_VENUES } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @ApiTags('Venues')
-@Controller('venues')
+@Controller(ENDPOINT_VENUES)
 export class VenuesController {
   constructor(private readonly venuesService: VenuesService) {}
 

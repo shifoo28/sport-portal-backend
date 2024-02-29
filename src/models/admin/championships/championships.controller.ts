@@ -24,11 +24,12 @@ import { diskStorage } from 'multer';
 const path = require('path');
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FindAllChampionships } from './dto/find-championship.dto';
+import { ENDPOINT_CHAMPIONSHIPS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
 @ApiTags('Championship')
-@Controller('championships')
+@Controller(ENDPOINT_CHAMPIONSHIPS)
 export class ChampionshipsController {
   constructor(private readonly championshipsService: ChampionshipsService) {}
 

@@ -28,10 +28,11 @@ import { LangQueryDto } from 'src/app.dto';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 import { FindAllFederationGymsAndClubs } from './dto/find-federation-gyms-and-clubs.dto';
+import { ENDPOINT_FEDERATION_GYMS_AND_CLUBS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)
-@Controller('federation-gyms-and-clubs')
+@Controller(ENDPOINT_FEDERATION_GYMS_AND_CLUBS)
 @ApiTags('Federation Gyms & Clubs')
 export class FederationGymsAndClubsController {
   private readonly imageFields = {

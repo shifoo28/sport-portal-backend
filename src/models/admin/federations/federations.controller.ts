@@ -24,10 +24,11 @@ import { diskStorage } from 'multer';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 import { FindAllFederationsDto } from './dto/find-federation.dto';
+import { ENDPOINT_FEDERATIONS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
-@Controller('federations')
+@Controller(ENDPOINT_FEDERATIONS)
 @ApiTags('Federations')
 export class FederationsController {
   constructor(private readonly federationsService: FederationsService) {}

@@ -3,7 +3,7 @@ import { MainPageService } from './main-page.service';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { LangQueryDto } from 'src/app.dto';
-import { LanguageTransformInterceptor } from 'src/interceptor/language.transform.interceptor';
+import { LanguageTransformInterceptor } from 'src/interceptor/language-transform.interceptor';
 import { FindAllHomeNewsDto } from './dto/main-page.dto';
 import { Public } from 'src/decorator/public-route.decorator';
 

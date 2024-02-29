@@ -18,11 +18,12 @@ import { Roles } from 'src/decorator/roles.decorator';
 import { Role } from '@prisma/client';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { FindAllAthleteRatingsDto } from './dto/find-athlete-rating.dto';
+import { ENDPOINT_ATHLETE_RATINGS } from 'src/tools/endpoints';
 
 @ApiBearerAuth()
 @Roles(Role.Admin)
 @ApiTags('Athlete Ratings')
-@Controller('athlete-ratings')
+@Controller(ENDPOINT_ATHLETE_RATINGS)
 export class AthleteRatingsController {
   constructor(private readonly athleteRatingsService: AthleteRatingsService) {}
 

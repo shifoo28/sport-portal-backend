@@ -13,6 +13,7 @@ export class TeamsService {
     const {
       nameTm,
       nameRu,
+      played,
       win,
       draw,
       loss,
@@ -27,6 +28,7 @@ export class TeamsService {
       data: {
         nameTm,
         nameRu,
+        played: +played,
         win: +win,
         draw: +draw,
         loss: +loss,
@@ -51,6 +53,7 @@ export class TeamsService {
     const {
       nameTm,
       nameRu,
+      played,
       win,
       draw,
       loss,
@@ -66,6 +69,7 @@ export class TeamsService {
       data: {
         nameTm,
         nameRu,
+        played: played && +played,
         win: win && +win,
         draw: draw && +draw,
         loss: loss && +loss,
