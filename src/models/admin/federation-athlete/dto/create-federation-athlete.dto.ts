@@ -7,7 +7,6 @@ export class CreateFederationAthleteDto
 {
   @ApiProperty() nameTm: string;
   @ApiProperty() nameRu: string;
-  @ApiProperty() age: number;
   @ApiProperty({ default: new Date() }) birthday: Date;
   @ApiProperty() madeTm: string;
   @ApiProperty() madeRu: string;
@@ -46,19 +45,4 @@ export class CreateFederationAthleteDto
   photo: Express.Multer.File;
   imagePath: string;
   federation: Prisma.FederationsCreateNestedOneWithoutFathleteInput;
-}
-
-export class FindAllFederationAthleteDto
-  implements Prisma.FederationAthleteFindManyArgs
-{
-  @ApiProperty({ required: false }) skip?: number;
-  @ApiProperty({ required: false }) take?: number;
-  @ApiProperty({ required: false }) where?: Prisma.FederationAthleteWhereInput;
-  @ApiProperty({ required: false }) orderBy?:
-    | Prisma.FederationAthleteOrderByWithRelationAndSearchRelevanceInput
-    | Prisma.FederationAthleteOrderByWithRelationAndSearchRelevanceInput[];
-  @ApiProperty({ required: false })
-  select?: Prisma.FederationAthleteSelect<DefaultArgs>;
-  @ApiProperty({ required: false })
-  include?: Prisma.FederationAthleteInclude<DefaultArgs>;
 }

@@ -8,7 +8,6 @@ export class FederationHealthCareEmployeeEntity
   nameRu: string;
   jobTm: string;
   jobRu: string;
-  age: number;
   birthday: Date;
   workAtTm: string;
   workAtRu: string;

@@ -19,7 +19,6 @@ export class FederationHealthCareEmployeesService {
       jobRu,
       workAtTm,
       workAtRu,
-      age,
       birthday,
       departmentId,
       experience,
@@ -28,7 +27,6 @@ export class FederationHealthCareEmployeesService {
     } = data;
     return this.prismaService.federationHealthCareEmployees.create({
       data: {
-        age: +age,
         birthday,
         experience: +experience,
         nameTm,
@@ -68,7 +66,6 @@ export class FederationHealthCareEmployeesService {
       jobRu,
       workAtTm,
       workAtRu,
-      age,
       birthday,
       departmentId,
       experience,
@@ -81,7 +78,6 @@ export class FederationHealthCareEmployeesService {
     return this.prismaService.federationHealthCareEmployees.update({
       where: { id },
       data: {
-        age: age && +age,
         birthday,
         rating: rating && +rating,
         experience: experience && +experience,

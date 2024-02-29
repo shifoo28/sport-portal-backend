@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import {
-  CreateFederationTrainerDto,
-  FindAllFederationTrainersDto,
-} from './dto/create-federation-trainer.dto';
+import { CreateFederationTrainerDto } from './dto/create-federation-trainer.dto';
 import { UpdateFederationTrainerDto } from './dto/update-federation-trainer.dto';
 import { FederationTrainerEntity } from './entities/federation-trainer.entity';
 import { PrismaService } from 'src/prisma.service';
+import { FindAllFederationTrainersDto } from './dto/find-federation-trainers.dto';
 
 @Injectable()
 export class FederationTrainersService {
@@ -30,7 +28,6 @@ export class FederationTrainersService {
       badgesRu,
       workedAtTm,
       workedAtRu,
-      age,
       birthday,
       imagePath,
       experience,
@@ -39,7 +36,6 @@ export class FederationTrainersService {
 
     return this.prismaService.federationTrainers.create({
       data: {
-        age: +age,
         birthday,
         experience: +experience,
         nameTm,
@@ -96,7 +92,6 @@ export class FederationTrainersService {
       badgesRu,
       workedAtTm,
       workedAtRu,
-      age,
       birthday,
       rating,
       imagePath,
@@ -107,7 +102,6 @@ export class FederationTrainersService {
     return this.prismaService.federationTrainers.update({
       where: { id },
       data: {
-        age: age && +age,
         birthday,
         rating: rating && +rating,
         experience: experience && +experience,

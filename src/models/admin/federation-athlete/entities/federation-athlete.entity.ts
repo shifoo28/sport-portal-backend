@@ -13,7 +13,6 @@ export class FederationAthleteEntity implements FederationAthlete {
   positionTm: string;
   positionRu: string;
   imagePath: string;
-  age: number;
   birthday: Date;
   birthPlaceTm: string;
   birthPlaceRu: string;

@@ -15,10 +15,7 @@ import {
 } from '@nestjs/common';
 var path = require('path');
 import { FederationAthleteService } from './federation-athlete.service';
-import {
-  CreateFederationAthleteDto,
-  FindAllFederationAthleteDto,
-} from './dto/create-federation-athlete.dto';
+import { CreateFederationAthleteDto } from './dto/create-federation-athlete.dto';
 import { UpdateFederationAthleteDto } from './dto/update-federation-athlete.dto';
 import { ApiBearerAuth, ApiConsumes, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -28,6 +25,7 @@ import { strToArray } from 'src/tools/strToArray';
 import { Role } from '@prisma/client';
 import { Roles } from 'src/decorator/roles.decorator';
 import { ENDPOINT_FEDERATION_ATHLETE } from 'src/tools/endpoints';
+import { FindAllFederationAthleteDto } from './dto/find-federation-athletes.dto';
 
 @ApiBearerAuth()
 @Roles(Role.Admin, Role.Employee)

@@ -5,7 +5,6 @@ export class FederationTrainerEntity implements FederationTrainers {
   rating: number;
   experience: number;
   views: number;
-  age: number;
   birthday: Date;
   jobTm: string;
   jobRu: string;
