@@ -6,6 +6,7 @@ import { SportTypesService } from 'src/models/admin/sport-types/sport-types.serv
 import { FilterOptionsDto } from './dto/filter-options.dto';
 import { Prisma } from '@prisma/client';
 import { VenuesService } from 'src/models/admin/venues/venues.service';
+import { SportEnvironmentsService } from 'src/models/admin/sport-environments/sport-environments.service';
 
 export interface IGymClubPage {
   gymsclubs: FederationGymsAndClubEntity[];
@@ -17,6 +18,7 @@ export class GymsAndClubsPageService {
     private readonly fgcService: FederationGymsAndClubsService,
     private readonly stService: SportTypesService,
     private readonly venueService: VenuesService,
+    private readonly environmentService: SportEnvironmentsService,
   ) {}
 
   async findAll(query: LangQueryDto): Promise<IGymClubPage> {
@@ -41,6 +43,14 @@ export class GymsAndClubsPageService {
 
     return venues.map((venue) => {
       return lang === ELangs.Tm ? venue.nameTm : venue.nameRu;
+    });
+  }
+
+  async getEnvironments(lang: ELangs): Promise<string[]> {
+    const environments = await this.environmentService.findAll({});
+
+    return environments.map((env) => {
+      return lang === ELangs.Tm ? env.nameTm : env.nameRu;
     });
   }
 

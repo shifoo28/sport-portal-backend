@@ -3,12 +3,11 @@ import {
   GymsAndClubsPageService,
   IGymClubPage,
 } from './gyms-and-clubs-page.service';
-import { ELangs, LangQueryDto } from 'src/app.dto';
+import { LangQueryDto } from 'src/app.dto';
 import { ResponseInterceptor } from 'src/interceptor/response.interceptor';
 import { ApiTags } from '@nestjs/swagger';
 import { FederationGymsAndClubEntity } from 'src/models/admin/federation-gyms-and-clubs/entities/federation-gyms-and-club.entity';
 import { FilterOptionsDto } from './dto/filter-options.dto';
-import { SPORT_ENVIRONMENTS } from 'src/tools/constants';
 import { Public } from 'src/decorator/public-route.decorator';
 
 @Public()
@@ -30,10 +29,9 @@ export class GymsAndClubsPageController {
   async getFilterOptions(@Query() query: LangQueryDto) {
     const sports = await this.gymsAndClubsPageService.getSportTypes(query.lang);
     const venues = await this.gymsAndClubsPageService.getVenues(query.lang);
-
-    const environments = SPORT_ENVIRONMENTS.map((env) => {
-      return query.lang === ELangs.Tm ? env.nameTm : env.nameRu;
-    });
+    const environments = await this.gymsAndClubsPageService.getEnvironments(
+      query.lang,
+    );
 
     return [
       { name: 'sports', filters: sports },
