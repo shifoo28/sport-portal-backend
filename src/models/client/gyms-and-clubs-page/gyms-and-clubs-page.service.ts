@@ -49,13 +49,11 @@ export class GymsAndClubsPageService {
   ): Promise<FederationGymsAndClubEntity[]> {
     const langTransform = new LangQueryDto(query.lang);
 
-    const { locations, environments, sports, lang, name } = query;
-    const where =
+    const { venues, environments, sports, lang, name } = query;
+    const where: Prisma.FederationGymsAndClubsWhereInput =
       lang === ELangs.Tm
         ? {
-            locationTm: locations
-              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
-              : undefined,
+            venue: { nameTm: venues },
             environment: environments ? { nameTm: environments } : undefined,
             sportsTm: sports ? { has: sports } : undefined,
             nameTm: name
@@ -63,9 +61,7 @@ export class GymsAndClubsPageService {
               : undefined,
           }
         : {
-            locationRu: locations
-              ? { contains: locations, mode: Prisma.QueryMode.insensitive }
-              : undefined,
+            venue: { nameRu: venues },
             environment: environments ? { nameRu: environments } : undefined,
             sportsRu: sports ? { has: sports } : undefined,
             nameRu: name
@@ -74,8 +70,8 @@ export class GymsAndClubsPageService {
           };
 
     let fgc = await this.fgcService.findAll({
-      where:{},
-      include: { environment: true },
+      where,
+      include: { environment: true, venue: true },
     });
     fgc = langTransform.toName(fgc);
 

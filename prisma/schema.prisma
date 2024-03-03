@@ -254,11 +254,13 @@ model SportEnvironment {
 
   @@unique([nameTm, nameRu])
 }
-
+// @default("014efeac-428e-4eb7-b2fe-e022b381127b")npxx
 model FederationGymsAndClubs {
   id            String            @id @default(uuid())
   nameTm        String
   nameRu        String
+  venue         Venues?            @relation(fields: [venueId], references: [id])
+  venueId       String?
   locationTm    String
   locationRu    String
   email         String
@@ -342,12 +344,13 @@ model CompetitionTypes {
 }
 
 model Venues {
-  id           String         @id @default(uuid())
-  nameTm       String
-  nameRu       String
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  Competitions Competitions[]
+  id                     String                   @id @default(uuid())
+  nameTm                 String
+  nameRu                 String
+  createdAt              DateTime                 @default(now())
+  updatedAt              DateTime                 @updatedAt
+  Competitions           Competitions[]
+  GymsAndClubs FederationGymsAndClubs[]
 
   @@unique([nameTm, nameRu])
 }

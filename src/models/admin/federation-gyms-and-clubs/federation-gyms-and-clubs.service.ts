@@ -20,6 +20,7 @@ export class FederationGymsAndClubsService {
       tel,
       email,
       link,
+      venueId,
       locationTm,
       locationRu,
       sportsTm,
@@ -54,6 +55,7 @@ export class FederationGymsAndClubsService {
         imagePath4,
         imagePath5,
         environment: { connect: { id: environmentId } },
+        venue: { connect: { id: venueId } },
       },
     });
   }
@@ -83,6 +85,7 @@ export class FederationGymsAndClubsService {
       email,
       link,
       views,
+      venueId,
       locationTm,
       locationRu,
       sportsTm,
@@ -119,6 +122,7 @@ export class FederationGymsAndClubsService {
         imagePath4,
         imagePath5,
         environment: environmentId && { connect: { id: environmentId } },
+        venue: venueId && { connect: { id: venueId } },
       },
     });
   }

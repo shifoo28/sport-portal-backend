@@ -4,6 +4,7 @@ export class FederationGymsAndClubEntity implements FederationGymsAndClubs {
   id: string;
   nameTm: string;
   nameRu: string;
+  venueId: string;
   locationTm: string;
   locationRu: string;
   email: string;

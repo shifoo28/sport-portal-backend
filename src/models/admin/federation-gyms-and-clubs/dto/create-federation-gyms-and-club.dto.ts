@@ -65,6 +65,8 @@ export class CreateFederationGymsAndClubDto
   photo5: Express.Multer.File;
   environment?: Prisma.SportEnvironmentCreateNestedOneWithoutGymsandclubsInput;
   @ApiProperty() environmentId: string;
+  venue?: Prisma.VenuesCreateNestedOneWithoutGymsAndClubsInput;
+  @ApiProperty() venueId: string;
   imagePath1: string;
   imagePath2: string;
   imagePath3: string;

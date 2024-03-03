@@ -44,7 +44,7 @@ export class CompetitionPageService {
   ): Promise<CompetitionEntity[]> {
     const { lang, venues, competitionTypes, name, startDate, endDate } = query;
     // where clouse tayyarlamak
-    const where =
+    const where: Prisma.CompetitionsWhereInput =
       lang === ELangs.Tm
         ? {
             // Turkmen dilinde

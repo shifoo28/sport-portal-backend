@@ -7,7 +7,7 @@ export class FilterOptionsDto {
     description: 'Filterleri haysy dilde ugradyan?',
   })
   lang: ELangs;
-  @ApiProperty({ required: false }) locations: string;
+  @ApiProperty({ required: false }) venues: string;
   @ApiProperty({ required: false }) environments: string;
   @ApiProperty({ required: false }) sports: string;
   @ApiProperty({ required: false }) name: string;
