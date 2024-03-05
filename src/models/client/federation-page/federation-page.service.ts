@@ -11,13 +11,13 @@ export class FederationPageService {
   async findAllFederationSports(
     query: FindAllFederationsDto,
   ): Promise<FederationsEntity[]> {
-    const { skip, take, where, include, orderBy } = query;
+    const { skip, take, where, include } = query;
 
     return this.federation.findAll({
       skip: skip && +skip,
       take: take && +take,
       where: where ? strToObj(where) : undefined,
-      orderBy: orderBy ? strToObj(orderBy) : undefined,
+      orderBy: { fsports: { createdAt: 'asc' } },
       include: include ? strToObj(include) : { fsports: true },
     });
   }
@@ -25,13 +25,13 @@ export class FederationPageService {
   async findAllFederationTrainers(
     query: FindAllFederationsDto,
   ): Promise<FederationsEntity[]> {
-    const { skip, take, where, include, orderBy } = query;
+    const { skip, take, where, include } = query;
 
     return this.federation.findAll({
       skip: skip && +skip,
       take: take && +take,
       where: where ? strToObj(where) : undefined,
-      orderBy: orderBy ? strToObj(orderBy) : undefined,
+      orderBy: { ftrainers: { _count: 'desc' } },
       include: include ? strToObj(include) : { ftrainers: true },
     });
   }
@@ -39,13 +39,13 @@ export class FederationPageService {
   async findAllFederationAthletes(
     query: FindAllFederationsDto,
   ): Promise<FederationsEntity[]> {
-    const { skip, take, where, include, orderBy } = query;
+    const { skip, take, where, include } = query;
 
     return this.federation.findAll({
       skip: skip && +skip,
       take: take && +take,
       where: where ? strToObj(where) : undefined,
-      orderBy: orderBy ? strToObj(orderBy) : undefined,
+      orderBy: { fathlete: { _count: 'desc' } },
       include: include ? strToObj(include) : { fathlete: true },
     });
   }

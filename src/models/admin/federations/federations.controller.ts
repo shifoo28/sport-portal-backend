@@ -108,7 +108,7 @@ export class FederationsController {
       }),
     )
     file?: Express.Multer.File,
-  ) {
+  ) {    
     data.imagePath = file && file.path.slice(process.env.PM2_PATH.length + 5);
 
     return this.federationsService.update(id, data);
